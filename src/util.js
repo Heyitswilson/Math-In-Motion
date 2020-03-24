@@ -21,7 +21,7 @@ const Util = {
     },
 
     setVec(length) {
-    const deg = 2 * Math.PI * 20;
+    const deg = 2 * Math.PI * .5;
     return Util.scale([Math.sin(deg), Math.cos(deg)], length);
     },
 

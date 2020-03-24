@@ -18,11 +18,11 @@ MovingObject.prototype.draw = function(ctx) {
     ctx.stroke();
 }
 
-MovingObject.prototype.move = function(ctx) {
-    let x = this.pos[0] + this.vel
-    let y = this.pos[1] + this.vel
+MovingObject.prototype.move = function() {
+    let x = this.pos[0] + this.vel[0]
+    let y = this.pos[1] + this.vel[1]
 
-    let newPos = [x, y]
+    this.pos = [x, y]
 }
 
 export default MovingObject;
