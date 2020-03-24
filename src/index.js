@@ -1,8 +1,11 @@
 import MovingObject from './moving_object'
 import WindParticle from './wind_particle'
+import Demo from './demo'
+import DemoView from './demo_view'
 // const MovingObject = require("./moving_object.js").default;
 window.MovingObject = MovingObject
 window.WindParticle = WindParticle
+window.Demo = Demo
 
 window.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.getElementById("canvas");
@@ -22,8 +25,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         color: "#00FF00"
     }
 
-    new WindParticle(wp).draw(ctx)
-    new MovingObject(mo).draw(ctx)
+    // new WindParticle(wp).draw(ctx)
+    // new MovingObject(mo).draw(ctx)
+
+    new DemoView(ctx).start()
 })
 
 
