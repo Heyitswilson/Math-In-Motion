@@ -14,13 +14,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let canvasPos = getPosition(canvas);
     let mouseX = 5;
     let mouseY = 0;
+    
+    const Demoview = new DemoView(ctx)
+    Demoview.start()
 
-    canvas.addEventListener("mousemove", setMousePosition, false)
+    canvas.addEventListener("mousedown", setMousePosition, false)
 
     function setMousePosition(e) {
         mouseX = e.clientX - canvasPos.x;
         mouseY = e.clientY - canvasPos.y;
         console.log(`${mouseX} & ${mouseY}`)
+        Demoview.clear()
     }
 
     function getPosition(el) {
@@ -39,7 +43,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
     }
 
-    new DemoView(ctx).start()
 })
 
 

@@ -6,7 +6,7 @@ class Demo {
         this.DIM_X = 800
         this.DIM_Y = 800
         this.NUM_WIND_PARTICLES = 10
-
+        console.log('hitting demo')
         this.windParticles = []
         this.addWindParticles()
     }
