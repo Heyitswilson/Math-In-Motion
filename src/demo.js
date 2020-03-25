@@ -42,4 +42,15 @@ Demo.prototype.moveObjects = function() {
     })
 }
 
+Demo.prototype.mod = function (a, b) {
+    return ((a % b) + b) % b;
+}
+
+Demo.prototype.wrap = function (pos) {
+    let x = this.mod(pos[0], this.DIM_X)
+    let y = this.mod(pos[1], this.DIM_Y)
+
+    return [x, y]
+}
+
 export default Demo

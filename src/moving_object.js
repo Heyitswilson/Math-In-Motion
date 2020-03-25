@@ -2,7 +2,8 @@ function MovingObject(attrs) {
     this.pos = attrs.pos;
     this.vel = attrs.vel;
     this.radius = attrs.radius;
-    this.color = attrs.color
+    this.color = attrs.color;
+    this.demo = attrs.demo;
 }
 
 MovingObject.prototype.draw = function(ctx) {
@@ -22,7 +23,7 @@ MovingObject.prototype.move = function() {
     let x = this.pos[0] + this.vel[0]
     let y = this.pos[1] + this.vel[1]
 
-    this.pos = [x, y]
+    this.pos = this.demo.wrap([x, y])
 }
 
 export default MovingObject;

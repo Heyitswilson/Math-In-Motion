@@ -11,22 +11,33 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d")
 
-    const mo = {
-        pos: [30, 30],
-        vel: [10, 10],
-        radius: 5,
-        color: "#00FF00"
-    };
+    let canvasPos = getPosition(canvas);
+    let mouseX = 5;
+    let mouseY = 0;
 
-    const wp = {
-        pos: [100, 30],
-        vel: [10, 10],
-        radius: 5,
-        color: "#00FF00"
+    canvas.addEventListener("mousemove", setMousePosition, false)
+
+    function setMousePosition(e) {
+        mouseX = e.clientX - canvasPos.x;
+        mouseY = e.clientY - canvasPos.y;
+        console.log(`${mouseX} & ${mouseY}`)
     }
 
-    // new WindParticle(wp).draw(ctx)
-    // new MovingObject(mo).draw(ctx)
+    function getPosition(el) {
+        let xPosition = 0;
+        let yPosition = 0;
+
+        while (el) {
+            xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+            yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+            el = el.offsetParent
+        }
+
+        return {
+            x: xPosition,
+            y: yPosition
+        }
+    }
 
     new DemoView(ctx).start()
 })
