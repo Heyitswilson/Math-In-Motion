@@ -25,6 +25,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         mouseY = e.clientY - canvasPos.y;
         console.log(`${mouseX} & ${mouseY}`)
         Demoview.clear()
+        Demoview.moveAgain(mouseX, mouseY)
     }
 
     function getPosition(el) {

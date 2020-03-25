@@ -8,7 +8,9 @@ class Demo {
         this.NUM_WIND_PARTICLES = 10
         console.log('hitting demo')
         this.windParticles = []
-        this.addWindParticles()
+        this.addWindParticles();
+        this.movedWindParticles = [];
+        this.finalMovedWindParticles = [];
     }
 }
 
@@ -51,6 +53,35 @@ Demo.prototype.wrap = function (pos) {
     let y = this.mod(pos[1], this.DIM_Y)
 
     return [x, y]
+}
+
+Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
+    if (this.movedWindParticles.length === 0) {
+        for(let i = 0; i < this.windParticles.length; i += 1) {
+            let windParticle = this.windParticles[i];
+            this.movedWindParticles.push(new WindParticle({
+                pos: windParticle.pos, 
+                demo: this,
+                mouseX: mouseX,
+                mouseY: mouseY
+            }))
+        }
+    } else {
+        for (let i = 0; i < this.movedWindParticles.length; i += 1) {
+            this.finalMovedWindParticles = [];
+            let movedWindParticle = this.movedWindParticles[i];
+            this.finalMovedWindParticles.push(new WindParticle({
+                pos: movedWindParticle.pos,
+                demo: this,
+                mouseX: mouseX,
+                mouseY: mouseY
+            }))
+        }
+        this.movedWindParticles = this.finalMovedWindParticles
+    }
+    console.log(` ALL WIND PARTICLES${this.windParticles[0].mouseX}`)
+    console.log(`ALL MOVED WIND PARTICLES${this.movedWindParticles[0].mouseX}`)
+    console.log(`ALL FINAL MOVED WIND PARTICLES${this.finalMovedWindParticles[0].mouseX}`)
 }
 
 export default Demo
