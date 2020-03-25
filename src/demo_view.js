@@ -24,12 +24,12 @@ DemoView.prototype.start = function(){
 }
 
 DemoView.prototype.clear = function() {
-    console.log(this.interval)
     clearInterval(this.interval)
     console.log("clearing")
 }
 
 DemoView.prototype.moveAgain = function(mouseX, mouseY) {
+    console.log("move again")
     this.interval = setInterval(() => {
         this.Demo.moveObjectsAgain(mouseX, mouseY);
         this.Demo.draw(this.ctx)

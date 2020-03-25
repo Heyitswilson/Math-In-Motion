@@ -33,8 +33,8 @@ Demo.prototype.addWindParticles = function() {
 Demo.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 800, 800)
 
-    this.windParticles.forEach( windParticle => {
-        return windParticle.draw(ctx)
+    this.finalMovedWindParticles.forEach( finalMovedWindParticle => {
+        return finalMovedWindParticle.draw(ctx)
     })
 }
 
@@ -57,18 +57,28 @@ Demo.prototype.wrap = function (pos) {
 
 Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
     if (this.movedWindParticles.length === 0) {
-        for(let i = 0; i < this.windParticles.length; i += 1) {
-            let windParticle = this.windParticles[i];
+        console.log(this.windParticles)
+        this.windParticles.forEach(windParticle => {
             this.movedWindParticles.push(new WindParticle({
-                pos: windParticle.pos, 
+                pos: windParticle.pos,
                 demo: this,
                 mouseX: mouseX,
                 mouseY: mouseY
             }))
-        }
+            console.log(this.movedWindParticles)
+        })
+        // for(let i = 0; i < this.windParticles.length; i += 1) {
+        //     let windParticle = this.windParticles[i];
+        //     this.movedWindParticles.push(new WindParticle({
+        //         pos: windParticle.pos, 
+        //         demo: this,
+        //         mouseX: mouseX,
+        //         mouseY: mouseY
+        //     }))
+        // }
     } else {
+        this.finalMovedWindParticles = [];
         for (let i = 0; i < this.movedWindParticles.length; i += 1) {
-            this.finalMovedWindParticles = [];
             let movedWindParticle = this.movedWindParticles[i];
             this.finalMovedWindParticles.push(new WindParticle({
                 pos: movedWindParticle.pos,
@@ -79,9 +89,14 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
         }
         this.movedWindParticles = this.finalMovedWindParticles
     }
-    console.log(` ALL WIND PARTICLES${this.windParticles[0].mouseX}`)
-    console.log(`ALL MOVED WIND PARTICLES${this.movedWindParticles[0].mouseX}`)
-    console.log(`ALL FINAL MOVED WIND PARTICLES${this.finalMovedWindParticles[0].mouseX}`)
+
+    this.finalMovedWindParticles.forEach(finalMovedWindParticle => {
+        finalMovedWindParticle.move()
+    })
+
+    console.log(` ALL WIND PARTICLES${this.windParticles}`)
+    console.log(`ALL MOVED WIND PARTICLES${this.movedWindParticles}`)
+    console.log(`ALL FINAL MOVED WIND PARTICLES${this.finalMovedWindParticles}`)
 }
 
 export default Demo
