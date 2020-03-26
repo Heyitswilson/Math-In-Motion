@@ -1,7 +1,11 @@
 import MovingObject from './moving_object'
 import WindParticle from './wind_particle'
 import WaterParticle from './water_particle'
-import Land from './land'
+// import Land from './land'
+import LandTop from './land/land_top'
+import LandRight from './land/land_right'
+import LandLeft from './land/land_left'
+
 
 class Demo {
     constructor() {
@@ -20,7 +24,9 @@ class Demo {
         this.waterParticles = [];
         this.addWaterParticles();
 
-        this.land = new Land()
+        this.landTop = new LandTop()
+        this.landLeft = new LandLeft()
+        this.landRight = new LandRight()
     }
 }
 
@@ -64,7 +70,9 @@ Demo.prototype.addWaterParticles = function () {
 Demo.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 800, 400)
 
-    this.land.draw(ctx)
+    this.landTop.drawTop(ctx)
+    this.landLeft.drawRight(ctx)
+    this.landRight.drawLeft(ctx)
     this.finalMovedWindParticles.forEach( finalMovedWindParticle => {
         return finalMovedWindParticle.draw(ctx)
     })
@@ -74,7 +82,9 @@ Demo.prototype.drawWater = function(ctx){
     ctx.clearRect(0, 400, 300, 600)
     ctx.clearRect(500, 400, 800, 600)
 
-    this.land.draw(ctx)
+    this.landTop.drawTop(ctx)
+    this.landLeft.drawRight(ctx)
+    this.landRight.drawLeft(ctx)
     this.waterParticles.forEach( waterParticle => {
         return waterParticle.draw(ctx);
     })
@@ -134,20 +144,22 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
     Demo.prototype.checkCollisionsWater = function(checkWind = false) {
         let all;
         if (!checkWind) {
-            all = this.waterParticles.concat(this.land)
+            //checking for the collision of landTop against landRight and landLeft
+            all = this.waterParticles.concat(this.landTop, this.landLeft, this.landRight)
         } else {
-            all = this.waterParticles.concat(this.finalMovedWindParticles, this.land)
+            all = this.waterParticles.concat(this.finalMovedWindParticles, this.landTop, this.landLeft, this.landRight)
         }
 
-        console.log(`checking wind: ${checkWind}`)
+        // console.log(`checking wind: ${checkWind}`)
         all.forEach( (particle1, idx) => {
             for(let i = idx + 1; i < all.length; i += 1) {
                 let particle2 = all[i]
-
-                if (particle1.isCollidedWith(particle2)) {
+                if ( (particle1 instanceof WindParticle) || 
+                    (particle1 instanceof WaterParticle) && 
+                    particle1.isCollidedWith(particle2)) {
                     // alert(`collision between ${particle1.pos} and ${particle2.pos}, radii
                     // are ${particle1.radius} and ${particle2.radius}`)
-                    particle1.collideMove()
+                        particle1.collideMove()
                     // particle2.collideMove()
                 }
             }
