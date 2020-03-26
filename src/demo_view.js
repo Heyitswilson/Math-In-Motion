@@ -7,7 +7,7 @@ class DemoView {
         this.ctx = ctx
         console.log("hitting demoView")
         this.interval = "testtest"
-        this.Land = new Land(this.ctx)
+        // this.Land = new Land(this.ctx)
     }
 }
 DemoView.prototype.start = function(){
@@ -19,8 +19,7 @@ DemoView.prototype.start = function(){
         this.Demo.draw(this.ctx)
      }, 20)
      console.log(this.interval)
-
-    this.Land
+    this.Demo.drawWater(this.ctx)
 }
 
 DemoView.prototype.clear = function() {
