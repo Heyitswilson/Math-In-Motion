@@ -20,9 +20,9 @@ const Util = {
         return [vec[0] * m, vec[1] * m];
     },
 
-    setVec(length) {
-    const deg = 2 * Math.PI * .5;
-    return Util.scale([Math.sin(deg), Math.cos(deg)], length);
+    setVec(length, mouseX = 800, mouseY= 800) {
+    const deg = 2 * Math.PI * ((mouseX + mouseY) / 1600) ;
+    return Util.scale([Math.sin(-deg), Math.cos(-deg)], length);
     },
 
 }

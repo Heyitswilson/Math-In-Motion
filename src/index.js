@@ -2,6 +2,7 @@ import MovingObject from './moving_object'
 import WindParticle from './wind_particle'
 import Demo from './demo'
 import DemoView from './demo_view'
+import Land from './land'
 // const MovingObject = require("./moving_object.js").default;
 window.MovingObject = MovingObject
 window.WindParticle = WindParticle
@@ -10,10 +11,12 @@ window.Demo = Demo
 window.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d")
-
+    
     let canvasPos = getPosition(canvas);
     let mouseX = 5;
     let mouseY = 0;
+
+    new Land(ctx)
     
     const Demoview = new DemoView(ctx)
     Demoview.start()
@@ -25,6 +28,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         mouseY = e.clientY - canvasPos.y;
         console.log(`${mouseX} & ${mouseY}`)
         Demoview.clear()
+        Demoview.moveAgain(mouseX, mouseY)
     }
 
     function getPosition(el) {
