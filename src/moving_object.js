@@ -38,4 +38,11 @@ MovingObject.prototype.isCollidedWith = function(otherObject) {
     return false;
 }
 
+MovingObject.prototype.collideMove = function () {
+    let x = this.pos[0] + this.vel[0]
+    let y = this.pos[1] - this.vel[1]
+
+    this.pos = this.demo.wrap([x, y])
+}
+
 export default MovingObject;

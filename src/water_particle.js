@@ -3,7 +3,7 @@ import Util from './util'
 
 const waterAttrs = {
     color: "#4d79ff",
-    radius: 40,
+    radius: 30,
     strokeColor: "#ffe6e6"
 }
 

@@ -145,8 +145,10 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
                 let particle2 = all[i]
 
                 if (particle1.isCollidedWith(particle2)) {
-                    alert(`collision between ${particle1.pos} and ${particle2.pos}, radii
-                    are ${particle1.radius} and ${particle2.radius}`)
+                    // alert(`collision between ${particle1.pos} and ${particle2.pos}, radii
+                    // are ${particle1.radius} and ${particle2.radius}`)
+                    particle1.collideMove()
+                    // particle2.collideMove()
                 }
             }
         })
