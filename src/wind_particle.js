@@ -3,7 +3,7 @@ import Util from './util'
 
 const windAttrs = {
     color: "#ffe6e6",
-    radius: 3
+    radius: 50
 }
 
 class WindParticle extends MovingObject{

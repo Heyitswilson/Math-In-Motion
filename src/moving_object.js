@@ -1,3 +1,5 @@
+import Util from './util'
+
 function MovingObject(attrs) {
     this.pos = attrs.pos;
     this.vel = attrs.vel;
@@ -16,6 +18,9 @@ MovingObject.prototype.draw = function(ctx) {
         this.radius, 
         0, 
         2 * Math.PI);
+    ctx.fillStyle = this.color
+    ctx.fill()
+    ctx.strokeStyle = this.strokeColor
     ctx.stroke();
 }
 
@@ -24,6 +29,13 @@ MovingObject.prototype.move = function() {
     let y = this.pos[1] + this.vel[1]
 
     this.pos = this.demo.wrap([x, y])
+}
+
+MovingObject.prototype.isCollidedWith = function(otherObject) {
+    if (Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius)) {
+        return true;
+    }
+    return false;
 }
 
 export default MovingObject;

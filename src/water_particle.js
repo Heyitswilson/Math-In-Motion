@@ -3,7 +3,8 @@ import Util from './util'
 
 const waterAttrs = {
     color: "#4d79ff",
-    radius: 3
+    radius: 40,
+    strokeColor: "#ffe6e6"
 }
 
 class WaterParticle extends MovingObject {
@@ -13,7 +14,7 @@ class WaterParticle extends MovingObject {
         this.color = waterAttrs.color;
         this.radius = waterAttrs.radius;
         this.pos = args.pos;
-        // this.vel = Util.setVec(10, args.mouseX, args.mouseY)
+        this.vel = Util.setVecWater(10)
     }
 
 
