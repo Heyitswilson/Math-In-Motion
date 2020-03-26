@@ -26,7 +26,7 @@ const Util = {
     },
 
     setVecWater(length) {
-    const deg = 2 * Math.PI * .05;
+    const deg = 2 * Math.PI * .01;
     return Util.scale([Math.sin(-deg), Math.cos(deg)], length);
     },
 

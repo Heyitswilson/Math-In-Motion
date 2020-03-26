@@ -13,7 +13,7 @@ class WindParticle extends MovingObject{
         this.color = windAttrs.color;
         this.radius = windAttrs.radius;
         this.pos = args.pos;
-        this.vel = Util.setVec(10, args.mouseX, args.mouseY)
+        this.vel = Util.setVec(3, args.mouseX, args.mouseY)
     }
 
 

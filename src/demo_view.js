@@ -1,5 +1,5 @@
 import Demo from './demo'
-import Land from './land'
+// import Land from './land'
 
 class DemoView {
     constructor(ctx) {
@@ -12,7 +12,7 @@ class DemoView {
 }
 DemoView.prototype.start = function(){
     this.interval = setInterval(() => { 
-        console.log("moving every 20ms")
+        // console.log("moving every 20ms")
         this.Demo.moveObjects();
         this.Demo.draw(this.ctx)
         this.Demo.stepWater()
