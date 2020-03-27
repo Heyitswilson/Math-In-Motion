@@ -3,15 +3,15 @@ import WindParticle from './wind_particle'
 import WaterParticle from './water_particle'
 // import Land from './land'
 import LandTop from './land/land_top'
-import LandRight from './land/land_right'
-import LandLeft from './land/land_left'
+// import LandRight from './land/land_right'
+// import LandLeft from './land/land_left'
 
 
 class Demo {
     constructor() {
         this.DIM_X = 800
         this.DIM_Y = 600
-        this.NUM_WIND_PARTICLES = 1
+        this.NUM_WIND_PARTICLES = 5    
         // console.log('hitting demo')
         this.windParticles = []
         this.addWindParticles();
@@ -20,13 +20,13 @@ class Demo {
 
         // console.log(this.windParticles[0].pos)
 
-        this.NUM_WATER_PARTICLES = 1
+        this.NUM_WATER_PARTICLES = 5
         this.waterParticles = [];
         this.addWaterParticles();
 
         this.landTop = new LandTop()
-        this.landLeft = new LandLeft()
-        this.landRight = new LandRight()
+        // this.landLeft = new LandLeft()
+        // this.landRight = new LandRight()
     }
 }
 
@@ -42,8 +42,8 @@ Demo.prototype.randomFromInterval = (min, max) => {
 }
 
 Demo.prototype.waterPositionRandom = function() {
-    let x = this.randomFromInterval(0, 300)
-    let y = this.randomFromInterval(400, 600)
+    let x = this.randomFromInterval(50, 300)
+    let y = this.randomFromInterval(400, 550)
     let randPos = [x, y]
     return randPos
 } 
@@ -60,7 +60,7 @@ Demo.prototype.addWindParticles = function() {
 Demo.prototype.addWaterParticles = function () {
     let i = 0;
     while (i < this.NUM_WATER_PARTICLES) {
-        let waterParticle = new WaterParticle({ pos: this.waterPositionRandom(), demo: this })
+        let waterParticle = new WaterParticle({ pos: this.randomPosition(), demo: this })
         this.waterParticles.push(waterParticle)
         i += 1
     }
@@ -68,25 +68,26 @@ Demo.prototype.addWaterParticles = function () {
 }
 
 Demo.prototype.draw = function(ctx){
-    ctx.clearRect(0, 0, 800, 400)
+    ctx.clearRect(0, 0, 800, 600)
 
-    this.landTop.drawTop(ctx)
-    this.landLeft.drawRight(ctx)
-    this.landRight.drawLeft(ctx)
+    // this.landTop.drawTop(ctx)
+    // this.landLeft.drawRight(ctx)
+    // this.landRight.drawLeft(ctx)
     this.finalMovedWindParticles.forEach( finalMovedWindParticle => {
         return finalMovedWindParticle.draw(ctx)
     })
 }
 // need to DRAW LAND so you can clearRect
 Demo.prototype.drawWater = function(ctx){
-    ctx.clearRect(0, 400, 300, 600)
-    ctx.clearRect(500, 400, 800, 600)
-
+    ctx.clearRect(0, 0, 800, 600)
+    // ctx.clearRect(0, 400, 300, 600)
+    // ctx.clearRect(400, 400, 800, 600)
+    let all = this.waterParticles.concat(this.finalMovedWindParticles)
     this.landTop.drawTop(ctx)
-    this.landLeft.drawRight(ctx)
-    this.landRight.drawLeft(ctx)
-    this.waterParticles.forEach( waterParticle => {
-        return waterParticle.draw(ctx);
+    // this.landLeft.drawRight(ctx)
+    // this.landRight.drawLeft(ctx)
+    all.forEach( particle => {
+        return particle.draw(ctx);
     })
 }
 
@@ -141,36 +142,54 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
         finalMovedWindParticle.move()
     })
 }
-    Demo.prototype.checkCollisionsWater = function(checkWind = false) {
-        let all;
-        if (!checkWind) {
-            //checking for the collision of landTop against landRight and landLeft
-            all = this.waterParticles.concat(this.landTop, this.landLeft, this.landRight)
-        } else {
-            all = this.waterParticles.concat(this.finalMovedWindParticles, this.landTop, this.landLeft, this.landRight)
-        }
 
-        // console.log(`checking wind: ${checkWind}`)
-        all.forEach( (particle1, idx) => {
-            for(let i = idx + 1; i < all.length; i += 1) {
-                let particle2 = all[i]
-                if ( (particle1 instanceof WindParticle) || 
-                    (particle1 instanceof WaterParticle) && 
-                    particle1.isCollidedWith(particle2)) {
-                    // alert(`collision between ${particle1.pos} and ${particle2.pos}, radii
-                    // are ${particle1.radius} and ${particle2.radius}`)
-                        particle1.collideMove()
-                    // particle2.collideMove()
-                }
+Demo.prototype.checkCollisionsWater = function(checkWind = false) {
+    let all;
+    if (!checkWind) {
+        //checking for the collision of landTop against landRight and landLeft
+        // all = this.waterParticles.concat(this.landTop)
+        all = this.waterParticles
+    } else {
+        // all = this.waterParticles.concat(this.finalMovedWindParticles, this.landTop)
+        all = this.waterParticles.concat(this.finalMovedWindParticles)
+    }
+
+    all.forEach( (particle1, idx) => {
+        for(let i = idx + 1; i < all.length; i += 1) {
+            let particle2 = all[i]
+            
+            // console.log(`is particle2: ${particle2}`)
+            // if ( (particle1 instanceof WindParticle) || 
+            //     (particle1 instanceof WaterParticle) && 
+            //     particle1.isCollidedWith(particle2)) {
+            //         particle1.collideLandTop()
+            //     // particle2.collideMove()
+            // }
+            // particle1.collideMove(particle2)
+            
+            particle1.collideMove()
+            particle2.collideMove()
+            
+            if (particle1.isCollidedWith(particle2)) {
+                particle1.collideMoveObj(particle2)
+                // particle2.collideMoveObj(particle1)
+                // if (particle1 instanceof WaterParticle && particle2 instanceof LandTop)
+                // alert(`collision: particle1 = ${particle1.vel}, particle2 = ${particle2.vel}`)
             }
-        })
-    }
+        }
+    })
+}
 
-    Demo.prototype.stepWater = function(checkWind) {
-        this.moveObjectsWater()
-        this.checkCollisionsWater(checkWind)
-        // this.drawWater(ctx)
+Demo.prototype.stepWater = function(checkWind, mouseX, mouseY, moveAgain) {
+    if (moveAgain) {
+        // this.moveObjects()
+    } else {
+        this.moveObjectsAgain(mouseX, mouseY)
     }
+    this.moveObjectsWater()
+    this.checkCollisionsWater(checkWind)
+    // this.drawWater(ctx)
+}
 
 
 export default Demo

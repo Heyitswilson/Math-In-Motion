@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // new Land(ctx)
     
     const Demoview = new DemoView(ctx)
-    Demoview.start()
+    Demoview.start(mouseX, mouseY)
 
     canvas.addEventListener("mousedown", setMousePosition, false)
 

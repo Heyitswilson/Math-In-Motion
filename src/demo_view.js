@@ -10,13 +10,13 @@ class DemoView {
         this.intervalWater = "testwater"
     }
 }
-DemoView.prototype.start = function(){
+DemoView.prototype.start = function(mouseX, mouseY){
     this.interval = setInterval(() => { 
         // console.log("moving every 20ms")
-        this.Demo.moveObjects();
-        this.Demo.draw(this.ctx)
-        this.Demo.stepWater()
+        // this.Demo.moveObjects();
+        this.Demo.stepWater(false, mouseX, mouseY, true)
         // this.Demo.moveObjectsWater()
+        // this.Demo.draw(this.ctx)
         this.Demo.drawWater(this.ctx)
     }, 20);
 
@@ -32,9 +32,9 @@ DemoView.prototype.clear = function() {
 
 DemoView.prototype.moveAgain = function(mouseX, mouseY) {
     this.interval = setInterval(() => {
-        this.Demo.moveObjectsAgain(mouseX, mouseY);
-        this.Demo.draw(this.ctx)
-        this.Demo.stepWater(true)
+        // this.Demo.moveObjectsAgain(mouseX, mouseY);
+        this.Demo.stepWater(true, mouseX, mouseY, false)
+        // this.Demo.draw(this.ctx)
         this.Demo.drawWater(this.ctx)
     }, 20)
 }

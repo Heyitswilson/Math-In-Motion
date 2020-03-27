@@ -26,10 +26,30 @@ const Util = {
     },
 
     setVecWater(length) {
-    const deg = 2 * Math.PI * .01;
-    return Util.scale([Math.sin(-deg), Math.cos(deg)], length);
+    // const deg = 2 * Math.PI * .01;
+        const deg = 2 * Math.PI * .2;
+        return Util.scale([Math.sin(-deg), Math.cos(deg)], length);
     },
 
+    collisionVecWater(length) {
+        const deg = 2 * Math.PI * .01;
+        return Util.scale([Math.sin(-deg), Math.cos(deg)], length);
+    },
+
+    velChange(impulse, mass) {
+        return impulse / mass
+    },
+
+    collisionChange(pos, vel) {
+        let ans;
+        if (vel > 0) {
+            ans = pos + vel
+        } else {
+            ans = pos - vel
+        }
+
+        return ans
+    }
 }
 
 export default Util
