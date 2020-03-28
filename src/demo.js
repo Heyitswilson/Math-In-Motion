@@ -20,7 +20,7 @@ class Demo {
 
         // console.log(this.windParticles[0].pos)
 
-        this.NUM_WATER_PARTICLES = 5
+        this.NUM_WATER_PARTICLES = 0
         this.waterParticles = [];
         this.addWaterParticles();
 
@@ -82,7 +82,13 @@ Demo.prototype.drawWater = function(ctx){
     ctx.clearRect(0, 0, 800, 600)
     // ctx.clearRect(0, 400, 300, 600)
     // ctx.clearRect(400, 400, 800, 600)
-    let all = this.waterParticles.concat(this.finalMovedWindParticles)
+    let all;
+    if (this.finalMovedWindParticles.length === 0) {
+        all = this.waterParticles.concat(this.movedWindParticles)
+    } else {
+        all = this.waterParticles.concat(this.finalMovedWindParticles)
+    }
+    console.log(all)
     this.landTop.drawTop(ctx)
     // this.landLeft.drawRight(ctx)
     // this.landRight.drawLeft(ctx)
@@ -103,16 +109,16 @@ Demo.prototype.moveObjectsWater = function() {
     })
 }
 
-Demo.prototype.mod = function (a, b) {
-    return ((a % b) + b) % b;
-}
+// Demo.prototype.mod = function (a, b) {
+//     return ((a % b) + b) % b;
+// }
 
-Demo.prototype.wrap = function (pos) {
-    let x = this.mod(pos[0], this.DIM_X)
-    let y = this.mod(pos[1], this.DIM_Y)
+// Demo.prototype.wrap = function (pos) {
+//     let x = this.mod(pos[0], this.DIM_X)
+//     let y = this.mod(pos[1], this.DIM_Y)
 
-    return [x, y]
-}
+//     return [x, y]
+// }
 
 Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
     if (this.movedWindParticles.length === 0) {
@@ -123,6 +129,9 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
                 mouseX: mouseX,
                 mouseY: mouseY
             }))
+        })
+        this.movedWindParticles.forEach(movedWindParticle => {
+            movedWindParticle.move()
         })
     } else {
         this.finalMovedWindParticles = [];
@@ -136,11 +145,15 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
             }))
         }
         this.movedWindParticles = this.finalMovedWindParticles
+        this.finalMovedWindParticles.forEach(finalMovedWindParticle => {
+            finalMovedWindParticle.move()
+        })
     }
     
-    this.finalMovedWindParticles.forEach(finalMovedWindParticle => {
-        finalMovedWindParticle.move()
-    })
+    // console.log(this.windParticles)
+    // this.windParticles.forEach( windParticle => {
+    //     windParticle.move()
+    // })
 }
 
 Demo.prototype.checkCollisionsWater = function(checkWind = false) {
@@ -149,15 +162,15 @@ Demo.prototype.checkCollisionsWater = function(checkWind = false) {
         //checking for the collision of landTop against landRight and landLeft
         // all = this.waterParticles.concat(this.landTop)
         all = this.waterParticles
-    } else {
+    } else if (this.finalMovedWindParticles.length === 0) {
         // all = this.waterParticles.concat(this.finalMovedWindParticles, this.landTop)
         all = this.waterParticles.concat(this.finalMovedWindParticles)
+    } else {
+        all = this.waterParticles.concat(this.movedWindParticles)
     }
-
     all.forEach( (particle1, idx) => {
         for(let i = idx + 1; i < all.length; i += 1) {
             let particle2 = all[i]
-            
             // console.log(`is particle2: ${particle2}`)
             // if ( (particle1 instanceof WindParticle) || 
             //     (particle1 instanceof WaterParticle) && 
@@ -181,9 +194,7 @@ Demo.prototype.checkCollisionsWater = function(checkWind = false) {
 }
 
 Demo.prototype.stepWater = function(checkWind, mouseX, mouseY, moveAgain) {
-    if (moveAgain) {
-        // this.moveObjects()
-    } else {
+    if (!moveAgain) {
         this.moveObjectsAgain(mouseX, mouseY)
     }
     this.moveObjectsWater()

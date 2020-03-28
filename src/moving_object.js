@@ -33,7 +33,7 @@ MovingObject.prototype.move = function() {
     let y = this.pos[1] + this.vel[1]
 
     this.pos = [x, y]
-    this.pos = this.demo.wrap([x, y])
+    // this.pos = this.demo.wrap([x, y])
 }
 
 MovingObject.prototype.isCollidedWith = function(otherObject) {
@@ -54,10 +54,16 @@ MovingObject.prototype.collideMove = function() {
     let r1 = this.radius;
 
     if ( y1 + this.vel[1] < r1 || y1 + this.vel[1] > 600 - r1) {
+        // console.log('condition 1')
+        // console.log(`before, ${this.vel}`)
         this.vel[1] = -this.vel[1]
+        // console.log(`after, ${this.vel}`)
+        // the vector does change. it looks like that change isn't being registered
+        // or drawn out
     } 
 
     if (x1 + this.vel[0] < r1 || x1 + this.vel[0] > 800 - r1) {
+        // console.log('condition 2')
         this.vel[0] = - this.vel[0]
     }
 
@@ -74,8 +80,8 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
     let y2 = particle2.pos[1];
     let r1 = this.radius;
     let r2 = particle2.radius;
-    console.log(this.name)
-    console.log(particle2.name)
+
+    
     // if ((x1 ) < (x2 + particle2.radius) || (x2 - particle2.radius)) {
     //     this.vel[0] = -this.vel[0];
     //     particle2.vel[0] = particle2.vel[0]
@@ -92,16 +98,20 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
     // }
 
     if ((x1 + r1 + this.vel[0] - 10 > x2 - r2) && (x1 - r1 - this.vel[0] + 10 < x2 + r2)) {
+        console.log(`before ---particle1: ${this.pos}, particle2: ${particle2.pos}`)
         this.vel[0] = -this.vel[0];
         this.vel[1] = - this.vel[1]
         particle2.vel[0] = - particle2.vel[0]
         particle2.vel[1] = - particle2.vel[1]
+        console.log(`after ---particle1: ${ this.pos }, particle2: ${ particle2.pos }`)
+        // console.log("colliding1")
         //bouncing off of the island...
     }
 
     if ((y1 + r1 + this.vel[1] + 10 < y2 - r2) && (y1 - r2 - this.vel[1] - 10 < y2 + r2)) {
         this.vel[1] = -this.vel[1];
         particle2.vel[1] = - particle2.vel[1]
+        console.log("colliding1")
         //bouncing off of the island...
     }
 
