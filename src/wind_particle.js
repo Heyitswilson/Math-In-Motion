@@ -10,13 +10,14 @@ const windAttrs = {
 class WindParticle extends MovingObject{
     constructor(args) {
         super(args)
-        args = args || {};
         this.name = windAttrs.name;
         this.color = windAttrs.color;
         this.radius = windAttrs.radius;
         this.pos = args.pos;
-        this.vel = Util.setVec(3, args.mouseX, args.mouseY);
-        console.log(args)
+        // this.vel =  args.vel || Util.setVec(3, args.mouseX, args.mouseY)
+        this.vel = Util.setVec(3, args.mouseX, args.mouseY) || args.vel;
+
+        // console.log(args)
     }
 
 

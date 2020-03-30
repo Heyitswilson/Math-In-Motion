@@ -1,11 +1,8 @@
 import MovingObject from './moving_object'
 import WindParticle from './wind_particle'
 import WaterParticle from './water_particle'
-// import Land from './land'
 import LandTop from './land/land_top'
 import Util from './util'
-// import LandRight from './land/land_right'
-// import LandLeft from './land/land_left'
 
 
 class Demo {
@@ -19,15 +16,13 @@ class Demo {
         this.movedWindParticles = [];
         this.finalMovedWindParticles = [];
 
-        // console.log(this.windParticles[0].pos)
 
-        this.NUM_WATER_PARTICLES = 0
+
+        this.NUM_WATER_PARTICLES = 5
         this.waterParticles = [];
         this.addWaterParticles();
 
         this.landTop = new LandTop()
-        // this.landLeft = new LandLeft()
-        // this.landRight = new LandRight()
     }
 }
 
@@ -71,9 +66,6 @@ Demo.prototype.addWaterParticles = function () {
 Demo.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 800, 600)
 
-    // this.landTop.drawTop(ctx)
-    // this.landLeft.drawRight(ctx)
-    // this.landRight.drawLeft(ctx)
     this.finalMovedWindParticles.forEach( finalMovedWindParticle => {
         return finalMovedWindParticle.draw(ctx)
     })
@@ -132,6 +124,10 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
     this.windParticles.forEach( windParticle => {
         pos.push(windParticle.pos)
     })
+    let vel = []
+    this.windParticles.forEach(windParticle => {
+        vel.push(windParticle.vel)
+    })
     // console.log(`before: ${this.windParticles}`)
     this.windParticles = [];
     // console.log(`after: ${this.windParticles}`)
@@ -147,10 +143,11 @@ Demo.prototype.moveObjectsAgain = function(mouseX, mouseY) {
     //     i += 1
     // }
     while (i < this.NUM_WIND_PARTICLES) {
-        let windParticle = new WindParticle({ pos: pos[i], demo: this, mouseX: mouseX, mouseY: mouseY })
+        let windParticle = new WindParticle({ pos: pos[i], demo: this, vel: vel[i], mouseX: mouseX, mouseY: mouseY })
         this.windParticles.push(windParticle)
         i += 1
     }
+    // console.log(this.windParticles)
     // console.log(`after: ${this.windParticles[0]}`)
     // console.log(`after after after: ${this.windParticles}`)
     this.windParticles.forEach( windParticle => {
@@ -218,6 +215,7 @@ Demo.prototype.checkCollisionsWater = function(checkWind = false) {
     }
     all.forEach( (particle1, idx) => {
         // console.log(`before collision check`)
+        particle1.collideMove()
         for(let i = idx + 1; i < all.length; i += 1) {
             let particle2 = all[i]
             // console.log(`is particle2: ${particle2}`)
@@ -228,9 +226,7 @@ Demo.prototype.checkCollisionsWater = function(checkWind = false) {
             //     // particle2.collideMove()
             // }
             // particle1.collideMove(particle2)
-            // console.log(`during collisionCheck : ${particle1.vel}`)
-            particle1.collideMove()
-            particle2.collideMove()
+            console.log(`during collisionCheck : ${particle1.vel}`)
             
             if (particle1.isCollidedWith(particle2)) {
                 // if(particle1.delete) {

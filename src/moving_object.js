@@ -2,16 +2,13 @@ import Util from './util'
 
 function MovingObject(attrs) {
     this.pos = attrs.pos;
-    this.vel = attrs.vel;
-    this.radius = attrs.radius;
-    this.color = attrs.color;
-    this.demo = attrs.demo;
-    this.impulse = attrs.impulse;
-    this.mass = attrs.mass;
-    this.velChange = attrs.velChange;
-    this.name = attrs.name
-    // this.delete = false
-    console.log(attrs)
+    // this.vel = attrs.vel;
+    this.demo = attrs.demo
+    // this.radius = attrs.radius;
+    // this.color = attrs.color;
+    // this.name = attrs.name
+    // console.log(attrs.vel)
+    // console.log(attrs)
 }
 
 MovingObject.prototype.draw = function(ctx) {
@@ -54,10 +51,10 @@ MovingObject.prototype.collideMove = function() {
     let x1 = this.pos[0];
     let y1 = this.pos[1];
     let r1 = this.radius;
-    
     if ( y1 + this.vel[1] < r1 || y1 + this.vel[1] > 600 - r1) {
         // console.log('condition 1')
         // console.log(`before, ${this.vel}`)
+        
         this.vel[1] = -this.vel[1]
         
         // console.log(this.vel)
