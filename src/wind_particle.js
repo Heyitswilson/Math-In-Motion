@@ -15,7 +15,7 @@ class WindParticle extends MovingObject{
         this.radius = windAttrs.radius;
         this.pos = args.pos;
         // this.vel =  args.vel || Util.setVec(3, args.mouseX, args.mouseY)
-        this.vel = Util.setVec(3, args.mouseX, args.mouseY) || args.vel;
+        this.vel = Util.setVec(5, args.mouseX, args.mouseY) || args.vel;
 
         // console.log(args)
     }
