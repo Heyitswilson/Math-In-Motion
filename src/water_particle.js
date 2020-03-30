@@ -6,8 +6,6 @@ const waterAttrs = {
     color: "#4d79ff",
     radius: 30,
     strokeColor: "#ffe6e6",
-    impulse: 3,
-    mass: 2
 }
 
 class WaterParticle extends MovingObject {
@@ -18,10 +16,8 @@ class WaterParticle extends MovingObject {
         this.color = waterAttrs.color;
         this.radius = waterAttrs.radius;
         this.pos = args.pos;
-        this.vel = Util.setVecWater(5);
-        this.impulse = waterAttrs.impulse;
-        this.mass = waterAttrs.mass;
-        this.velChange = Util.velChange(waterAttrs.impulse, waterAttrs.mass)
+        // this.vel = Util.setVec(5);
+        this.vel = Util.setVecWater(7);
     }
 
 
