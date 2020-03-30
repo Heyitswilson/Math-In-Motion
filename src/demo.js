@@ -9,7 +9,7 @@ class Demo {
     constructor() {
         this.DIM_X = 800
         this.DIM_Y = 600
-        this.NUM_WIND_PARTICLES = 2
+        this.NUM_WIND_PARTICLES = 4
         // console.log('hitting demo')
         this.windParticles = []
         this.addWindParticles();
