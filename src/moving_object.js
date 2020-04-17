@@ -2,17 +2,10 @@ import Util from './util'
 
 function MovingObject(attrs) {
     this.pos = attrs.pos;
-    // this.vel = attrs.vel;
-    this.demo = attrs.demo
-    // this.radius = attrs.radius;
-    // this.color = attrs.color;
-    // this.name = attrs.name
-    // console.log(attrs.vel)
-    // console.log(attrs)
+    this.demo = attrs.demo;
 }
 
 MovingObject.prototype.draw = function(ctx) {
-    // console.log("canvas works")
     ctx.fillStyle = this.color;
     ctx.beginPath();
     ctx.arc(
@@ -21,25 +14,35 @@ MovingObject.prototype.draw = function(ctx) {
         this.radius, 
         0, 
         2 * Math.PI);
-    ctx.fillStyle = this.color
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)"
     ctx.fill()
     ctx.strokeStyle = this.strokeColor
     ctx.stroke();
 }
 
-MovingObject.prototype.move = function() {
+MovingObject.prototype.move = function(otherObject) {
     let x = this.pos[0] + this.vel[0]
     let y = this.pos[1] + this.vel[1]
-
-    // this.pos = [x, y]
     this.pos = this.demo.wrap([x, y])
+    // if (this.isCollidedWith(otherObject)) {
+    //     this.pos = this.demo.wrap([x + 20, y + 20])
+    // }
 }
 
 MovingObject.prototype.isCollidedWith = function(otherObject) {
     if (Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius)) {
-        return true;
+        // COLOR INDEX CODE HERE
+        let currentIdx = this.strokeColors.indexOf(this.strokeColor);
+        let otherCurrentIdx = otherObject.strokeColors.indexOf(otherObject.strokeColor);
+        let nextIdx = (currentIdx + 1) % 5;
+        let otherNextIdx = (otherCurrentIdx + 1) % 5;
+        this.strokeColor = this.strokeColors[nextIdx];
+        otherObject.strokeColor = otherObject.strokeColors[otherNextIdx];
+
+        this.collideMoveObj(otherObject)
+        // return true;
     }
-    return false;
+    // return false;
 }
 // particle2's velocity is [0. 0], so you always hit the first case 
 // cannot just take into account one particle's velocity, have to take into
@@ -52,22 +55,11 @@ MovingObject.prototype.collideMove = function() {
     let y1 = this.pos[1];
     let r1 = this.radius;
     if ( y1 + this.vel[1] < r1 || y1 + this.vel[1] > 600 - r1) {
-        // console.log('condition 1')
-        // console.log(`before, ${this.vel}`)
-        
-        this.vel[1] = -this.vel[1]
-        
-        // console.log(this.vel)
-        // console.log(`after, ${this.vel}`)
-        // the vector does change. it looks like that change isn't being registered
-        // or drawn out
+        console.log(this)
+        this.vel[1] *= -1
+    } else if (x1 + this.vel[0] < r1 || x1 + this.vel[0] > 800 - r1) {
+        this.vel[0] *= -1
     } 
-
-    if (x1 + this.vel[0] < r1 || x1 + this.vel[0] > 800 - r1) {
-        // console.log('condition 2')
-        this.vel[0] = - this.vel[0]
-    }
-
 }
 
 
@@ -80,13 +72,48 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
     let r2 = particle2.radius;
 
 
-    if ((x1 + r1 + this.vel[0] + 5000 > x2 - r2) && (x1 - r1 - this.vel[0] - 5000 < x2 + r2)) {
-     
-        this.vel[0] = -this.vel[0];
-        this.vel[1] = - this.vel[1]
-        particle2.vel[0] = - particle2.vel[0]
-        particle2.vel[1] = - particle2.vel[1]
+    if (x1 + r1 + this.vel[0] > x2 - r2) {
+        this.vel[0] *= -1
+        this.vel[1] *= -1
+        particle2.vel[0] *= -1
+        particle2.vel[1] *= -1
     }
+
+    // if (((x1 + this.vel[0]) > x2 - r2) || ((x1 - this.vel[0]) < x2 + r2)) {
+     
+    //     this.vel[0] *= -1
+    //     this.vel[1] *= -1
+    //     particle2.vel[0] *= -1
+    //     particle2.vel[1] *= -1
+    // }
+
+
+    // if (((x1 + r1 + this.vel[0]) > x2 - r2) || 
+    //     (x1 - r1 - this.vel[0]) < x2 + r2) {
+    //         this.vel[0] *= -1
+    //         particle2.vel[0] *= -1
+    // } else if ((y1 + r1 + this.vel[1] > y2 - r2) ||
+    //     (y1 - r1 - this.vel[1] < y2 + r2)) {
+    //         this.vel[1] *= -1.02
+    //         particle2.vel[1] *= -1
+    // }
+
+    // if (((x1 + r1 + this.vel[0]) > x2 - r2 - this.vel[0]) || 
+    // ((x1 - r1 - this.vel[0]) < x2 + r2 + this.vel[0]) ||
+    // ((y1 + r1 + this.vel[1] > y2 - r2 - this.vel[1]) || 
+    // (y1 - r1 - this.vel[1] < y2 + r2 + this.vel[1]))) {
+    //     this.vel[0] *= -1
+    //     this.vel[1] *= -1
+    //     particle2.vel[0] *= -1
+    //     particle2.vel[1] *= -1
+    // }
+
+
+
+
+
+
+
 }
 
 

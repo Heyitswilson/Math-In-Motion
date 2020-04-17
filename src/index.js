@@ -2,10 +2,6 @@ import MovingObject from './moving_object'
 import WindParticle from './wind_particle'
 import Demo from './demo'
 import DemoView from './demo_view'
-import LandTop from './land/land_top'
-import LandRIght from './land/land_right'
-import LandLeft from './land/land_left'
-// const MovingObject = require("./moving_object.js").default;
 window.MovingObject = MovingObject
 window.WindParticle = WindParticle
 window.Demo = Demo
@@ -18,9 +14,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let mouseX = 0;
     let mouseY = 0;
 
-    // new Land(ctx)
-    // new Land(ctx)
-    // new Land(ctx)
     
     const Demoview = new DemoView(ctx)
     Demoview.start(mouseX, mouseY)
