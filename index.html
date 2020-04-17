@@ -6,24 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./dist/main.js"></script>
+    <script>
+        let music = document.getElementById("musicApp");
+        function play() {
+            music.play()
+        }
+
+        function pause() {
+            music.pause()
+        }
+        console.log(music)
+    </script>
     <link rel="stylesheet" href="./assets/stylesheets/index.css" >
 </head>
 <body>
     <div class="screen-div">
-        <canvas width="800" height="600" id="canvas" ></canvas>
-        <div>
-            <h1>Overview</h1>
-            <div>   
-                Click your mouse to control the pink particles! 
-                I'd like for more to happen but the project isn't finished yet :(
+        <div class="background">
+            
+        </div>
+        <div class="top">
+            <div class="header">
+                <div>
+                    <h1 class="title">Bounce</h1>
+                </div>
+                <div class="link-space"> 
+                    <a class="icon-link" href="https://github.com/Heyitswilson" target="_blank">
+                        <img class="icons" src="https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png" />
+                    </a>
+                    <a class="icon-link" href="https://www.linkedin.com/in/wilson-ngu-67a45a151/" target="_blank">
+                        <img class="icons" src="https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png" />
+                    </a>
+                    <a class="icon-link" href="https://angel.co/u/wilson-ngu" target="_blank">
+                        <img class="icons-a" src="https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="intro">   
+                Inspired by the neon colors of cyberpunk artworks, Bounce is an interactive, visual experiment that is best paired with lofi music. Use mouse clicks to affect the travel directions of the large particles.
             </div>
             <br/>
             <div>
-                Refresh the page if the particles bug out!
+                <audio controls id="musicApp">
+                    <source src="./music.mp3" type="audio/mpeg">
+                    </audio>
+                    <!-- <button onClick="play()">Play</button>
+                        <button onClick="pause()">Pause</button> -->
             </div>
-            
+            <div class="credit-div">
+                <div class="credit">Music: "Take me away" - WYS</div>
+                <div class="credit">Art: Cyberpunk 2077</div>
+            </div>
         </div>
-
+        <canvas width="800" height="600" id="canvas" ></canvas>
     </div>
 </body>
 </html>
