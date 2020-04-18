@@ -10,7 +10,7 @@ class DemoView {
 }
 DemoView.prototype.start = function(mouseX, mouseY){
     this.interval = setInterval(() => { 
-        this.Demo.stepWater(false, mouseX, mouseY)
+        this.Demo.stepWater(mouseX, mouseY, true)
         this.Demo.drawWater(this.ctx)
     }, 20);
 
@@ -22,7 +22,7 @@ DemoView.prototype.clear = function() {
 
 DemoView.prototype.moveAgain = function(mouseX, mouseY) {
     this.interval = setInterval(() => {
-        this.Demo.stepWater(true, mouseX, mouseY, true)
+        this.Demo.stepWater(mouseX, mouseY, true)
         this.Demo.drawWater(this.ctx)
     }, 20)
 }

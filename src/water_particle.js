@@ -17,7 +17,6 @@ class WaterParticle extends MovingObject {
         this.radius = waterAttrs.radius;
         this.pos = args.pos;
         this.vel = Util.setVecWater(7);
-        // this.strokeColors
         this.strokeColors = ["#00ff00", "#ffff00", "#00ffff", "#ff00ff", "#ff8000"]
     }
 
