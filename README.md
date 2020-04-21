@@ -6,7 +6,5 @@ Bounce is a colorful demo where users guide particles around the screen and watc
 * Javascript
 
 ## To-do
-* Collision fix
-* Color changes
-* Slidebar adjustments of speed and particle numbers
-* Color trails
+* Different oscillation directions
+* Different travel paths
