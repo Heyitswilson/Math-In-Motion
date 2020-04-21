@@ -53,9 +53,7 @@ MovingObject.prototype.collideMove = function() {
 
 MovingObject.prototype.collideMoveObj = function(particle2) {
     let x1 = this.pos[0];
-    let y1 = this.pos[1];
     let x2 = particle2.pos[0];
-    let y2 = particle2.pos[1];
     let r1 = this.radius;
     let r2 = particle2.radius;
 
