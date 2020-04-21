@@ -134,7 +134,6 @@ Demo.prototype.checkCollisionsWater = function() {
         particle1.collideMove()
         for(let i = idx + 1; i < all.length; i += 1) {
             let particle2 = all[i]
-            // console.log(`during collisionCheck : ${particle1.vel}`)
             particle1.isCollidedWith(particle2)
         }
     })

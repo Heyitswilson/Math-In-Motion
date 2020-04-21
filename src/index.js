@@ -11,9 +11,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const ctx = canvas.getContext("2d")
     
     let canvasPos = getPosition(canvas);
-    let mouseX = 300;
-    let mouseY = 570;
-
+    let mouseX = 400;
+    let mouseY = 400;
     
     const Demoview = new DemoView(ctx)
     Demoview.start(mouseX, mouseY)
