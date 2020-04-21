@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bounce</title>
     <script src="./dist/main.js"></script>
     <script>
         let music = document.getElementById("musicApp");
@@ -15,15 +15,15 @@
         function pause() {
             music.pause()
         }
-        console.log(music)
     </script>
     <link rel="stylesheet" href="./assets/stylesheets/index.css" >
+    <link rel="icon" href="https://toasty-dev.s3-us-west-1.amazonaws.com/icons/icons8-circle-96.png">
 </head>
 <body>
     <div class="screen-div">
         <div class="background">
             
-            <div>
+            <div class="background-div">
                 <div class="header">
                     <div>
                         <h1 class="title">Bounce</h1>
@@ -41,7 +41,11 @@
                     </div>
                 </div>
                 <div class="intro">   
-                    Inspired by the neon colors of cyberpunk artworks, Bounce is an interactive, visual experiment that is best paired with lofi music. Use mouse clicks to affect the travel directions of the large particles.
+                    Inspired by the neon colors of cyberpunk artworks, Bounce is an interactive, visual presentation that is best paired with lofi music. 
+                    <br/>
+                    <br/>
+                    The large particles oscillate back and forth at a set speed determined by where you click inside the canvas.
+                    Clicking towards the top left corner sets a faster oscillation speed, while clicking towards the bottom right corner sets a slower oscillation speed.
                 </div>
                 <br/>
                 <div class="music-div">

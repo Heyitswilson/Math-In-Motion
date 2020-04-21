@@ -20,7 +20,7 @@ MovingObject.prototype.draw = function(ctx) {
     ctx.stroke();
 }
 
-MovingObject.prototype.move = function(otherObject) {
+MovingObject.prototype.move = function() {
     let x = this.pos[0] + this.vel[0]
     let y = this.pos[1] + this.vel[1]
     this.pos = this.demo.wrap([x, y])
@@ -44,7 +44,6 @@ MovingObject.prototype.collideMove = function() {
     let y1 = this.pos[1];
     let r1 = this.radius;
     if ( y1 + this.vel[1] < r1 || y1 + this.vel[1] > 600 - r1) {
-        console.log(this)
         this.vel[1] *= -1
     } else if (x1 + this.vel[0] < r1 || x1 + this.vel[0] > 800 - r1) {
         this.vel[0] *= -1

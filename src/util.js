@@ -1,4 +1,5 @@
 const Util = {
+
     dist(pos1, pos2) {
         let x1, y1;
         [x1, y1] = pos1
@@ -20,9 +21,9 @@ const Util = {
         return [vec[0] * m, vec[1] * m];
     },
 
-    setVec(length, mouseX=undefined, mouseY=undefined) {
-    const deg = 2 * Math.PI * ((mouseX + mouseY) / 1600) ;
-    return Util.scale([Math.sin(-deg), Math.cos(-deg)], length);
+    setVec(length, mouseX, mouseY, angle) {
+    const deg = 2 * Math.PI * (angle/(mouseX + mouseY));
+    return Util.scale([Math.sin(deg), Math.sin(deg)], length);
     },
 
     setVecWater(length) {
