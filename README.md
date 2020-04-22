@@ -1,7 +1,7 @@
 # Bounce
 [Live Site](https://heyitswilson.github.io/Bounce/)
 
-Bounce is an interactive, visual presentation inspired by the neon colors of cyberpunk artwork and built with JavaScript.
+Bounce is a visual demo built with JavaScript which features particle collisions and oscillations.
 
 ![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/Bounce.png)
 
@@ -21,7 +21,7 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
     let r1 = this.radius;
     let r2 = particle2.radius;
 
-    //Reverses the velocity of both particles if their next position would be inside each other. 
+    //Reverses the velocity of both particles if their next positions places them inside each other. 
     if (x1 + r1 + this.vel[0] > x2 - r2) {
         this.vel[0] *= -1
         this.vel[1] *= -1
@@ -51,7 +51,8 @@ As the angle variable increases with each frame, it increases the deg constant a
 ```javascript
 setVec(length, mouseX, mouseY, angle) {
         //Angle is divided by the sum of the mouse X and Y coordinates, resulting in faster 
-        //oscillations with smaller coordinate sums and slower oscillations with larger coordinate sums.
+        //oscillations with smaller coordinate sums and slower oscillations 
+        //with larger coordinate sums.
         const deg = 2 * Math.PI * (angle/(mouseY + mouseX));
         return Util.scale([Math.sin(deg), Math.sin(deg)], length);
     }
