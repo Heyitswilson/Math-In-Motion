@@ -22,8 +22,8 @@ const Util = {
     },
 
     setVec(length, mouseX, mouseY, angle) {
-        console.log(mouseX, mouseY)
-        const deg = 2 * Math.PI * (angle/(mouseY + mouseX));
+        // console.log(mouseX, mouseY)
+        const deg = 2 * Math.PI * (((1 / (mouseY + mouseX)) * angle) );
         return Util.scale([Math.sin(deg), Math.sin(deg)], length);
     },
 
