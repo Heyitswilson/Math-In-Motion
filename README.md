@@ -1,7 +1,9 @@
 # Bounce
+[Live Site](https://heyitswilson.github.io/Bounce/)
+
+Bounce is an interactive, visual presentation inspired by the neon colors of cyberpunk artwork and built with JavaScript.
 
 ![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/Bounce.png)
-Bounce is an interactive, visual presentation inspired by the neon colors of cyberpunk artwork and built with JavaScript.
 
 ## Features
 * Particle collisions
