@@ -32,7 +32,7 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
 ```
 
 #### Oscillations
-The factor which causes particle oscillation is an an everchanging angle value.
+The factor which causes particle oscillation is an everchanging angle value.
 ```javascript
 class WindParticle extends MovingObject{
     constructor(args) {
