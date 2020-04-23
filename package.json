@@ -1,7 +1,7 @@
 {
-  "name": "Javascript-project",
+  "name": "Bounce",
   "version": "1.0.0",
-  "description": "Bounce is a colorful demo where users guide particles around the screen and watch as each bounce changes their colors.",
+  "description": "Bounce is an interactive, visual demo best paired with lofi music.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
