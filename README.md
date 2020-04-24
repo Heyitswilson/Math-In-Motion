@@ -9,6 +9,8 @@ Bounce is a visual demo built with JavaScript which features particle collisions
 * Particle collisions
 * Oscillations
 
+![bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/bounce.gif)
+
 ## Code
 
 #### Particle Collisions
