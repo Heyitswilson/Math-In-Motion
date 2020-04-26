@@ -7,7 +7,7 @@ Bounce is a visual demo built with JavaScript which features particle collisions
 
 ## Features
 * Particle collisions
-* Oscillations
+* Particle oscillations
 
 ## Code
 
@@ -31,7 +31,7 @@ MovingObject.prototype.collideMoveObj = function(particle2) {
 }
 ```
 
-#### Oscillations
+#### Particle oscillations
 The factor which causes particle oscillation is an everchanging angle value.
 ```javascript
 class WindParticle extends MovingObject{
@@ -57,7 +57,25 @@ setVec(length, mouseX, mouseY, angle) {
         return Util.scale([Math.sin(deg), Math.sin(deg)], length);
     }
  ```
+ 
+ #### Color Changes
+ The particle color changes on collision with another particle. All particles have an array of colors and display one based on an index. Collisions simply change the index so that the next color is displayed.
+ ```javascript
+ MovingObject.prototype.isCollidedWith = function(otherObject) {
+    if (Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius)) {
+        let currentIdx = this.strokeColors.indexOf(this.strokeColor);
+        let otherCurrentIdx = otherObject.strokeColors.indexOf(otherObject.strokeColor);
+        let nextIdx = (currentIdx + 1) % 5;
+        let otherNextIdx = (otherCurrentIdx + 1) % 5;
+        
+        this.strokeColor = this.strokeColors[nextIdx];
+        otherObject.strokeColor = otherObject.strokeColors[otherNextIdx];
 
+        this.collideMoveObj(otherObject)
+    }
+}
+```
+ 
 ## To-do
 * Different oscillation directions
 * Different travel paths
