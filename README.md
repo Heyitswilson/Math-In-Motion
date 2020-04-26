@@ -8,6 +8,7 @@ Bounce is a visual demo built with JavaScript which features particle collisions
 ## Features
 * Particle collisions
 * Particle oscillations
+* Color changes
 
 ## Code
 
