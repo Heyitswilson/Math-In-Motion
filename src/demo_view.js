@@ -1,30 +1,22 @@
 import Demo from './demo'
+import Sin from './sin'
 
 class DemoView {
     constructor(ctx) {
         this.Demo = new Demo();
         this.ctx = ctx
-        this.interval = "testtest"
-        this.intervalWater = "testwater"
+        this.Sin = new Sin();
     }
 }
-DemoView.prototype.start = function(mouseX, mouseY){
-    this.interval = setInterval(() => { 
-        this.Demo.stepWater(mouseX, mouseY, true)
-        this.Demo.drawWater(this.ctx)
-    }, 20);
 
+DemoView.prototype.drawSin = function(w, h){
+
+    // setInterval(() => {
+    //     this.Sin.draw(this.ctx, w, h)
+    // }, 20);
+        this.Sin.draw(this.ctx, w, h)
 }
 
-DemoView.prototype.clear = function() {
-    clearInterval(this.interval)
-}
 
-DemoView.prototype.moveAgain = function(mouseX, mouseY) {
-    this.interval = setInterval(() => {
-        this.Demo.stepWater(mouseX, mouseY, true)
-        this.Demo.drawWater(this.ctx)
-    }, 20)
-}
 
 export default DemoView
