@@ -7,7 +7,7 @@ class Sin {
 
 Sin.prototype.sinY = (ctx, w, h, t) => {
     ctx.strokeStyle = `#00ffff`;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
 
     let x = function (t) {
         return w * t / 120
@@ -36,11 +36,13 @@ Sin.prototype.sinXY = (ctx, w, h, t) => {
     let y = function (t) {
         return Math.sin(t * (4 * Math.PI) / 120) * (-h / 4) + (h / 2);
     };
-
-    ctx.beginPath();
-    ctx.moveTo(x(t), y(t));
-    ctx.lineTo(x(t + 1), y(t + 1));
-    ctx.stroke();
+    
+    if (t < (12* Math.PI)) {
+        ctx.beginPath();
+        ctx.moveTo(x(t), y(t));
+        ctx.lineTo(x(t + 1), y(t + 1));
+        ctx.stroke();
+    }
 
 }
 
@@ -50,7 +52,11 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
     var factorX = Math.exp(Math.cos(t)) - (2 * Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5);
     var factorY = Math.exp(Math.cos(t)) - (2 * Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5);
 
-    ctx.strokeStyle = `#00ffff`;
+    // ctx.strokeStyle = `#00ffff`;
+
+    
+
+
     ctx.lineWidth = 2;
 
     let x = function (t) {
@@ -64,7 +70,10 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
 
             // Math.sin(t) * factorX * (-w / 10) + (w / 2)
 
-            Math.sin(t) * ( Math.exp(Math.cos(t)) - 2 * ( Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5) ) * (-w / 10) + (w / 2)
+            (Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
+
+            // Math.sin(t) * ( Math.exp(Math.cos(t)) - ( 2 *  Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5) ) * (-w / 10) + (w / 2)
+            // Math.sin(t) * ( Math.exp(Math.cos(t)) - ( 2 *  Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5) ) * (-w / 10) + (w / 2)
         )   
     };
 
@@ -77,7 +86,9 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
 
             // Math.cos(t) * factorX * (-h / 10) + (h / 2)
 
-            Math.cos(t) * (Math.exp(Math.cos(t)) - 2 * ( Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + (h / 2)
+            (Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
+
+            // Math.cos(t) * (Math.exp(Math.cos(t)) - ( 2 *  Math.cos(4 * t)) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + (h / 2)
 
         )
     };
