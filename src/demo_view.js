@@ -9,12 +9,14 @@ class DemoView {
     }
 }
 
-DemoView.prototype.drawSin = function(w, h){
-
-    // setInterval(() => {
-    //     this.Sin.draw(this.ctx, w, h)
-    // }, 20);
-        this.Sin.draw(this.ctx, w, h)
+DemoView.prototype.sinY = function(w, h){
+    let t = 200;
+    // let modT = t % 120
+    setInterval(() => {
+        t += 220
+        this.Sin.butterfly(this.ctx, w, h, t % (12 * Math.PI))
+    }, 20);
+        // this.Sin.draw(this.ctx, w, h, 1)
 }
 
 

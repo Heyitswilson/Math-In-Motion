@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     
     const Demoview = new DemoView(ctx)
 
-    Demoview.drawSin(800, 600)
+    Demoview.sinY(800, 600)
 })
 
 
