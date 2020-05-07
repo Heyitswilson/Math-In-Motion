@@ -92,11 +92,12 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
 
         )
     };
-
-    ctx.beginPath();
-    ctx.moveTo(x(t), y(t));
-    ctx.lineTo(x(t + 1), y(t + 1));
-    ctx.stroke();
+    ctx.fillRect(x(t + 1), y(t + 1), 15, 5)
+    
+    // ctx.beginPath();
+    // ctx.moveTo(x(t), y(t));
+    // ctx.lineTo(x(t + 1), y(t + 1));
+    // ctx.stroke();
 
 }
 

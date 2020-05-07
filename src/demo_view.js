@@ -27,14 +27,20 @@ DemoView.prototype.sinY = function(w, h){
     setInterval(() => {
         // t += 220
 
-        this.ctx.strokeStyle = `rgb(
+        // this.ctx.strokeStyle = `rgb(
+        // ${r(t)},
+        // ${g(t)},
+        // ${b(t)}`;
+
+        this.ctx.fillStyle = `rgb(
         ${r(t)},
         ${g(t)},
         ${b(t)}`;
 
 
         t += 1
-        if (t < 600) {
+        // for visual shape, use t < 600 ; for butterfly shape, use t < 750
+        if (t < 750) {
             this.Sin.butterfly(this.ctx, w, h, t / (12 * Math.PI))
         }
     }, 20);
