@@ -115,3 +115,9 @@
     position: relative;
     bottom: 15px;
 }
+
+#bar {
+    background-color: red;
+    color: white;
+    z-index: 99
+}
