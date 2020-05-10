@@ -118,6 +118,69 @@ DemoView.prototype.doubleSin = function (w, h) {
     }, 20);
 }
 
+DemoView.prototype.ring = function (w, h) {
+    let t = 0
+    function r(t) {
+        return 150 + Math.sin(t / 700) * 200;
+    };
+    function g(t) {
+        return Math.cos(t / 400) * 500;
+    };
+    function b(t) {
+        return 200 + Math.tan(t / 900) * 55;
+    };
+
+
+    setInterval(() => {
+
+        this.ctx.strokeStyle = `rgb(
+        ${r(t)},
+        ${g(t)},
+        ${b(t)}`;
+
+        t += 0.5
+        if (t < 150) {
+            this.Sin.ring(this.ctx, w, h, t / (80 * Math.PI))
+        }
+    }, 20);
+}
+
+DemoView.prototype.donut = function (w, h) {
+    let t = 0
+
+    setInterval(() => {
+
+        t += 1
+        if (t < 1000) {
+            this.Sin.donut(this.ctx, w, h, t / ( 50 * Math.PI))
+        }
+    }, 20);
+}
+
+DemoView.prototype.twist = function (w, h) {
+  let t = 0;
+  function r(t) {
+    return 450 + Math.cos(t / 100) * 500;
+  }
+  function g(t) {
+    return 300 + Math.cos(t / 400) * 500;
+  }
+  function b(t) {
+    return 500 + Math.sin(t / 200) * 255;
+  }
+
+  setInterval(() => {
+    this.ctx.strokeStyle = `rgb(
+        ${r(t)},
+        ${g(t)},
+        ${b(t)}`;
+
+    t += 2;
+    if (t < 750) {
+      this.Sin.twist(this.ctx, w, h, t / (10 * Math.PI));
+    }
+  }, 20);
+};
 
 
 export default DemoView

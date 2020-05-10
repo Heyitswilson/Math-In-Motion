@@ -9,7 +9,6 @@ class App extends React.Component {
     
     
     render () {
-        console.log(this.props.ctx)
         // const canvas = document.getElementById("canvas");
         // const ctx = canvas.getContext("2d");
         // const Demoview = new DemoView(ctx);

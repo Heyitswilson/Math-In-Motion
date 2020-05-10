@@ -121,3 +121,12 @@
     color: white;
     z-index: 99
 }
+
+.slider-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.labels {
+    color: white
+}
