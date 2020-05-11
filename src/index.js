@@ -1,16 +1,23 @@
-
+import React from "react";
+import ReactDOM from "react-dom";
+import Root from "./components/root";
+import configureStore from "./store/store";
 import Demo from './demo'
-import DemoView from './demo_view'
+import DemoView from './components/demo_view'
 window.Demo = Demo
 
-window.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
+    const main = document.getElementById("main");
     const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d")
-
+    const ctx = canvas.getContext("2d");
+    let store = configureStore()
+    window.getState = store.getState;
+    // const Demoview = new DemoView(ctx)
     
-    const Demoview = new DemoView(ctx)
+    // Demoview.sinY(800, 600)
+    ReactDOM.render(<Root ctx={ctx} store={store}/>, main)
+});
 
-    Demoview.sinY(800, 600)
-})
+
 
 

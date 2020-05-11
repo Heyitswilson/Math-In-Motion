@@ -115,3 +115,22 @@
     position: relative;
     bottom: 15px;
 }
+
+#bar {
+    background-color: red;
+    color: white;
+    z-index: 99
+}
+
+.slider-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.labels {
+    color: white
+}
+
+.frame-num {
+    color: red; 
+}
