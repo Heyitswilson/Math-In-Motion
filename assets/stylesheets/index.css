@@ -130,3 +130,7 @@
 .labels {
     color: white
 }
+
+.frame-num {
+    color: red; 
+}

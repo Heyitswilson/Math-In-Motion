@@ -36,7 +36,6 @@ class Main extends React.Component {
 
   runDemoView () {
     let graph = this.state.graph;
-    console.log(this.state.graph)
     let ctx = this.Demoview.ctx;
     // this.Demoview.twist(800, 600)
     ctx.clearRect(0, 0, 800, 600);
@@ -88,9 +87,9 @@ class Main extends React.Component {
                 </div>
               </div>
               <div className="intro">
-                Inspired by the neon colors of cyberpunk artworks, Bounce is an
+                {/* Inspired by the neon colors of cyberpunk artworks, Bounce is an
                 interactive, visual presentation that is best paired with lofi
-                music.
+                music. */}
                 <br />
                 <br />
               </div>
@@ -113,24 +112,10 @@ class Main extends React.Component {
                   RUN
                 </button>
               </div>
-              <div className="slider-div">
-                <label className="labels">
-                  {" "}
-                  X
-                  <input type="range" min="1" max="100" value="50" />
-                </label>
-                <label className="labels">
-                  {" "}
-                  Y
-                  <input type="range" min="1" max="100" value="50" />
-                </label>
-              </div>
               <div className="credit-div">
-                <div className="credit">Art: Cyberpunk 2077</div>
+                {/* <div className="credit">Art: Cyberpunk 2077</div> */}
 
                 <div className="labels">
-                  As 't' time increases, the X and Y position changes based on these
-                  formulas:
                   <Formula graph={this.state.graph} /> 
                 </div>
               </div>

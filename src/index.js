@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     let store = configureStore()
-
+    window.getState = store.getState;
     // const Demoview = new DemoView(ctx)
     
     // Demoview.sinY(800, 600)

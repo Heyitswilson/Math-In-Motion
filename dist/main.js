@@ -11142,6 +11142,82 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/load-script/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/load-script/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+module.exports = function load (src, opts, cb) {
+  var head = document.head || document.getElementsByTagName('head')[0]
+  var script = document.createElement('script')
+
+  if (typeof opts === 'function') {
+    cb = opts
+    opts = {}
+  }
+
+  opts = opts || {}
+  cb = cb || function() {}
+
+  script.type = opts.type || 'text/javascript'
+  script.charset = opts.charset || 'utf8';
+  script.async = 'async' in opts ? !!opts.async : true
+  script.src = src
+
+  if (opts.attrs) {
+    setAttributes(script, opts.attrs)
+  }
+
+  if (opts.text) {
+    script.text = '' + opts.text
+  }
+
+  var onend = 'onload' in script ? stdOnEnd : ieOnEnd
+  onend(script, cb)
+
+  // some good legacy browsers (firefox) fail the 'in' detection above
+  // so as a fallback we always set onload
+  // old IE will ignore this and new IE will set onload
+  if (!script.onload) {
+    stdOnEnd(script, cb);
+  }
+
+  head.appendChild(script)
+}
+
+function setAttributes(script, attrs) {
+  for (var attr in attrs) {
+    script.setAttribute(attr, attrs[attr]);
+  }
+}
+
+function stdOnEnd (script, cb) {
+  script.onload = function () {
+    this.onerror = this.onload = null
+    cb(null, script)
+  }
+  script.onerror = function () {
+    // this.onload = null here is necessary
+    // because even IE9 works not like others
+    this.onerror = this.onload = null
+    cb(new Error('Failed to load ' + this.src), script)
+  }
+}
+
+function ieOnEnd (script, cb) {
+  script.onreadystatechange = function () {
+    if (this.readyState != 'complete' && this.readyState != 'loaded') return
+    this.onreadystatechange = null
+    cb(null, script) // there is no way to catch loading errors in IE8
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/object-assign/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
@@ -37290,6 +37366,470 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-mathjax2/lib/Context.js":
+/*!****************************************************!*\
+  !*** ./node_modules/react-mathjax2/lib/Context.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _loadScript = __webpack_require__(/*! load-script */ "./node_modules/load-script/index.js");
+
+var _loadScript2 = _interopRequireDefault(_loadScript);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global MathJax */
+
+/**
+ * Context for loading MathJax
+ */
+var Context = function (_React$Component) {
+  _inherits(Context, _React$Component);
+
+  function Context(props) {
+    _classCallCheck(this, Context);
+
+    var _this = _possibleConstructorReturn(this, (Context.__proto__ || Object.getPrototypeOf(Context)).call(this, props));
+
+    _this.state = { loaded: false };
+    _this.onLoad = _this.onLoad.bind(_this);
+    return _this;
+  }
+
+  _createClass(Context, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        MathJax: typeof MathJax === 'undefined' ? undefined : MathJax,
+        input: this.props.input
+      };
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var script = this.props.script;
+
+      if (!script) {
+        return this.onLoad();
+      }
+
+      (0, _loadScript2.default)(script, this.onLoad);
+    }
+  }, {
+    key: 'onLoad',
+    value: function onLoad() {
+      var _this2 = this;
+
+      var options = this.props.options;
+
+      MathJax.Hub.Config(options);
+
+      MathJax.Hub.Register.StartupHook('End', function () {
+        MathJax.Hub.processSectionDelay = _this2.props.delay;
+
+        if (_this2.props.didFinishTypeset) {
+          _this2.props.didFinishTypeset();
+        }
+
+        if (_this2.props.onLoad) {
+          _this2.props.onLoad();
+        }
+
+        _this2.setState({
+          loaded: true
+        });
+      });
+
+      MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        if (_this2.props.onError) {
+          _this2.props.onError(MathJax, message);
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.state.loaded && !this.props.noGate) {
+        return this.props.loading;
+      }
+
+      var children = this.props.children;
+
+      return _react2.default.Children.only(children);
+    }
+  }]);
+
+  return Context;
+}(_react2.default.Component);
+
+Context.propTypes = {
+  children: _propTypes2.default.node.isRequired,
+  didFinishTypeset: _propTypes2.default.func,
+  script: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.oneOf([false])]),
+  input: _propTypes2.default.oneOf(['ascii', 'tex']),
+  delay: _propTypes2.default.number,
+  options: _propTypes2.default.object,
+  loading: _propTypes2.default.node,
+  noGate: _propTypes2.default.bool
+};
+
+Context.childContextTypes = {
+  MathJax: _propTypes2.default.object,
+  input: _propTypes2.default.string
+};
+
+Context.defaultProps = {
+  script: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML',
+  input: 'ascii',
+  delay: 0,
+  options: {},
+  loading: null,
+  noGate: false
+};
+
+exports.default = Context;
+
+/***/ }),
+
+/***/ "./node_modules/react-mathjax2/lib/Node.js":
+/*!*************************************************!*\
+  !*** ./node_modules/react-mathjax2/lib/Node.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var types = {
+  ascii: 'asciimath',
+  tex: 'tex'
+};
+
+var Node = function (_React$Component) {
+  _inherits(Node, _React$Component);
+
+  function Node() {
+    _classCallCheck(this, Node);
+
+    return _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).apply(this, arguments));
+  }
+
+  _createClass(Node, [{
+    key: 'componentDidMount',
+
+    /**
+     * Render the math once the node is mounted
+     */
+    value: function componentDidMount() {
+      this.typeset();
+    }
+
+    /**
+     * Update the jax, force update if the display mode changed
+     */
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var forceUpdate = prevProps.inline !== this.props.inline || prevProps.children !== this.props.children;
+      this.typeset(forceUpdate);
+    }
+
+    /**
+     * Prevent update when the source has not changed
+     */
+
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState, nextContext) {
+      return nextProps.children !== this.props.children || nextProps.inline !== this.props.inline;
+    }
+
+    /**
+     * Clear the math when unmounting the node
+     */
+
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.clear();
+    }
+
+    /**
+     * Clear the jax
+     */
+
+  }, {
+    key: 'clear',
+    value: function clear() {
+      var MathJax = this.context.MathJax;
+
+      if (!this.script) {
+        return;
+      }
+
+      var jax = MathJax.Hub.getJaxFor(this.script);
+
+      if (jax) {
+        jax.Remove();
+      }
+    }
+
+    /**
+     * Update math in the node
+     * @param { Boolean } forceUpdate
+     */
+
+  }, {
+    key: 'typeset',
+    value: function typeset(forceUpdate) {
+      var MathJax = this.context.MathJax;
+
+
+      if (!MathJax) {
+        throw Error("Could not find MathJax while attempting typeset! Probably MathJax script hasn't been loaded or MathJax.Context is not in the hierarchy");
+      }
+
+      var text = this.props.children;
+
+      if (forceUpdate) {
+        this.clear();
+      }
+
+      if (forceUpdate || !this.script) {
+        this.setScriptText(text);
+      }
+
+      MathJax.Hub.Queue(MathJax.Hub.Reprocess(this.script, this.props.onRender));
+    }
+
+    /**
+     * Create a script
+     * @param { String } text
+     */
+
+  }, {
+    key: 'setScriptText',
+    value: function setScriptText(text) {
+      var inline = this.props.inline;
+      var type = types[this.context.input];
+      if (!this.script) {
+        this.script = document.createElement('script');
+        this.script.type = 'math/' + type + '; ' + (inline ? '' : 'mode=display');
+        this.refs.node.appendChild(this.script);
+      }
+
+      if ('text' in this.script) {
+        // IE8, etc
+        this.script.text = text;
+      } else {
+        this.script.textContent = text;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement('span', { ref: 'node' });
+    }
+  }]);
+
+  return Node;
+}(_react2.default.Component);
+
+Node.propTypes = {
+  inline: _propTypes2.default.bool,
+  children: _propTypes2.default.node.isRequired,
+  onRender: _propTypes2.default.func
+};
+
+Node.contextTypes = {
+  MathJax: _propTypes2.default.object,
+  input: _propTypes2.default.string
+};
+
+Node.defaultProps = {
+  inline: false,
+  onRender: function onRender() {}
+};
+
+exports.default = Node;
+
+/***/ }),
+
+/***/ "./node_modules/react-mathjax2/lib/Text.js":
+/*!*************************************************!*\
+  !*** ./node_modules/react-mathjax2/lib/Text.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Text = function (_React$Component) {
+  _inherits(Text, _React$Component);
+
+  function Text() {
+    _classCallCheck(this, Text);
+
+    return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
+  }
+
+  _createClass(Text, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.refreshMathJax();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.refreshMathJax();
+    }
+  }, {
+    key: 'refreshMathJax',
+    value: function refreshMathJax() {
+      var MathJax = this.context.MathJax;
+
+      if (!MathJax) {
+        throw Error("Could not find MathJax while attempting typeset! Probably MathJax script hasn't been loaded or MathJax.Context is not in the hierarchy");
+      }
+
+      MathJax.Hub.Queue(MathJax.Hub.Typeset(this.div, this.props.onRender));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          classes = _props.classes,
+          options = _props.options;
+
+
+      return _react2.default.createElement(
+        'div',
+        { key: this.props.text, ref: function ref(div) {
+            return _this2.div = div;
+          } },
+        this.props.text
+      );
+    }
+  }]);
+
+  return Text;
+}(_react2.default.Component);
+
+Text.contextTypes = {
+  MathJax: _propTypes2.default.object
+};
+
+exports.default = Text;
+
+/***/ }),
+
+/***/ "./node_modules/react-mathjax2/lib/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/react-mathjax2/lib/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Text = exports.Context = exports.Node = undefined;
+
+var _Node = __webpack_require__(/*! ./Node */ "./node_modules/react-mathjax2/lib/Node.js");
+
+var _Node2 = _interopRequireDefault(_Node);
+
+var _Context = __webpack_require__(/*! ./Context */ "./node_modules/react-mathjax2/lib/Context.js");
+
+var _Context2 = _interopRequireDefault(_Context);
+
+var _Text = __webpack_require__(/*! ./Text */ "./node_modules/react-mathjax2/lib/Text.js");
+
+var _Text2 = _interopRequireDefault(_Text);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Node = _Node2.default;
+exports.Context = _Context2.default;
+exports.Text = _Text2.default;
+exports.default = { Node: _Node2.default, Context: _Context2.default, Text: _Text2.default };
+
+/***/ }),
+
 /***/ "./node_modules/react-redux/es/components/Context.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-redux/es/components/Context.js ***!
@@ -42990,6 +43530,62 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./src/actions/graph_actions.js":
+/*!**************************************!*\
+  !*** ./src/actions/graph_actions.js ***!
+  \**************************************/
+/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, receiveX, receiveY, receiveT, receiveFrame, clear */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_X", function() { return RECEIVE_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_Y", function() { return RECEIVE_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_T", function() { return RECEIVE_T; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRAME", function() { return RECEIVE_FRAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR", function() { return CLEAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveX", function() { return receiveX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveY", function() { return receiveY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveT", function() { return receiveT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFrame", function() { return receiveFrame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clear", function() { return clear; });
+var RECEIVE_X = "RECEIVE_X";
+var RECEIVE_Y = "RECEIVE_Y";
+var RECEIVE_T = "RECEIVE_T";
+var RECEIVE_FRAME = "RECEIVE_FRAME";
+var CLEAR = "CLEAR";
+var receiveX = function receiveX(x) {
+  return {
+    type: RECEIVE_X,
+    x: x
+  };
+};
+var receiveY = function receiveY(y) {
+  return {
+    type: RECEIVE_Y,
+    y: y
+  };
+};
+var receiveT = function receiveT(t) {
+  return {
+    type: RECEIVE_T,
+    t: t
+  };
+};
+var receiveFrame = function receiveFrame(frame) {
+  return {
+    type: RECEIVE_FRAME,
+    frame: frame
+  };
+};
+var clear = function clear() {
+  return {
+    type: CLEAR
+  };
+};
+
+/***/ }),
+
 /***/ "./src/components/App.js":
 /*!*******************************!*\
   !*** ./src/components/App.js ***!
@@ -43312,9 +43908,145 @@ DemoView.prototype.twist = function (w, h) {
   !*** ./src/components/formula.js ***!
   \***********************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/src/components/formula.js: Unterminated template (9:22)\n\n\u001b[0m \u001b[90m  7 | \u001b[39m    \u001b[36mconst\u001b[39m sin \u001b[33m=\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m  8 | \u001b[39m        \u001b[36mconst\u001b[39m texX \u001b[33m=\u001b[39m \u001b[32m`x(t) = \\\\frac{t}{120}`\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  9 | \u001b[39m        \u001b[36mconst\u001b[39m texY \u001b[33m=\u001b[39m \u001b[32m`y(t) = \\\\';\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 11 | \u001b[39m\u001b[32m        return (\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 12 | \u001b[39m\u001b[32m          <MathJax.Context input=\"tex\">\u001b[39m\u001b[0m\n    at Object._raise (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:742:17)\n    at Object.raiseWithData (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.raise (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:729:17)\n    at Object.readTmplToken (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:8391:20)\n    at types$1.template.p (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:1042:52)\n    at Object.nextToken (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:7557:7)\n    at Object.next (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:7487:10)\n    at Object.parseTemplate (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:10338:10)\n    at Object.parseExprAtom (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:10015:21)\n    at Object.parseExprAtom (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:4614:20)\n    at Object.parseExprSubscripts (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9602:23)\n    at Object.parseMaybeUnary (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9582:21)\n    at Object.parseExprOps (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9452:23)\n    at Object.parseMaybeConditional (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9425:23)\n    at Object.parseMaybeAssign (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9380:21)\n    at Object.parseVar (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11740:26)\n    at Object.parseVarStatement (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11549:10)\n    at Object.parseStatementContent (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11148:21)\n    at Object.parseStatement (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11081:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11656:25)\n    at Object.parseBlockBody (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11642:10)\n    at Object.parseBlock (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:11626:10)\n    at Object.parseFunctionBody (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:10634:24)\n    at Object.parseArrowExpression (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:10603:10)\n    at Object.parseParenAndDistinguishExpression (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:10221:12)\n    at Object.parseExprAtom (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9947:21)\n    at Object.parseExprAtom (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:4614:20)\n    at Object.parseExprSubscripts (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9602:23)\n    at Object.parseMaybeUnary (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9582:21)\n    at Object.parseExprOps (/Users/wilsonngu/Desktop/JS/MathMotion2/Bounce/node_modules/@babel/parser/lib/index.js:9452:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+function Formula(_ref) {
+  var graph = _ref.graph,
+      receiveX = _ref.receiveX,
+      receiveY = _ref.receiveY,
+      receiveT = _ref.receiveT,
+      receiveFrame = _ref.receiveFrame,
+      clear = _ref.clear;
+  var selected = graph;
+  console.log(selected);
+
+  var sin = function sin() {
+    var texX = "x(t) = \\frac{t}{\\color{yellow}{120}}";
+    var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{120}})";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "slider-div"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "labels"
+    }, " ", "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "range",
+      min: "1",
+      max: "100",
+      value: "50"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      className: "labels"
+    }, " ", "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "range",
+      min: "1",
+      max: "100",
+      value: "50"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+  };
+
+  var doubleSin = function doubleSin() {
+    var texX = "x(t) = \\sin(t(\\frac{10\\Pi}{\\color{yellow}{120}}))";
+    var texY = "y(t) = \\sin(t(\\frac{8\\Pi}{\\color{red}{120}}))";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+  };
+
+  var butterfly = function butterfly() {
+    var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\cos(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
+    var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\cos(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+  };
+
+  var coolButterfly = function coolButterfly() {
+    var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\cos(t)}} + 2(\\color{red}{\\cos(4t)}) - sin(\\frac{t}{12})^5)";
+    var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+  };
+
+  var ring = function ring() {
+    var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\cos(13t)}}{2} + \\frac{\\sin(6t)}{3}";
+    var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\sin(13t)}}{2} + \\frac{\\cos(6t)}{3}";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+  };
+
+  var donut = function donut() {
+    var texX = "x(t) = \\cos(20t) + \\frac{\\cos(\\color{yellow}{13t})}{2} + \\frac{\\sin(14t)}{3}";
+    var texY = "y(t) = \\sin(20t) + \\frac{\\cos(\\color{red}{13t})}{2} + \\frac{\\cos(14t)}{3}";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+  };
+
+  var twist = function twist() {
+    var texX = "x(t) = t - 1.6(\\cos(24t))";
+    var texY = "y(t) = t - 1.6(\\sin(25t))";
+    var texT = "t = (\\frac{t}{\\color{yellow}{10}\\Pi}) ";
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      input: "tex"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "labels"
+    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Time 't': ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Animation frames: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "frame-num"
+    }, "750"))));
+  };
+
+  var renderSwitch = function renderSwitch(param) {
+    switch (param) {
+      case "sin":
+        return sin();
+
+      case "doubleSin":
+        return doubleSin();
+
+      case "butterfly":
+        return butterfly();
+
+      case "coolButterfly":
+        return coolButterfly();
+
+      case "ring":
+        return ring();
+
+      case "donut":
+        return donut();
+
+      case "twist":
+        return twist();
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, renderSwitch(graph));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Formula);
 
 /***/ }),
 
@@ -43403,7 +44135,6 @@ var Main = /*#__PURE__*/function (_React$Component) {
     key: "runDemoView",
     value: function runDemoView() {
       var graph = this.state.graph;
-      console.log(this.state.graph);
       var ctx = this.Demoview.ctx; // this.Demoview.twist(800, 600)
 
       ctx.clearRect(0, 0, 800, 600);
@@ -43449,7 +44180,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "intro"
-      }, "Inspired by the neon colors of cyberpunk artworks, Bounce is an interactive, visual presentation that is best paired with lofi music.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "music-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: function onChange() {
@@ -43477,28 +44208,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
           return _this2.runDemoView();
         }
       }, "RUN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, " ", "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        min: "1",
-        max: "100",
-        value: "50"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, " ", "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        min: "1",
-        max: "100",
-        value: "50"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "credit-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "credit"
-      }, "Art: Cyberpunk 2077"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formula__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formula__WEBPACK_IMPORTED_MODULE_3__["default"], {
         graph: this.state.graph
       }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
@@ -43604,7 +44317,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var main = document.getElementById("main");
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
-  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(); // const Demoview = new DemoView(ctx)
+  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  window.getState = store.getState; // const Demoview = new DemoView(ctx)
   // Demoview.sinY(800, 600)
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -43615,31 +44329,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
-/***/ "./src/reducers/graph_reducer.js":
-/*!***************************************!*\
-  !*** ./src/reducers/graph_reducer.js ***!
-  \***************************************/
+/***/ "./src/reducers/frames_reducer.js":
+/*!****************************************!*\
+  !*** ./src/reducers/frames_reducer.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var graphReducer = function graphReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var framesReducer = function framesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
   switch (action.type) {
-    // case RECEIVE_CATEGORY:
-    //   return action.category;
-    // case UNMOUNT_CATEGORY:
-    //   return "All";
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRAME"]:
+      return action.frames;
+
+    case CLEAR:
+      return null;
+
     default:
       return state;
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (graphReducer);
+/* harmony default export */ __webpack_exports__["default"] = (framesReducer);
 
 /***/ }),
 
@@ -43653,13 +44372,121 @@ var graphReducer = function graphReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
+/* harmony import */ var _x_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./x_reducer */ "./src/reducers/x_reducer.js");
+/* harmony import */ var _y_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./y_reducer */ "./src/reducers/y_reducer.js");
+/* harmony import */ var _t_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./t_reducer */ "./src/reducers/t_reducer.js");
+/* harmony import */ var _frames_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frames_reducer */ "./src/reducers/frames_reducer.js");
+
+
+
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  x: _x_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  y: _y_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./src/reducers/t_reducer.js":
+/*!***********************************!*\
+  !*** ./src/reducers/t_reducer.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var tReducer = function tReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_T"]:
+      return action.t;
+
+    case CLEAR:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tReducer);
+
+/***/ }),
+
+/***/ "./src/reducers/x_reducer.js":
+/*!***********************************!*\
+  !*** ./src/reducers/x_reducer.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var xReducer = function xReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_X"]:
+      return action.x;
+
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (xReducer);
+
+/***/ }),
+
+/***/ "./src/reducers/y_reducer.js":
+/*!***********************************!*\
+  !*** ./src/reducers/y_reducer.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var yReducer = function yReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_Y"]:
+      return action.y;
+
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (yReducer);
 
 /***/ }),
 
@@ -43727,7 +44554,7 @@ Sin.prototype.doubleSin = function (ctx, w, h, t) {
   ctx.lineWidth = 2;
 
   var x = function x(t) {
-    return Math.sin(t * (10 * Math.PI) / 120) * (-w / 4) + w / 2;
+    return Math.sin(t * (10 * Math.PI / 120)) * (-w / 4) + w / 2;
   };
 
   var y = function y(t) {
@@ -43807,9 +44634,7 @@ Sin.prototype.donut = function (ctx, w, h, t) {
 };
 
 Sin.prototype.twist = function (ctx, w, h, t) {
-  ctx.lineWidth = 2; // ctx.strokeStyle = "rgb(255, 255, 255)";
-
-  console.log("running");
+  ctx.lineWidth = 2;
 
   var x = function x(t) {
     return (t - 1.6 * Math.cos(24 * t)) * (-w / 30) + w / 1.1;

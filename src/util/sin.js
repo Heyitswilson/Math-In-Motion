@@ -28,7 +28,7 @@ Sin.prototype.doubleSin = (ctx, w, h, t) => {
     ctx.lineWidth = 2;
 
     let x = function (t) {
-        return Math.sin(t * (10 * Math.PI) / 120) * (-w / 4) + (w / 2);
+        return Math.sin(t * ((10 * Math.PI) / 120)) * (-w / 4) + (w / 2);
     };
 
     let y = function (t) {
@@ -136,8 +136,6 @@ Sin.prototype.donut = (ctx, w, h, t) => {
 
 Sin.prototype.twist = (ctx, w, h, t) => {
     ctx.lineWidth = 2;
-    // ctx.strokeStyle = "rgb(255, 255, 255)";
-    console.log("running")
 
     let x = function (t) {
         return (t - (1.6 * Math.cos(24 * t))) * (-w / 30) + (w/1.1);
