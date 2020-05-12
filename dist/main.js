@@ -43534,7 +43534,7 @@ module.exports = function(originalModule) {
 /*!**************************************!*\
   !*** ./src/actions/graph_actions.js ***!
   \**************************************/
-/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, receiveX, receiveY, receiveT, receiveFrame, clear */
+/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, RECEIVE_GRAPH, receiveGraph, receiveX, receiveY, receiveT, receiveFrame, clear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43544,6 +43544,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_T", function() { return RECEIVE_T; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRAME", function() { return RECEIVE_FRAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR", function() { return CLEAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_GRAPH", function() { return RECEIVE_GRAPH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveGraph", function() { return receiveGraph; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveX", function() { return receiveX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveY", function() { return receiveY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveT", function() { return receiveT; });
@@ -43554,8 +43556,14 @@ var RECEIVE_Y = "RECEIVE_Y";
 var RECEIVE_T = "RECEIVE_T";
 var RECEIVE_FRAME = "RECEIVE_FRAME";
 var CLEAR = "CLEAR";
+var RECEIVE_GRAPH = "RECEIVE_GRAPH";
+var receiveGraph = function receiveGraph(graph) {
+  return {
+    type: RECEIVE_GRAPH,
+    graph: graph
+  };
+};
 var receiveX = function receiveX(x) {
-  debugger;
   return {
     type: RECEIVE_X,
     x: x
@@ -43971,6 +43979,11 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Butterfly, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("butterfly");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44033,7 +44046,8 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
@@ -44044,6 +44058,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveY: function receiveY(y) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -44120,6 +44137,11 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(coolButterfly, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("coolButterfly");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44182,7 +44204,8 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
@@ -44193,6 +44216,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveY: function receiveY(y) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -44269,6 +44295,11 @@ var Donut = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Donut, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("donut");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44331,7 +44362,8 @@ var Donut = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
@@ -44340,19 +44372,12 @@ var mDTP = function mDTP(dispatch) {
     receiveX: function receiveX(x) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
     },
-    receiveY: function (_receiveY) {
-      function receiveY(_x) {
-        return _receiveY.apply(this, arguments);
-      }
-
-      receiveY.toString = function () {
-        return _receiveY.toString();
-      };
-
-      return receiveY;
-    }(function (y) {
-      return dispatch(receiveY(y));
-    }),
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
     }
@@ -44428,6 +44453,11 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(doubleSin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("doubleSin");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44490,27 +44520,21 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function (_receiveX) {
-      function receiveX(_x) {
-        return _receiveX.apply(this, arguments);
-      }
-
-      receiveX.toString = function () {
-        return _receiveX.toString();
-      };
-
-      return receiveX;
-    }(function (x) {
-      return dispatch(receiveX(x));
-    }),
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
     receiveY: function receiveY(y) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -44633,12 +44657,13 @@ var Formula = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderSwitch",
     value: function renderSwitch(param) {
-      console.log(this.state);
+      var _this$props = this.props,
+          receiveGraph = _this$props.receiveGraph,
+          clear = _this$props.clear;
 
       switch (param) {
         case "sin":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
-        // return this.sin()
 
         case "doubleSin":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
@@ -44690,30 +44715,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state) {
-  return {
-    x: state.x,
-    y: state.y,
-    t: state.t,
-    frames: state.frames
-  };
+  return {};
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveY"])(y));
-    },
-    receiveT: function receiveT(t) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveT"])(t));
-    },
-    receiveFrame: function receiveFrame(frame) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveFrame"])(frame));
-    },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["clear"])());
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveGraph"])(graph));
     }
   };
 };
@@ -44787,6 +44798,11 @@ var Ring = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Ring, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("ring");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44849,7 +44865,8 @@ var Ring = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
@@ -44860,6 +44877,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveY: function receiveY(y) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -44936,6 +44956,11 @@ var Sin = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Sin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("sin");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -44999,7 +45024,8 @@ var Sin = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
   };
 };
 
@@ -45010,6 +45036,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveY: function receiveY(y) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -45086,6 +45115,11 @@ var Twist = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Twist, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("twist");
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.props.clear();
@@ -45153,7 +45187,8 @@ var Twist = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     t: state.t,
-    frames: state.frames
+    frames: state.frames,
+    graph: state.graph
   };
 };
 
@@ -45164,6 +45199,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveFrame: function receiveFrame(frames) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveFrame"])(frames));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -45235,9 +45273,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _demo_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo_view */ "./src/components/demo_view.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _formulas_formula_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formulas/formula_container */ "./src/components/formulas/formula_container.js");
+/* harmony import */ var _formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formulas/formula_container */ "./src/components/formulas/formula_container.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45262,7 +45299,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import { Fraction, toTex } from "algebra.js";
 
 
 
@@ -45281,25 +45317,16 @@ var Main = /*#__PURE__*/function (_React$Component) {
       graph: ""
     };
     _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this)); // this.selectGraph = this.selectGraph.bind(this);
-
-    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this));
     _this.canvas = null;
     _this.context = null;
     _this.Demoview = null;
     return _this;
-  } // update(field) {
-  //  this.setState({
-  //     [field]: $("select option:selected").val()
-  //   })
-  // }
-
+  }
 
   _createClass(Main, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
-      // console.log(this.canvas)
       this.canvas = this.canvasRef.current;
       this.context = this.canvas.getContext('2d');
       this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
@@ -45307,11 +45334,9 @@ var Main = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "runDemoView",
     value: function runDemoView() {
-      var graph = this.state.graph;
-      var ctx = this.Demoview.ctx; // this.Demoview.twist(800, 600)
-
+      var ctx = this.Demoview.ctx;
       ctx.clearRect(0, 0, 800, 600);
-      this.Demoview[this.state.graph](800, 600);
+      this.Demoview[this.props.graph](800, 600);
     }
   }, {
     key: "render",
@@ -45335,7 +45360,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         className: "credit-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_3__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
         height: "600",
         id: "canvas",
@@ -45347,7 +45372,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
   return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Main);
+var mSTP = function mSTP(state) {
+  return {
+    graph: state.graph
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mSTP, null)(Main));
 
 /***/ }),
 
@@ -45480,6 +45511,39 @@ var framesReducer = function framesReducer() {
 
 /***/ }),
 
+/***/ "./src/reducers/graph_reducer.js":
+/*!***************************************!*\
+  !*** ./src/reducers/graph_reducer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var graphReducer = function graphReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_GRAPH"]:
+      return action.graph;
+
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (graphReducer);
+
+/***/ }),
+
 /***/ "./src/reducers/root_reducer.js":
 /*!**************************************!*\
   !*** ./src/reducers/root_reducer.js ***!
@@ -45494,6 +45558,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _y_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./y_reducer */ "./src/reducers/y_reducer.js");
 /* harmony import */ var _t_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./t_reducer */ "./src/reducers/t_reducer.js");
 /* harmony import */ var _frames_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frames_reducer */ "./src/reducers/frames_reducer.js");
+/* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
+
 
 
 
@@ -45503,7 +45569,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   x: _x_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   y: _y_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 

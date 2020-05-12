@@ -47,11 +47,10 @@ class Formula extends React.Component {
   }
     
     renderSwitch (param) {
-      console.log(this.state)
+      const { receiveGraph, clear } = this.props;
         switch(param) {
             case "sin":
                 return <Sin />
-                // return this.sin()
             case "doubleSin":
                 return <DoubleSin />
             case "butterfly": 

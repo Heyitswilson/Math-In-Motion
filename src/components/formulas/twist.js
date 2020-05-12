@@ -1,7 +1,7 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveT, receiveFrame, clear } from '../../actions/graph_actions'
+import { receiveT, receiveFrame, receiveGraph, clear } from '../../actions/graph_actions'
 
 class Twist extends React.Component {
     constructor(props) {
@@ -14,6 +14,10 @@ class Twist extends React.Component {
 
         this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.receiveGraph("twist")
     }
 
     componentWillUnmount() {
@@ -77,12 +81,14 @@ class Twist extends React.Component {
 
 const mSTP = state => ({
     t: state.t,
-    frames: state.frames
+    frames: state.frames,
+    graph: state.graph
 })
 
 const mDTP = dispatch => ({
     receiveT: t => dispatch(receiveT(t)),
     receiveFrame: frames => dispatch(receiveFrame(frames)),
+    receiveGraph: graph => dispatch(receiveGraph(graph)),
     clear: () => dispatch(clear())
 })
 

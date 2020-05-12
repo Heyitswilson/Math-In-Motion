@@ -1,7 +1,7 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveX, receiveY , clear } from '../../actions/graph_actions'
+import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions'
 
 class Butterfly extends React.Component {
     constructor(props) {
@@ -16,7 +16,12 @@ class Butterfly extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        this.props.receiveGraph("butterfly")
+    }
+
     componentWillUnmount() {
+        
         this.props.clear()
     }
 
@@ -71,12 +76,14 @@ class Butterfly extends React.Component {
 
 const mSTP = state => ({
     x: state.x,
-    y: state.y
+    y: state.y,
+    graph: state.graph
 })
 
 const mDTP = dispatch => ({
     receiveX: x => dispatch(receiveX(x)),
     receiveY: y => dispatch(receiveY(y)),
+    receiveGraph: graph => dispatch(receiveGraph(graph)),
     clear: () => dispatch(clear())
 })
 
