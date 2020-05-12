@@ -27,9 +27,9 @@ export const receiveT = (t) => ({
     t
 })
 
-export const receiveFrame = (frame) => ({
+export const receiveFrame = (frames) => ({
     type: RECEIVE_FRAME,
-    frame
+    frames
 })
 
 export const clear = () => ({

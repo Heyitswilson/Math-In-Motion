@@ -8,8 +8,8 @@ class Donut extends React.Component {
         super(props);
 
         this.state = {
-            x_val: 13,
-            y_val: 13
+            x_func: "cos",
+            y_func: "sin"
         }
 
         this.update = this.update.bind(this);
@@ -25,8 +25,8 @@ class Donut extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveX(this.state.x_val);
-        this.props.receiveY(this.state.y_val);
+        this.props.receiveX(this.state.x_func);
+        this.props.receiveY(this.state.y_func);
     }
 
     update(field) {
@@ -36,20 +36,21 @@ class Donut extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\cos(20t) + \\frac{\\cos(\\color{yellow}{${this.state.x_val}t})}{2} + \\frac{\\sin(14t)}{3}`;
-        const texY = `y(t) = \\sin(20t) + \\frac{\\cos(\\color{red}{${this.state.y_val}t})}{2} + \\frac{\\cos(14t)}{3}`;
+        const texX = `x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\${this.state.x_func}({13t})}}{2} + \\frac{\\sin(14t)}{3}`;
+        const texY = `y(t) = \\sin(20t) + \\frac{\\color{red}{\\${this.state.y_func}({13t})}}{2} + \\frac{\\cos(14t)}{3}`;
 
         return (
             <div>
                 <div className="slider-div">
-                    <label className="labels">
-                        X
-                        <input onChange={this.update("x_val")} type="range" min="10" max="500" value={this.state.x_val} />
-                    </label>
-                    <label className="labels">
-                        Y
-                        <input onChange={this.update("y_val")} type="range" min="10" max="500" value={this.state.y_val} />
-                    </label>
+                    <select onChange={this.update("x_func")}>
+                        <option value={"cos"}>cos(t)</option>
+                        <option value={"sin"}>sin(t)</option>
+                    </select>
+
+                    <select onChange={this.update("y_func")}>
+                        <option value={"sin"}>sin(t)</option>
+                        <option value={"cos"}>cos(t)</option>
+                    </select>
                     <button onClick={() => this.handleSubmit()}>Update Changes</button>
                 </div>
                 <MathJax.Context input="tex">

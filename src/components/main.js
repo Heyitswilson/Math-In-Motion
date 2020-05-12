@@ -17,6 +17,7 @@ class Main extends React.Component {
     this.canvas = null;
     this.context = null;
     this.Demoview = null;
+
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ class Main extends React.Component {
   runDemoView () {
     let ctx = this.Demoview.ctx;
     ctx.clearRect(0, 0, 800, 600);
-    this.Demoview[this.props.graph](800, 600);
+    this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
   }
 
   render () {
@@ -63,7 +64,11 @@ class Main extends React.Component {
 }
 
 const mSTP = state => ({
-  graph: state.graph
+  graph: state.graph,
+  x: state.x,
+  y: state.y,
+  t: state.t,
+  frames: state.frames
 })
 
 

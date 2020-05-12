@@ -25,8 +25,9 @@ class Twist extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveX(this.state.t);
-        this.props.receiveY(this.state.frames);
+        debugger
+        this.props.receiveT(this.state.t);
+        this.props.receiveFrame(this.state.frames);
     }
 
     update(field) {
@@ -47,11 +48,11 @@ class Twist extends React.Component {
                 <div className="slider-div">
                     <label className="labels">
                         t
-                        <input onChange={this.update("t")} type="range" min="5" max="500" value={this.state.t} />
+                        <input onChange={this.update("t")} type="range" min="5" max="50" value={this.state.t} />
                     </label>
                     <label className="labels">
                         Animation Frames
-                        <input onChange={this.update("frames")} type="range" min="750" max="2000" value={this.state.frames} />
+                        <input onChange={this.update("frames")} type="range" min="750" max="4000" value={this.state.frames} />
                     </label>
                     <button onClick={() => this.handleSubmit()}>Update Changes</button>
                 </div>

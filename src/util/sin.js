@@ -5,16 +5,15 @@ class Sin {
 
 }
 
-Sin.prototype.sin = (ctx, w, h, t) => {
+Sin.prototype.sin = (ctx, w, h, t, userX, userY) => {
     ctx.strokeStyle = `#00ffff`;
     ctx.lineWidth = 1;
-
     let x = function (t) {
-        return w * t / 120
+        return w * t / userX
     };
 
     let y = function (t) {
-        return Math.sin(t * (4 * Math.PI) / 120) * (-h / 4) + (h / 2);
+        return Math.sin(t * (4 * Math.PI) / userY) * (-h / 4) + (h / 2);
     };
 
     ctx.beginPath();
@@ -24,15 +23,15 @@ Sin.prototype.sin = (ctx, w, h, t) => {
 
 }
 
-Sin.prototype.doubleSin = (ctx, w, h, t) => {
+Sin.prototype.doubleSin = (ctx, w, h, t, userX, userY) => {
     ctx.lineWidth = 2;
 
     let x = function (t) {
-        return Math.sin(t * ((10 * Math.PI) / 120)) * (-w / 4) + (w / 2);
+        return Math.sin(t * ((10 * Math.PI) / userX)) * (-w / 4) + (w / 2);
     };
 
     let y = function (t) {
-        return Math.sin(t * (8 * Math.PI) / 120) * (-h / 4) + (h / 2);
+        return Math.sin(t * (8 * Math.PI) / userY) * (-h / 4) + (h / 2);
     };
 
     ctx.beginPath();
@@ -42,17 +41,13 @@ Sin.prototype.doubleSin = (ctx, w, h, t) => {
 
 }
 
-Sin.prototype.butterfly = (ctx, w, h, t) => {
-
-
-
-
+Sin.prototype.butterfly = (ctx, w, h, t,userX, userY) => {
     ctx.lineWidth = 2;
-
+    debugger
     let x = function (t) {
         return (
 
-            (Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
+            (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
 
         )
     };
@@ -60,7 +55,7 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
     let y = function (t) {
         return (
 
-            (Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
+            (Math.cos(t) * (Math.pow(Math.E, Math[userY](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
 
 
         )
@@ -70,12 +65,12 @@ Sin.prototype.butterfly = (ctx, w, h, t) => {
 
 }
 
-Sin.prototype.coolButterfly = (ctx, w, h, t) => {
+Sin.prototype.coolButterfly = (ctx, w, h, t, userX, userY) => {
     ctx.lineWidth = 2;
 
     let x = function (t) {
         return (
-            (Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
+            (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) + 2 * Math[userY](4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
         )
     };
 
@@ -91,18 +86,18 @@ Sin.prototype.coolButterfly = (ctx, w, h, t) => {
     ctx.stroke();
 }
 
-Sin.prototype.ring = (ctx, w, h, t) => {
+Sin.prototype.ring = (ctx, w, h, t, userX, userY) => {
     ctx.lineWidth = 2;
 
     let x = function (t) {
         return (
-           (Math.cos(20 * t) + (Math.cos(13 * t) / 2) + (Math.sin(6 * t) / 3)) * (-w / 4) + (w / 2)
+           (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(6 * t) / 3)) * (-w / 4) + (w / 2)
         )
     };
 
     let y = function (t) {
         return (
-            (Math.sin(20 * t) + (Math.cos(13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
+            (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
         )
     };
 
@@ -112,19 +107,19 @@ Sin.prototype.ring = (ctx, w, h, t) => {
     ctx.stroke();
 }
 
-Sin.prototype.donut = (ctx, w, h, t) => {
+Sin.prototype.donut = (ctx, w, h, t, userX, userY) => {
     ctx.lineWidth = 2;
     ctx.strokeStyle = "rgb(255, 255, 255)";
-
+    
     let x = function (t) {
         return (
-           (Math.cos(20 * t) + (Math.cos(13 * t) / 2) + (Math.sin(14 * t) / 3)) * (-w / 4) + (w / 2)
+           (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(14 * t) / 3)) * (-w / 4) + (w / 2)
         )
     };
 
     let y = function (t) {
         return (
-            (Math.sin(20 * t) + (Math.sin(13 * t)/ 2) + (Math.cos(14 * t) / 3)) * (-h / 4) + (h / 2)
+            (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(14 * t) / 3)) * (-h / 4) + (h / 2)
         )
     };
 

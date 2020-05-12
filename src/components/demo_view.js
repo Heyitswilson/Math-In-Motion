@@ -9,7 +9,7 @@ class DemoView {
     }
 }
 
-DemoView.prototype.butterfly = function (w, h) {
+DemoView.prototype.butterfly = function (w, h, userX, userY) {
     let t = 0
     function r(t) {
         return 100 + Math.cos(t / 300) * 700;
@@ -32,14 +32,14 @@ DemoView.prototype.butterfly = function (w, h) {
 
 
         t += 1
-        if (t < 720) {
-            this.Sin.butterfly(this.ctx, w, h, t / (12 * Math.PI))
+        if (t < 250) {
+            this.Sin.butterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
         }
     }, 20);
 }
 
 
-DemoView.prototype.coolButterfly = function (w, h) {
+DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
     let t = 0
     function r(t) {
         return 100 + Math.cos(t / 300) * 700;
@@ -61,12 +61,12 @@ DemoView.prototype.coolButterfly = function (w, h) {
 
         t += 1
         if (t < 199) {
-            this.Sin.coolButterfly(this.ctx, w, h, t / (12 * Math.PI))
+            this.Sin.coolButterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
         }
     }, 20);
 }
 
-DemoView.prototype.sin = function (w, h) {
+DemoView.prototype.sin = function (w, h, userX, userY) {
     let t = 0
     function r(t) {
         return 100 + Math.cos(t / 300) * 700;
@@ -87,11 +87,11 @@ DemoView.prototype.sin = function (w, h) {
         ${b(t)}`;
 
         t += 1
-        this.Sin.sin(this.ctx, w, h, t)
+        this.Sin.sin(this.ctx, w, h, t, userX, userY)
     }, 20);
 }
 
-DemoView.prototype.doubleSin = function (w, h) {
+DemoView.prototype.doubleSin = function (w, h, userX, userY) {
     let t = 0
     function r(t) {
         return 100 + Math.tan(t / 300) * 200;
@@ -113,12 +113,12 @@ DemoView.prototype.doubleSin = function (w, h) {
 
         t += 1
         if (t < 130) {
-            this.Sin.doubleSin(this.ctx, w, h, t)
+            this.Sin.doubleSin(this.ctx, w, h, t, userX, userY)
         }
     }, 20);
 }
 
-DemoView.prototype.ring = function (w, h) {
+DemoView.prototype.ring = function (w, h, userX, userY) {
     let t = 0
     function r(t) {
         return 150 + Math.sin(t / 700) * 200;
@@ -140,24 +140,24 @@ DemoView.prototype.ring = function (w, h) {
 
         t += 0.5
         if (t < 150) {
-            this.Sin.ring(this.ctx, w, h, t / (80 * Math.PI))
+            this.Sin.ring(this.ctx, w, h, t / (80 * Math.PI), userX, userY)
         }
     }, 20);
 }
 
-DemoView.prototype.donut = function (w, h) {
+DemoView.prototype.donut = function (w, h, userX, userY) {
     let t = 0
 
     setInterval(() => {
 
         t += 1
-        if (t < 1000) {
-            this.Sin.donut(this.ctx, w, h, t / ( 50 * Math.PI))
+        if (t < 460) {
+            this.Sin.donut(this.ctx, w, h, t / ( 50 * Math.PI), userX, userY)
         }
     }, 20);
 }
 
-DemoView.prototype.twist = function (w, h) {
+DemoView.prototype.twist = function (w, h, none1, none2, userT, userFrames) {
   let t = 0;
   function r(t) {
     return 450 + Math.cos(t / 100) * 500;
@@ -176,8 +176,8 @@ DemoView.prototype.twist = function (w, h) {
         ${b(t)}`;
 
     t += 2;
-    if (t < 750) {
-      this.Sin.twist(this.ctx, w, h, t / (10 * Math.PI));
+    if (t < userFrames) {
+      this.Sin.twist(this.ctx, w, h, t / (userT * Math.PI));
     }
   }, 20);
 };
