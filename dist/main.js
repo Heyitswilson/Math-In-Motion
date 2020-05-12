@@ -43581,10 +43581,10 @@ var receiveT = function receiveT(t) {
     t: t
   };
 };
-var receiveFrame = function receiveFrame(frame) {
+var receiveFrame = function receiveFrame(frames) {
   return {
     type: RECEIVE_FRAME,
-    frame: frame
+    frames: frames
   };
 };
 var clear = function clear() {
@@ -43712,7 +43712,7 @@ var DemoView = function DemoView(ctx) {
   this.Sin = new _util_sin__WEBPACK_IMPORTED_MODULE_0__["default"]();
 };
 
-DemoView.prototype.butterfly = function (w, h) {
+DemoView.prototype.butterfly = function (w, h, userX, userY) {
   var _this = this;
 
   var t = 0;
@@ -43738,13 +43738,13 @@ DemoView.prototype.butterfly = function (w, h) {
     _this.ctx.fillStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
     t += 1;
 
-    if (t < 720) {
-      _this.Sin.butterfly(_this.ctx, w, h, t / (12 * Math.PI));
+    if (t < 250) {
+      _this.Sin.butterfly(_this.ctx, w, h, t / (12 * Math.PI), userX, userY);
     }
   }, 20);
 };
 
-DemoView.prototype.coolButterfly = function (w, h) {
+DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
   var _this2 = this;
 
   var t = 0;
@@ -43771,12 +43771,12 @@ DemoView.prototype.coolButterfly = function (w, h) {
     t += 1;
 
     if (t < 199) {
-      _this2.Sin.coolButterfly(_this2.ctx, w, h, t / (12 * Math.PI));
+      _this2.Sin.coolButterfly(_this2.ctx, w, h, t / (12 * Math.PI), userX, userY);
     }
   }, 20);
 };
 
-DemoView.prototype.sin = function (w, h) {
+DemoView.prototype.sin = function (w, h, userX, userY) {
   var _this3 = this;
 
   var t = 0;
@@ -43802,11 +43802,11 @@ DemoView.prototype.sin = function (w, h) {
     _this3.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
     t += 1;
 
-    _this3.Sin.sin(_this3.ctx, w, h, t);
+    _this3.Sin.sin(_this3.ctx, w, h, t, userX, userY);
   }, 20);
 };
 
-DemoView.prototype.doubleSin = function (w, h) {
+DemoView.prototype.doubleSin = function (w, h, userX, userY) {
   var _this4 = this;
 
   var t = 0;
@@ -43833,12 +43833,12 @@ DemoView.prototype.doubleSin = function (w, h) {
     t += 1;
 
     if (t < 130) {
-      _this4.Sin.doubleSin(_this4.ctx, w, h, t);
+      _this4.Sin.doubleSin(_this4.ctx, w, h, t, userX, userY);
     }
   }, 20);
 };
 
-DemoView.prototype.ring = function (w, h) {
+DemoView.prototype.ring = function (w, h, userX, userY) {
   var _this5 = this;
 
   var t = 0;
@@ -43865,25 +43865,25 @@ DemoView.prototype.ring = function (w, h) {
     t += 0.5;
 
     if (t < 150) {
-      _this5.Sin.ring(_this5.ctx, w, h, t / (80 * Math.PI));
+      _this5.Sin.ring(_this5.ctx, w, h, t / (80 * Math.PI), userX, userY);
     }
   }, 20);
 };
 
-DemoView.prototype.donut = function (w, h) {
+DemoView.prototype.donut = function (w, h, userX, userY) {
   var _this6 = this;
 
   var t = 0;
   setInterval(function () {
     t += 1;
 
-    if (t < 1000) {
-      _this6.Sin.donut(_this6.ctx, w, h, t / (50 * Math.PI));
+    if (t < 460) {
+      _this6.Sin.donut(_this6.ctx, w, h, t / (50 * Math.PI), userX, userY);
     }
   }, 20);
 };
 
-DemoView.prototype.twist = function (w, h) {
+DemoView.prototype.twist = function (w, h, none1, none2, userT, userFrames) {
   var _this7 = this;
 
   var t = 0;
@@ -43904,8 +43904,8 @@ DemoView.prototype.twist = function (w, h) {
     _this7.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
     t += 2;
 
-    if (t < 750) {
-      _this7.Sin.twist(_this7.ctx, w, h, t / (10 * Math.PI));
+    if (t < userFrames) {
+      _this7.Sin.twist(_this7.ctx, w, h, t / (userT * Math.PI));
     }
   }, 20);
 };
@@ -43970,8 +43970,8 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      x_func: "cos(t)",
-      y_func: "cos(t)"
+      x_func: "cos",
+      y_func: "cos"
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -44008,26 +44008,26 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
-      var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\".concat(this.state.y_func, "}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\".concat(this.state.y_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(t)"
+        value: "cos"
       }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(t)"
+        value: "sin"
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(t)"
+        value: "tan"
       }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(t)"
+        value: "cos"
       }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(t)"
+        value: "sin"
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(t)"
+        value: "tan"
       }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this3.handleSubmit();
@@ -44128,8 +44128,8 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      x_func: "cos(t)",
-      y_func: "cos(4t)"
+      x_func: "cos",
+      y_func: "cos"
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -44166,26 +44166,26 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "}} + 2(\\color{red}{\\").concat(this.state.y_func, "}) - sin(\\frac{t}{12})^5)");
+      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} + 2(\\color{red}{\\").concat(this.state.y_func, "(4t)}) - sin(\\frac{t}{12})^5)");
       var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(t)"
+        value: "cos"
       }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(t)"
+        value: "sin"
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(t)"
+        value: "tan"
       }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(4t)"
+        value: "cos"
       }, "cos(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(4t)"
+        value: "sin"
       }, "sin(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(4t)"
+        value: "tan"
       }, "tan(4t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this3.handleSubmit();
@@ -44286,8 +44286,8 @@ var Donut = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      x_val: 13,
-      y_val: 13
+      x_func: "cos",
+      y_func: "sin"
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -44307,8 +44307,8 @@ var Donut = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      this.props.receiveX(this.state.x_val);
-      this.props.receiveY(this.state.y_val);
+      this.props.receiveX(this.state.x_func);
+      this.props.receiveY(this.state.y_func);
     }
   }, {
     key: "update",
@@ -44324,27 +44324,23 @@ var Donut = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var texX = "x(t) = \\cos(20t) + \\frac{\\cos(\\color{yellow}{".concat(this.state.x_val, "t})}{2} + \\frac{\\sin(14t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\cos(\\color{red}{".concat(this.state.y_val, "t})}{2} + \\frac{\\cos(14t)}{3}");
+      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "({13t})}}{2} + \\frac{\\sin(14t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "({13t})}}{2} + \\frac{\\cos(14t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update("x_val"),
-        type: "range",
-        min: "10",
-        max: "500",
-        value: this.state.x_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update("y_val"),
-        type: "range",
-        min: "10",
-        max: "500",
-        value: this.state.y_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("x_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos"
+      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin"
+      }, "sin(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("y_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin"
+      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos"
+      }, "cos(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this3.handleSubmit();
         }
@@ -44657,10 +44653,7 @@ var Formula = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderSwitch",
     value: function renderSwitch(param) {
-      var _this$props = this.props,
-          receiveGraph = _this$props.receiveGraph,
-          clear = _this$props.clear;
-
+      // const { receiveGraph, clear } = this.props;
       switch (param) {
         case "sin":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
@@ -44789,8 +44782,8 @@ var Ring = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      x_func: "cos(13t)",
-      y_func: "cos(13t)"
+      x_func: "cos",
+      y_func: "cos"
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -44827,26 +44820,26 @@ var Ring = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "}}{2} + \\frac{\\sin(6t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "}}{2} + \\frac{\\cos(6t)}{3}");
+      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "(13t)}}{2} + \\frac{\\sin(6t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "(13t)}}{2} + \\frac{\\cos(6t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(13t)"
+        value: "cos"
       }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(13t)"
+        value: "sin"
       }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(13t)"
+        value: "tan"
       }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos(13t)"
+        value: "cos"
       }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin(13t)"
-      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan(13t)"
+        value: "sin"
+      }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan"
       }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this3.handleSubmit();
@@ -45127,8 +45120,9 @@ var Twist = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      this.props.receiveX(this.state.t);
-      this.props.receiveY(this.state.frames);
+      debugger;
+      this.props.receiveT(this.state.t);
+      this.props.receiveFrame(this.state.frames);
     }
   }, {
     key: "update",
@@ -45157,7 +45151,7 @@ var Twist = /*#__PURE__*/function (_React$Component) {
         onChange: this.update("t"),
         type: "range",
         min: "5",
-        max: "500",
+        max: "50",
         value: this.state.t
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "labels"
@@ -45165,7 +45159,7 @@ var Twist = /*#__PURE__*/function (_React$Component) {
         onChange: this.update("frames"),
         type: "range",
         min: "750",
-        max: "2000",
+        max: "4000",
         value: this.state.frames
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
@@ -45336,7 +45330,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function runDemoView() {
       var ctx = this.Demoview.ctx;
       ctx.clearRect(0, 0, 800, 600);
-      this.Demoview[this.props.graph](800, 600);
+      this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
     }
   }, {
     key: "render",
@@ -45374,7 +45368,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    graph: state.graph
+    graph: state.graph,
+    x: state.x,
+    y: state.y,
+    t: state.t,
+    frames: state.frames
   };
 };
 
@@ -45717,16 +45715,16 @@ var Sin = function Sin(ctx) {
   this.ctx = ctx;
 };
 
-Sin.prototype.sin = function (ctx, w, h, t) {
+Sin.prototype.sin = function (ctx, w, h, t, userX, userY) {
   ctx.strokeStyle = "#00ffff";
   ctx.lineWidth = 1;
 
   var x = function x(t) {
-    return w * t / 120;
+    return w * t / userX;
   };
 
   var y = function y(t) {
-    return Math.sin(t * (4 * Math.PI) / 120) * (-h / 4) + h / 2;
+    return Math.sin(t * (4 * Math.PI) / userY) * (-h / 4) + h / 2;
   };
 
   ctx.beginPath();
@@ -45735,15 +45733,15 @@ Sin.prototype.sin = function (ctx, w, h, t) {
   ctx.stroke();
 };
 
-Sin.prototype.doubleSin = function (ctx, w, h, t) {
+Sin.prototype.doubleSin = function (ctx, w, h, t, userX, userY) {
   ctx.lineWidth = 2;
 
   var x = function x(t) {
-    return Math.sin(t * (10 * Math.PI / 120)) * (-w / 4) + w / 2;
+    return Math.sin(t * (10 * Math.PI / userX)) * (-w / 4) + w / 2;
   };
 
   var y = function y(t) {
-    return Math.sin(t * (8 * Math.PI) / 120) * (-h / 4) + h / 2;
+    return Math.sin(t * (8 * Math.PI) / userY) * (-h / 4) + h / 2;
   };
 
   ctx.beginPath();
@@ -45752,25 +45750,26 @@ Sin.prototype.doubleSin = function (ctx, w, h, t) {
   ctx.stroke();
 };
 
-Sin.prototype.butterfly = function (ctx, w, h, t) {
+Sin.prototype.butterfly = function (ctx, w, h, t, userX, userY) {
   ctx.lineWidth = 2;
+  debugger;
 
   var x = function x(t) {
-    return Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
+    return Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
   };
 
   var y = function y(t) {
-    return Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + h / 2;
+    return Math.cos(t) * (Math.pow(Math.E, Math[userY](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + h / 2;
   };
 
   ctx.fillRect(x(t + 1), y(t + 1), 15, 5);
 };
 
-Sin.prototype.coolButterfly = function (ctx, w, h, t) {
+Sin.prototype.coolButterfly = function (ctx, w, h, t, userX, userY) {
   ctx.lineWidth = 2;
 
   var x = function x(t) {
-    return Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
+    return Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) + 2 * Math[userY](4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
   };
 
   var y = function y(t) {
@@ -45783,15 +45782,15 @@ Sin.prototype.coolButterfly = function (ctx, w, h, t) {
   ctx.stroke();
 };
 
-Sin.prototype.ring = function (ctx, w, h, t) {
+Sin.prototype.ring = function (ctx, w, h, t, userX, userY) {
   ctx.lineWidth = 2;
 
   var x = function x(t) {
-    return (Math.cos(20 * t) + Math.cos(13 * t) / 2 + Math.sin(6 * t) / 3) * (-w / 4) + w / 2;
+    return (Math.cos(20 * t) + Math[userX](13 * t) / 2 + Math.sin(6 * t) / 3) * (-w / 4) + w / 2;
   };
 
   var y = function y(t) {
-    return (Math.sin(20 * t) + Math.cos(13 * t) / 2 + Math.cos(6 * t) / 3) * (-h / 4) + h / 2;
+    return (Math.sin(20 * t) + Math[userY](13 * t) / 2 + Math.cos(6 * t) / 3) * (-h / 4) + h / 2;
   };
 
   ctx.beginPath();
@@ -45800,16 +45799,16 @@ Sin.prototype.ring = function (ctx, w, h, t) {
   ctx.stroke();
 };
 
-Sin.prototype.donut = function (ctx, w, h, t) {
+Sin.prototype.donut = function (ctx, w, h, t, userX, userY) {
   ctx.lineWidth = 2;
   ctx.strokeStyle = "rgb(255, 255, 255)";
 
   var x = function x(t) {
-    return (Math.cos(20 * t) + Math.cos(13 * t) / 2 + Math.sin(14 * t) / 3) * (-w / 4) + w / 2;
+    return (Math.cos(20 * t) + Math[userX](13 * t) / 2 + Math.sin(14 * t) / 3) * (-w / 4) + w / 2;
   };
 
   var y = function y(t) {
-    return (Math.sin(20 * t) + Math.sin(13 * t) / 2 + Math.cos(14 * t) / 3) * (-h / 4) + h / 2;
+    return (Math.sin(20 * t) + Math[userY](13 * t) / 2 + Math.cos(14 * t) / 3) * (-h / 4) + h / 2;
   };
 
   ctx.beginPath();

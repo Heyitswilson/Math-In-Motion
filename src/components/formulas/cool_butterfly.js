@@ -8,8 +8,8 @@ class coolButterfly extends React.Component {
         super(props);
 
         this.state = {
-            x_func: "cos(t)",
-            y_func: "cos(4t)"
+            x_func: "cos",
+            y_func: "cos"
         }
 
         this.update = this.update.bind(this);
@@ -36,21 +36,21 @@ class coolButterfly extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\sin(t)(e^{\\color{yellow}{\\${this.state.x_func}}} + 2(\\color{red}{\\${this.state.y_func}}) - sin(\\frac{t}{12})^5)`;
+        const texX = `x(t) = \\sin(t)(e^{\\color{yellow}{\\${this.state.x_func}(t)}} + 2(\\color{red}{\\${this.state.y_func}(4t)}) - sin(\\frac{t}{12})^5)`;
         const texY = `y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)`;
         return (
             <div>
                 <div className="slider-div">
                     <select onChange={this.update("x_func")}>
-                        <option value={"cos(t)"}>cos(t)</option>
-                        <option value={"sin(t)"}>sin(t)</option>
-                        <option value={"tan(t)"}>tan(t)</option>
+                        <option value={"cos"}>cos(t)</option>
+                        <option value={"sin"}>sin(t)</option>
+                        <option value={"tan"}>tan(t)</option>
                     </select>
 
                     <select onChange={this.update("y_func")}>
-                        <option value={"cos(4t)"}>cos(4t)</option>
-                        <option value={"sin(4t)"}>sin(4t)</option>
-                        <option value={"tan(4t)"}>tan(4t)</option>
+                        <option value={"cos"}>cos(4t)</option>
+                        <option value={"sin"}>sin(4t)</option>
+                        <option value={"tan"}>tan(4t)</option>
                     </select>
                     <button onClick={() => this.handleSubmit()}>Update Changes</button>
                 </div>

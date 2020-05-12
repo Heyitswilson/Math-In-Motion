@@ -8,8 +8,8 @@ class Ring extends React.Component {
         super(props);
 
         this.state = {
-            x_func: "cos(13t)",
-            y_func: "cos(13t)"
+            x_func: "cos",
+            y_func: "cos"
         }
 
         this.update = this.update.bind(this);
@@ -36,21 +36,21 @@ class Ring extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\${this.state.x_func}}}{2} + \\frac{\\sin(6t)}{3}`;
-        const texY = `y(t) = \\sin(20t) + \\frac{\\color{red}{\\${this.state.y_func}}}{2} + \\frac{\\cos(6t)}{3}`;
+        const texX = `x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\${this.state.x_func}(13t)}}{2} + \\frac{\\sin(6t)}{3}`;
+        const texY = `y(t) = \\sin(20t) + \\frac{\\color{red}{\\${this.state.y_func}(13t)}}{2} + \\frac{\\cos(6t)}{3}`;
         return (
             <div>
                 <div className="slider-div">
                     <select onChange={this.update("x_func")}>
-                        <option value={"cos(13t)"}>cos(13t)</option>
-                        <option value={"sin(13t)"}>sin(13t)</option>
-                        <option value={"tan(13t)"}>tan(13t)</option>
+                        <option value={"cos"}>cos(13t)</option>
+                        <option value={"sin"}>sin(13t)</option>
+                        <option value={"tan"}>tan(13t)</option>
                     </select>
 
                     <select onChange={this.update("y_func")}>
-                        <option value={"cos(13t)"}>cos(13t)</option>
-                        <option value={"sin(13t)"}>sin(t)</option>
-                        <option value={"tan(13t)"}>tan(13t)</option>
+                        <option value={"cos"}>cos(13t)</option>
+                        <option value={"sin"}>sin(13t)</option>
+                        <option value={"tan"}>tan(13t)</option>
                     </select>
                     <button onClick={() => this.handleSubmit()}>Update Changes</button>
                 </div>
