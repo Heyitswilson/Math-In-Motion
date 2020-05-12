@@ -2,12 +2,20 @@ export const RECEIVE_X = "RECEIVE_X";
 export const RECEIVE_Y = "RECEIVE_Y";
 export const RECEIVE_T = "RECEIVE_T";
 export const RECEIVE_FRAME = "RECEIVE_FRAME";
-export const CLEAR = "CLEAR"
+export const CLEAR = "CLEAR";
+export const RECEIVE_GRAPH = "RECEIVE_GRAPH"
 
-export const receiveX = (x) => ({
-    type: RECEIVE_X,
-    x
+export const receiveGraph = (graph) => ({
+    type: RECEIVE_GRAPH,
+    graph
 })
+
+export const receiveX = (x) => {
+    return ({
+        type: RECEIVE_X,
+        x
+    })
+}
 
 export const receiveY = (y) => ({
     type: RECEIVE_Y,

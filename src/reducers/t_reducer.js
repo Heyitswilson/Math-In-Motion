@@ -1,4 +1,4 @@
-import { RECEIVE_T } from "../actions/graph_actions";
+import { RECEIVE_T, CLEAR } from "../actions/graph_actions";
 
 const tReducer = (state = null, action) => {
   Object.freeze(state);

@@ -102,7 +102,7 @@ Sin.prototype.ring = (ctx, w, h, t) => {
 
     let y = function (t) {
         return (
-            (Math.sin(20 * t) + (Math.sin(13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
+            (Math.sin(20 * t) + (Math.cos(13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
         )
     };
 

@@ -88,6 +88,7 @@
     min-width: 200px;
     justify-content: space-around;
     margin-left: 15px;
+    z-index: 99;
 }
 
 #musicApp {
@@ -114,12 +115,6 @@
 .background-div {
     position: relative;
     bottom: 15px;
-}
-
-#bar {
-    background-color: red;
-    color: white;
-    z-index: 99
 }
 
 .slider-div {

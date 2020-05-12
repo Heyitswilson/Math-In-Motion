@@ -43534,7 +43534,7 @@ module.exports = function(originalModule) {
 /*!**************************************!*\
   !*** ./src/actions/graph_actions.js ***!
   \**************************************/
-/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, receiveX, receiveY, receiveT, receiveFrame, clear */
+/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, RECEIVE_GRAPH, receiveGraph, receiveX, receiveY, receiveT, receiveFrame, clear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43544,6 +43544,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_T", function() { return RECEIVE_T; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRAME", function() { return RECEIVE_FRAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR", function() { return CLEAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_GRAPH", function() { return RECEIVE_GRAPH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveGraph", function() { return receiveGraph; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveX", function() { return receiveX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveY", function() { return receiveY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveT", function() { return receiveT; });
@@ -43554,6 +43556,13 @@ var RECEIVE_Y = "RECEIVE_Y";
 var RECEIVE_T = "RECEIVE_T";
 var RECEIVE_FRAME = "RECEIVE_FRAME";
 var CLEAR = "CLEAR";
+var RECEIVE_GRAPH = "RECEIVE_GRAPH";
+var receiveGraph = function receiveGraph(graph) {
+  return {
+    type: RECEIVE_GRAPH,
+    graph: graph
+  };
+};
 var receiveX = function receiveX(x) {
   return {
     type: RECEIVE_X,
@@ -43599,6 +43608,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./src/components/bar.js");
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./src/components/main.js");
+/* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./header/header */ "./src/components/header/header.js");
+/* harmony import */ var _components_formulas_formula__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/formulas/formula */ "./src/components/formulas/formula.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43625,6 +43636,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -43642,9 +43655,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       // const canvas = document.getElementById("canvas");
       // const ctx = canvas.getContext("2d");
       // const Demoview = new DemoView(ctx);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        ctx: this.props.ctx
-      }));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -43903,10 +43914,10 @@ DemoView.prototype.twist = function (w, h) {
 
 /***/ }),
 
-/***/ "./src/components/formula.js":
-/*!***********************************!*\
-  !*** ./src/components/formula.js ***!
-  \***********************************/
+/***/ "./src/components/formulas/butterfly.js":
+/*!**********************************************!*\
+  !*** ./src/components/formulas/butterfly.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -43916,155 +43927,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-function Formula(_ref) {
-  var graph = _ref.graph,
-      receiveX = _ref.receiveX,
-      receiveY = _ref.receiveY,
-      receiveT = _ref.receiveT,
-      receiveFrame = _ref.receiveFrame,
-      clear = _ref.clear;
-  var selected = graph;
-  console.log(selected);
-
-  var sin = function sin() {
-    var texX = "x(t) = \\frac{t}{\\color{yellow}{120}}";
-    var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{120}})";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "slider-div"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "labels"
-    }, " ", "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "range",
-      min: "1",
-      max: "100",
-      value: "50"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "labels"
-    }, " ", "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "range",
-      min: "1",
-      max: "100",
-      value: "50"
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
-  };
-
-  var doubleSin = function doubleSin() {
-    var texX = "x(t) = \\sin(t(\\frac{10\\Pi}{\\color{yellow}{120}}))";
-    var texY = "y(t) = \\sin(t(\\frac{8\\Pi}{\\color{red}{120}}))";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
-  };
-
-  var butterfly = function butterfly() {
-    var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\cos(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
-    var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\cos(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
-  };
-
-  var coolButterfly = function coolButterfly() {
-    var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\cos(t)}} + 2(\\color{red}{\\cos(4t)}) - sin(\\frac{t}{12})^5)";
-    var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
-  };
-
-  var ring = function ring() {
-    var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\cos(13t)}}{2} + \\frac{\\sin(6t)}{3}";
-    var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\sin(13t)}}{2} + \\frac{\\cos(6t)}{3}";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
-  };
-
-  var donut = function donut() {
-    var texX = "x(t) = \\cos(20t) + \\frac{\\cos(\\color{yellow}{13t})}{2} + \\frac{\\sin(14t)}{3}";
-    var texY = "y(t) = \\sin(20t) + \\frac{\\cos(\\color{red}{13t})}{2} + \\frac{\\cos(14t)}{3}";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
-  };
-
-  var twist = function twist() {
-    var texX = "x(t) = t - 1.6(\\cos(24t))";
-    var texY = "y(t) = t - 1.6(\\sin(25t))";
-    var texT = "t = (\\frac{t}{\\color{yellow}{10}\\Pi}) ";
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-      input: "tex"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "labels"
-    }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Time 't': ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Animation frames: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "frame-num"
-    }, "750"))));
-  };
-
-  var renderSwitch = function renderSwitch(param) {
-    switch (param) {
-      case "sin":
-        return sin();
-
-      case "doubleSin":
-        return doubleSin();
-
-      case "butterfly":
-        return butterfly();
-
-      case "coolButterfly":
-        return coolButterfly();
-
-      case "ring":
-        return ring();
-
-      case "donut":
-        return donut();
-
-      case "twist":
-        return twist();
-    }
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, renderSwitch(graph));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Formula);
-
-/***/ }),
-
-/***/ "./src/components/main.js":
-/*!********************************!*\
-  !*** ./src/components/main.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _demo_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo_view */ "./src/components/demo_view.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _formula__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formula */ "./src/components/formula.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44091,98 +43955,679 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import { Fraction, toTex } from "algebra.js";
 
 
 
-var Main = /*#__PURE__*/function (_React$Component) {
-  _inherits(Main, _React$Component);
+var Butterfly = /*#__PURE__*/function (_React$Component) {
+  _inherits(Butterfly, _React$Component);
 
-  var _super = _createSuper(Main);
+  var _super = _createSuper(Butterfly);
 
-  function Main(props) {
+  function Butterfly(props) {
     var _this;
 
-    _classCallCheck(this, Main);
+    _classCallCheck(this, Butterfly);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_func: "cos(t)",
+      y_func: "cos(t)"
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Butterfly, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("butterfly");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_func);
+      this.props.receiveY(this.state.y_func);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\".concat(this.state.y_func, "}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("x_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(t)"
+      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(t)"
+      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(t)"
+      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("y_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(t)"
+      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(t)"
+      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(t)"
+      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return Butterfly;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(Butterfly));
+
+/***/ }),
+
+/***/ "./src/components/formulas/cool_butterfly.js":
+/*!***************************************************!*\
+  !*** ./src/components/formulas/cool_butterfly.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var coolButterfly = /*#__PURE__*/function (_React$Component) {
+  _inherits(coolButterfly, _React$Component);
+
+  var _super = _createSuper(coolButterfly);
+
+  function coolButterfly(props) {
+    var _this;
+
+    _classCallCheck(this, coolButterfly);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_func: "cos(t)",
+      y_func: "cos(4t)"
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(coolButterfly, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("coolButterfly");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_func);
+      this.props.receiveY(this.state.y_func);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "}} + 2(\\color{red}{\\").concat(this.state.y_func, "}) - sin(\\frac{t}{12})^5)");
+      var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("x_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(t)"
+      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(t)"
+      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(t)"
+      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("y_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(4t)"
+      }, "cos(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(4t)"
+      }, "sin(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(4t)"
+      }, "tan(4t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return coolButterfly;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(coolButterfly));
+
+/***/ }),
+
+/***/ "./src/components/formulas/donut.js":
+/*!******************************************!*\
+  !*** ./src/components/formulas/donut.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Donut = /*#__PURE__*/function (_React$Component) {
+  _inherits(Donut, _React$Component);
+
+  var _super = _createSuper(Donut);
+
+  function Donut(props) {
+    var _this;
+
+    _classCallCheck(this, Donut);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_val: 13,
+      y_val: 13
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Donut, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("donut");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_val);
+      this.props.receiveY(this.state.y_val);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\cos(20t) + \\frac{\\cos(\\color{yellow}{".concat(this.state.x_val, "t})}{2} + \\frac{\\sin(14t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\cos(\\color{red}{".concat(this.state.y_val, "t})}{2} + \\frac{\\cos(14t)}{3}");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("x_val"),
+        type: "range",
+        min: "10",
+        max: "500",
+        value: this.state.x_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("y_val"),
+        type: "range",
+        min: "10",
+        max: "500",
+        value: this.state.y_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return Donut;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(Donut));
+
+/***/ }),
+
+/***/ "./src/components/formulas/double_sin.js":
+/*!***********************************************!*\
+  !*** ./src/components/formulas/double_sin.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var doubleSin = /*#__PURE__*/function (_React$Component) {
+  _inherits(doubleSin, _React$Component);
+
+  var _super = _createSuper(doubleSin);
+
+  function doubleSin(props) {
+    var _this;
+
+    _classCallCheck(this, doubleSin);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_val: 120,
+      y_val: 120
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(doubleSin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("doubleSin");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_val);
+      this.props.receiveY(this.state.y_val);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
+      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("x_val"),
+        type: "range",
+        min: "50",
+        max: "500",
+        value: this.state.x_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("y_val"),
+        type: "range",
+        min: "50",
+        max: "500",
+        value: this.state.y_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return doubleSin;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(doubleSin));
+
+/***/ }),
+
+/***/ "./src/components/formulas/formula.js":
+/*!********************************************!*\
+  !*** ./src/components/formulas/formula.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _sin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sin */ "./src/components/formulas/sin.js");
+/* harmony import */ var _double_sin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./double_sin */ "./src/components/formulas/double_sin.js");
+/* harmony import */ var _butterfly__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./butterfly */ "./src/components/formulas/butterfly.js");
+/* harmony import */ var _cool_butterfly__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cool_butterfly */ "./src/components/formulas/cool_butterfly.js");
+/* harmony import */ var _ring__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ring */ "./src/components/formulas/ring.js");
+/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./donut */ "./src/components/formulas/donut.js");
+/* harmony import */ var _twist__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./twist */ "./src/components/formulas/twist.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+ // import MathJax from "react-mathjax2";
+
+
+
+
+
+
+
+
+
+
+var Formula = /*#__PURE__*/function (_React$Component) {
+  _inherits(Formula, _React$Component);
+
+  var _super = _createSuper(Formula);
+
+  function Formula(props) {
+    var _this;
+
+    _classCallCheck(this, Formula);
 
     _this = _super.call(this, props);
     _this.state = {
       graph: ""
     };
-    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this)); // this.selectGraph = this.selectGraph.bind(this);
-
     _this.update = _this.update.bind(_assertThisInitialized(_this));
-    _this.canvas = null;
-    _this.context = null;
-    _this.Demoview = null;
+    _this.renderSwitch = _this.renderSwitch.bind(_assertThisInitialized(_this));
+    _this.options = _this.options.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Main, [{
-    key: "update",
-    value: function update(field) {
-      this.setState(_defineProperty({}, field, jquery__WEBPACK_IMPORTED_MODULE_2___default()("select option:selected").val()));
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.canvas = this.canvasRef.current;
-      this.context = this.canvas.getContext('2d');
-      this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
-    }
-  }, {
-    key: "runDemoView",
-    value: function runDemoView() {
-      var graph = this.state.graph;
-      var ctx = this.Demoview.ctx; // this.Demoview.twist(800, 600)
-
-      ctx.clearRect(0, 0, 800, 600);
-      this.Demoview[this.state.graph](800, 600);
-    }
-  }, {
-    key: "render",
-    value: function render() {
+  _createClass(Formula, [{
+    key: "options",
+    value: function options() {
       var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "screen-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "background"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "background-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "title"
-      }, "Bounce")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "link-space"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "icon-link",
-        href: "https://angel.co/u/wilson-ngu",
-        target: "_blank"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "icons-a",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "icon-link",
-        href: "https://github.com/Heyitswilson/Bounce",
-        target: "_blank"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "icons",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "icon-link",
-        href: "https://www.linkedin.com/in/wilson-ngu/",
-        target: "_blank"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "icons",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "intro"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "music-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "graph-select",
         onChange: function onChange() {
           return _this2.update("graph");
         }
@@ -44202,7 +44647,711 @@ var Main = /*#__PURE__*/function (_React$Component) {
         value: "donut"
       }, "Donut"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "twist"
-      }, "Twist")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Twist"));
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      this.setState(_defineProperty({}, field, jquery__WEBPACK_IMPORTED_MODULE_8___default()(".graph-select option:selected").val()));
+    }
+  }, {
+    key: "renderSwitch",
+    value: function renderSwitch(param) {
+      var _this$props = this.props,
+          receiveGraph = _this$props.receiveGraph,
+          clear = _this$props.clear;
+
+      switch (param) {
+        case "sin":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+
+        case "doubleSin":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+
+        case "butterfly":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+
+        case "coolButterfly":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+
+        case "ring":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+
+        case "donut":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+
+        case "twist":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.options(), this.renderSwitch(this.state.graph));
+    }
+  }]);
+
+  return Formula;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Formula);
+
+/***/ }),
+
+/***/ "./src/components/formulas/formula_container.js":
+/*!******************************************************!*\
+  !*** ./src/components/formulas/formula_container.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _formula__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formula */ "./src/components/formulas/formula.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {};
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["clear"])());
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveGraph"])(graph));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_formula__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./src/components/formulas/ring.js":
+/*!*****************************************!*\
+  !*** ./src/components/formulas/ring.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Ring = /*#__PURE__*/function (_React$Component) {
+  _inherits(Ring, _React$Component);
+
+  var _super = _createSuper(Ring);
+
+  function Ring(props) {
+    var _this;
+
+    _classCallCheck(this, Ring);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_func: "cos(13t)",
+      y_func: "cos(13t)"
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Ring, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("ring");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_func);
+      this.props.receiveY(this.state.y_func);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "}}{2} + \\frac{\\sin(6t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "}}{2} + \\frac{\\cos(6t)}{3}");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("x_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(13t)"
+      }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(13t)"
+      }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(13t)"
+      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update("y_func")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "cos(13t)"
+      }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "sin(13t)"
+      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "tan(13t)"
+      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return Ring;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(Ring));
+
+/***/ }),
+
+/***/ "./src/components/formulas/sin.js":
+/*!****************************************!*\
+  !*** ./src/components/formulas/sin.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Sin = /*#__PURE__*/function (_React$Component) {
+  _inherits(Sin, _React$Component);
+
+  var _super = _createSuper(Sin);
+
+  function Sin(props) {
+    var _this;
+
+    _classCallCheck(this, Sin);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      x_val: 120,
+      y_val: 120
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Sin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("sin");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.x_val);
+      this.props.receiveY(this.state.y_val);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      console.log(this.state.x_val);
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
+      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("x_val"),
+        type: "range",
+        min: 50,
+        max: 500,
+        value: this.state.x_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("y_val"),
+        type: "range",
+        min: 50,
+        max: 500,
+        value: this.state.y_val
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+    }
+  }]);
+
+  return Sin;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    x: state.x,
+    y: state.y,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveX: function receiveX(x) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+    },
+    receiveY: function receiveY(y) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(Sin));
+
+/***/ }),
+
+/***/ "./src/components/formulas/twist.js":
+/*!******************************************!*\
+  !*** ./src/components/formulas/twist.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
+/* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Twist = /*#__PURE__*/function (_React$Component) {
+  _inherits(Twist, _React$Component);
+
+  var _super = _createSuper(Twist);
+
+  function Twist(props) {
+    var _this;
+
+    _classCallCheck(this, Twist);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      t: 10,
+      frames: 750
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Twist, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveGraph("twist");
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clear();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.receiveX(this.state.t);
+      this.props.receiveY(this.state.frames);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      console.log(this.state.t);
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var texX = "x(t) = t - 1.6(\\cos(24t))";
+      var texY = "y(t) = t - 1.6(\\sin(25t))";
+      var texT = "t = (\\frac{t}{\\color{yellow}{".concat(this.state.t, "}\\Pi}) "); // const texT = `t = ${this.state.t} `;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "t", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("t"),
+        type: "range",
+        min: "5",
+        max: "500",
+        value: this.state.t
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "Animation Frames", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("frames"),
+        type: "range",
+        min: "750",
+        max: "2000",
+        value: this.state.frames
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleSubmit();
+        }
+      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Time 't': ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Animation frames: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "frame-num"
+      }, this.state.frames)))));
+    }
+  }]);
+
+  return Twist;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mSTP = function mSTP(state) {
+  return {
+    t: state.t,
+    frames: state.frames,
+    graph: state.graph
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveT: function receiveT(t) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveT"])(t));
+    },
+    receiveFrame: function receiveFrame(frames) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveFrame"])(frames));
+    },
+    receiveGraph: function receiveGraph(graph) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    clear: function clear() {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mSTP, mDTP)(Twist));
+
+/***/ }),
+
+/***/ "./src/components/header/header.js":
+/*!*****************************************!*\
+  !*** ./src/components/header/header.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function Header() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "title"
+  }, "Bounce")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "link-space"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "icon-link",
+    href: "https://angel.co/u/wilson-ngu",
+    target: "_blank"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "icons-a",
+    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "icon-link",
+    href: "https://github.com/Heyitswilson/Bounce",
+    target: "_blank"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "icons",
+    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "icon-link",
+    href: "https://www.linkedin.com/in/wilson-ngu/",
+    target: "_blank"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "icons",
+    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./src/components/main.js":
+/*!********************************!*\
+  !*** ./src/components/main.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _demo_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo_view */ "./src/components/demo_view.js");
+/* harmony import */ var _formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formulas/formula_container */ "./src/components/formulas/formula_container.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Main = /*#__PURE__*/function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  var _super = _createSuper(Main);
+
+  function Main(props) {
+    var _this;
+
+    _classCallCheck(this, Main);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      graph: ""
+    };
+    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this));
+    _this.canvas = null;
+    _this.context = null;
+    _this.Demoview = null;
+    return _this;
+  }
+
+  _createClass(Main, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.canvas = this.canvasRef.current;
+      this.context = this.canvas.getContext('2d');
+      this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
+    }
+  }, {
+    key: "runDemoView",
+    value: function runDemoView() {
+      var ctx = this.Demoview.ctx;
+      ctx.clearRect(0, 0, 800, 600);
+      this.Demoview[this.props.graph](800, 600);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "screen-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "background"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "background-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "music-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "run",
         onClick: function onClick() {
           return _this2.runDemoView();
@@ -44211,9 +45360,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         className: "credit-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formula__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        graph: this.state.graph
-      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
         height: "600",
         id: "canvas",
@@ -44225,7 +45372,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
   return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Main);
+var mSTP = function mSTP(state) {
+  return {
+    graph: state.graph
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mSTP, null)(Main));
 
 /***/ }),
 
@@ -44251,9 +45404,7 @@ var Root = function Root(_ref) {
       store = _ref.store;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: store
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    ctx: ctx
-  }));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Root);
@@ -44314,15 +45465,13 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Demo = _demo__WEBPACK_IMPORTED_MODULE_4__["default"];
 document.addEventListener("DOMContentLoaded", function () {
-  var main = document.getElementById("main");
-  var canvas = document.getElementById("canvas");
-  var ctx = canvas.getContext("2d");
+  var canvas = document.getElementById("canvas"); // const ctx = canvas.getContext("2d");
+
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   window.getState = store.getState; // const Demoview = new DemoView(ctx)
   // Demoview.sinY(800, 600)
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    ctx: ctx,
     store: store
   }), main);
 });
@@ -44350,7 +45499,7 @@ var framesReducer = function framesReducer() {
     case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRAME"]:
       return action.frames;
 
-    case CLEAR:
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
       return null;
 
     default:
@@ -44359,6 +45508,39 @@ var framesReducer = function framesReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (framesReducer);
+
+/***/ }),
+
+/***/ "./src/reducers/graph_reducer.js":
+/*!***************************************!*\
+  !*** ./src/reducers/graph_reducer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
+
+
+var graphReducer = function graphReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_GRAPH"]:
+      return action.graph;
+
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (graphReducer);
 
 /***/ }),
 
@@ -44376,6 +45558,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _y_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./y_reducer */ "./src/reducers/y_reducer.js");
 /* harmony import */ var _t_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./t_reducer */ "./src/reducers/t_reducer.js");
 /* harmony import */ var _frames_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frames_reducer */ "./src/reducers/frames_reducer.js");
+/* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
+
 
 
 
@@ -44385,7 +45569,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   x: _x_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   y: _y_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -44412,7 +45597,7 @@ var tReducer = function tReducer() {
     case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_T"]:
       return action.t;
 
-    case CLEAR:
+    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
       return null;
 
     default:
@@ -44606,7 +45791,7 @@ Sin.prototype.ring = function (ctx, w, h, t) {
   };
 
   var y = function y(t) {
-    return (Math.sin(20 * t) + Math.sin(13 * t) / 2 + Math.cos(6 * t) / 3) * (-h / 4) + h / 2;
+    return (Math.sin(20 * t) + Math.cos(13 * t) / 2 + Math.cos(6 * t) / 3) * (-h / 4) + h / 2;
   };
 
   ctx.beginPath();
