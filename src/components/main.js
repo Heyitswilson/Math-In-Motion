@@ -2,7 +2,7 @@ import React from 'react';
 import DemoView from './demo_view';
 import $ from "jquery";
 // import { Fraction, toTex } from "algebra.js";
-import Formula from './formula'
+import Formula from './formulas/formula_container'
 
 class Main extends React.Component {
   constructor(props) {
@@ -22,13 +22,15 @@ class Main extends React.Component {
     this.Demoview = null;
   }
 
-  update(field) {
-   this.setState({
-      [field]: $("select option:selected").val()
-    })
-  }
+  // update(field) {
+  //  this.setState({
+  //     [field]: $("select option:selected").val()
+  //   })
+  // }
 
   componentDidMount() {
+    // debugger
+    // console.log(this.canvas)
     this.canvas = this.canvasRef.current;
     this.context = this.canvas.getContext('2d');
     this.Demoview = new DemoView(this.context)
@@ -49,54 +51,9 @@ class Main extends React.Component {
         <div className="screen-div">
           <div className="background">
             <div className="background-div">
-              <div className="header">
-                <div>
-                  <h1 className="title">Bounce</h1>
-                </div>
-                <div className="link-space">
-                  <a
-                    className="icon-link"
-                    href="https://angel.co/u/wilson-ngu"
-                    target="_blank"
-                  >
-                    <img
-                      className="icons-a"
-                      src="https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
-                    />
-                  </a>
-                  <a
-                    className="icon-link"
-                    href="https://github.com/Heyitswilson/Bounce"
-                    target="_blank"
-                  >
-                    <img
-                      className="icons"
-                      src="https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
-                    />
-                  </a>
-                  <a
-                    className="icon-link"
-                    href="https://www.linkedin.com/in/wilson-ngu/"
-                    target="_blank"
-                  >
-                    <img
-                      className="icons"
-                      src="https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="intro">
-                {/* Inspired by the neon colors of cyberpunk artworks, Bounce is an
-                interactive, visual presentation that is best paired with lofi
-                music. */}
-                <br />
-                <br />
-              </div>
-              <br />
               <div className="music-div">
                 {/* {this.runDemoView()}q */}
-                <select onChange={() => this.update("graph")}>
+                {/* <select onChange={() => this.update("graph")}>
                   <option defaultValue>Choose a graph</option>
                   <option value="sin">Sin</option>
                   <option value="doubleSin">Double Sin</option>
@@ -107,7 +64,7 @@ class Main extends React.Component {
                   <option value="ring">Ring</option>
                   <option value="donut">Donut</option>
                   <option value="twist">Twist</option>
-                </select>
+                </select> */}
                 <button className="run" onClick={() => this.runDemoView()}>
                   RUN
                 </button>
@@ -116,7 +73,7 @@ class Main extends React.Component {
                 {/* <div className="credit">Art: Cyberpunk 2077</div> */}
 
                 <div className="labels">
-                  <Formula graph={this.state.graph} /> 
+                  <Formula /> 
                 </div>
               </div>
             </div>

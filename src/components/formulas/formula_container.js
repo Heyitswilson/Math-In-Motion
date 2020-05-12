@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Formula from './formula';
-import { receiveX, receiveY, receiveT, receiveFrame, clear } from '../actions'
+import { receiveX, receiveY, receiveT, receiveFrame, clear } from '../../actions/graph_actions'
 
 const mSTP = state => ({
     x: state.x,
@@ -11,7 +11,7 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
     receiveX: x => dispatch(receiveX(x)),
-    receiveY: y => dispatch(receiveY(t)),
+    receiveY: y => dispatch(receiveY(y)),
     receiveT: t => dispatch(receiveT(t)),
     receiveFrame: frame => dispatch(receiveFrame(frame)),
     clear: () => dispatch(clear())

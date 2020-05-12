@@ -1,6 +1,8 @@
 import React from "react";
 import Bar from './bar';
-import Main from './main'
+import Main from './main';
+import Header from './header/header'
+import Formula from '../components/formulas/formula'
 
 class App extends React.Component {
     constructor(props) {
@@ -16,7 +18,9 @@ class App extends React.Component {
             <div>
             {/* {Demoview.sinY(800, 600)} */}
                 <Bar />
-                <Main ctx={this.props.ctx}/>
+                <Header />
+                {/* <Formula /> */}
+                <Main/>
             </div>
         )
     }

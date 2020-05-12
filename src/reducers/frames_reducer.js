@@ -1,4 +1,4 @@
-import { RECEIVE_FRAME } from "../actions/graph_actions";
+import { RECEIVE_FRAME, CLEAR } from "../actions/graph_actions";
 
 const framesReducer = (state = null, action) => {
   Object.freeze(state);

@@ -4,10 +4,13 @@ export const RECEIVE_T = "RECEIVE_T";
 export const RECEIVE_FRAME = "RECEIVE_FRAME";
 export const CLEAR = "CLEAR"
 
-export const receiveX = (x) => ({
-    type: RECEIVE_X,
-    x
-})
+export const receiveX = (x) => {
+    debugger
+    return ({
+        type: RECEIVE_X,
+        x
+    })
+}
 
 export const receiveY = (y) => ({
     type: RECEIVE_Y,
