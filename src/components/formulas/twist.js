@@ -25,9 +25,9 @@ class Twist extends React.Component {
     }
 
     handleSubmit() {
-        debugger
         this.props.receiveT(this.state.t);
         this.props.receiveFrame(this.state.frames);
+        this.props.runDemoView()
     }
 
     update(field) {
@@ -41,37 +41,32 @@ class Twist extends React.Component {
         const texX = `x(t) = t - 1.6(\\cos(24t))`;
         const texY = `y(t) = t - 1.6(\\sin(25t))`;
         const texT = `t = (\\frac{t}{\\color{yellow}{${this.state.t}}\\Pi}) `;
-        // const texT = `t = ${this.state.t} `;
 
         return (
             <div>
                 <div className="slider-div">
                     <label className="labels">
                         t
-                        <input onChange={this.update("t")} type="range" min="5" max="50" value={this.state.t} />
+                        <input onChange={this.update("t")} type="range" min="5" max="30" value={this.state.t} />
                     </label>
                     <label className="labels">
                         Animation Frames
-                        <input onChange={this.update("frames")} type="range" min="750" max="4000" value={this.state.frames} />
+                        <input onChange={this.update("frames")} type="range" min="750" max="1500" value={this.state.frames} />
                     </label>
-                    <button onClick={() => this.handleSubmit()}>Update Changes</button>
+                    <div className="buttons">
+                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
+                    </div>
                 </div>
                 <MathJax.Context input="tex">
                     <div className="labels">
-                        As 't' time increases, the X and Y position changes based on these
-                        formulas:
-                        <div>
-                            X position:<MathJax.Node>{texX}</MathJax.Node>
+                        <MathJax.Node>{texX}</MathJax.Node>
+                        <MathJax.Node>{texY}</MathJax.Node>
+                        <MathJax.Node>{texT}</MathJax.Node>
+                        <div className="frame-div">
+                            <div className="labels">Animation frames: </div>                      
+                            <div className="frame-num"> {this.state.frames} </div>
                         </div>
-                        <div>
-                            Y position:<MathJax.Node>{texY}</MathJax.Node>
-                        </div>
-                        <div>
-                            Time 't': <MathJax.Node>{texT}</MathJax.Node>
-                        </div>
-                        <div>
-                            Animation frames: <div className="frame-num">{this.state.frames}</div>
-                        </div>
+
                     </div>
                 </MathJax.Context>
 

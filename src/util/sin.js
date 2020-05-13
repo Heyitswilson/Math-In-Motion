@@ -42,8 +42,8 @@ Sin.prototype.doubleSin = (ctx, w, h, t, userX, userY) => {
 }
 
 Sin.prototype.butterfly = (ctx, w, h, t,userX, userY) => {
-    ctx.lineWidth = 2;
     debugger
+    ctx.lineWidth = 2;
     let x = function (t) {
         return (
 

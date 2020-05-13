@@ -27,6 +27,7 @@ class Sin extends React.Component {
     handleSubmit() {
         this.props.receiveX(this.state.x_val);
         this.props.receiveY(this.state.y_val);
+        this.props.runDemoView()
     }
 
     update(field) {
@@ -43,26 +44,27 @@ class Sin extends React.Component {
         return (
             <div>
                 <div className="slider-div">
-                    <label className="labels">
-                        X
-                        <input onChange={this.update("x_val")} type="range" min={50} max={500} value={this.state.x_val} />
-                    </label>
-                    <label className="labels">
-                        Y
-                        <input onChange={this.update("y_val")} type="range" min={50} max={500} value={this.state.y_val} />
-                    </label>
-                    <button onClick={() => this.handleSubmit()}>Update Changes</button>
+                    <div>
+                        <label className="labels-X">
+                            X
+                            <input className="slider-X" onChange={this.update("x_val")} type="range" min={50} max={500} value={this.state.x_val} />
+                        </label>
+                        <label className="labels-Y">
+                            Y
+                            <input className="slider-Y" onChange={this.update("y_val")} type="range" min={50} max={500} value={this.state.y_val} />
+                        </label>
+
+                    </div>
+                    <div className="buttons">
+                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
+                    </div>
                 </div>
                 <MathJax.Context input="tex">
                     <div className="labels">
-                        As 't' time increases, the X and Y position changes based on these
-                        formulas:
-                    <div>
-                            X position:<MathJax.Node>{texX}</MathJax.Node>
-                        </div>
-                        <div>
-                            Y position:<MathJax.Node>{texY}</MathJax.Node>
-                        </div>
+                        <MathJax.Node>{texX}</MathJax.Node>
+
+                        <MathJax.Node>{texY}</MathJax.Node>
+
                     </div>
                 </MathJax.Context>
 

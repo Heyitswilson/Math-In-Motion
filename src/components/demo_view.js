@@ -1,5 +1,4 @@
-// import Demo from './demo'
-import Sin from '../util/sin'
+import Sin from '../util/sin';
 
 class DemoView {
     constructor(ctx) {
@@ -21,23 +20,22 @@ DemoView.prototype.butterfly = function (w, h, userX, userY) {
         return 200 + Math.sin(t / 60) * 55;
     };
 
-
+    
     setInterval(() => {
-
-
         this.ctx.fillStyle = `rgb(
-        ${r(t)},
-        ${g(t)},
-        ${b(t)}`;
-
-
-        t += 1
-        if (t < 250) {
-            this.Sin.butterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
-        }
-    }, 20);
+            ${r(t)},
+            ${g(t)},
+            ${b(t)})`;
+            
+            t += 1
+            if (t < 250) {
+                this.Sin.butterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
+            }
+        }, 20);
+        // clearInterval(interval);
+        
+    // butterflyInterval(r(t), g(t), b(t), w, h, userX, userY)
 }
-
 
 DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
     let t = 0
@@ -57,7 +55,7 @@ DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
         this.ctx.strokeStyle = `rgb(
         ${r(t)},
         ${g(t)},
-        ${b(t)}`;
+        ${b(t)})`;
 
         t += 1
         if (t < 199) {
@@ -77,7 +75,6 @@ DemoView.prototype.sin = function (w, h, userX, userY) {
     function b(t) {
         return 200 + Math.sin(t / 60) * 55;
     };
-
 
     setInterval(() => {
 
@@ -102,7 +99,6 @@ DemoView.prototype.doubleSin = function (w, h, userX, userY) {
     function b(t) {
         return 200 + Math.tan(t / 900) * 55;
     };
-
 
     setInterval(() => {
 
@@ -129,7 +125,6 @@ DemoView.prototype.ring = function (w, h, userX, userY) {
     function b(t) {
         return 200 + Math.tan(t / 900) * 55;
     };
-
 
     setInterval(() => {
 

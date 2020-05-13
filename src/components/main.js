@@ -2,6 +2,8 @@ import React from 'react';
 import DemoView from './demo_view';
 import Formula from './formulas/formula_container';
 import { connect } from "react-redux";
+import { receiveContext } from '../actions/context_actions'
+
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,36 +20,80 @@ class Main extends React.Component {
     this.context = null;
     this.Demoview = null;
 
+        // this.canvas = this.canvasRef.current;
+        // this.context = this.canvas.getContext("2d");
+        // this.Demoview = new DemoView(this.context);
+
   }
 
   componentDidMount() {
     this.canvas = this.canvasRef.current;
     this.context = this.canvas.getContext('2d');
     this.Demoview = new DemoView(this.context)
+    this.props.receiveContext(this.Demoview.ctx)
   }
 
   runDemoView () {
     let ctx = this.Demoview.ctx;
     ctx.clearRect(0, 0, 800, 600);
+    // clearInterval(this.Demoview)
     this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
   }
 
-  render () {
+  // clear() {
+  //   clearInterval(this.Demoview[this.props.graph])
+  // }
 
+  render () {
+    debugger
     return (
       <div>
         <div className="screen-div">
           <div className="background">
-            <div className="background-div">
-              <div className="music-div">
-                <button className="run" onClick={() => this.runDemoView()}>
-                  RUN
-                </button>
+            <div className="header">
+              <div>
+                <h1 className="title">Math-in-Motion</h1>
               </div>
+              <div className="link-space">
+                <a
+                  className="icon-link"
+                  href="https://angel.co/u/wilson-ngu"
+                  target="_blank"
+                >
+                  <img
+                    className="icons-a"
+                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
+                  />
+                </a>
+                <a
+                  className="icon-link"
+                  href="https://github.com/Heyitswilson/Bounce"
+                  target="_blank"
+                >
+                  <img
+                    className="icons"
+                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
+                  />
+                </a>
+                <a
+                  className="icon-link"
+                  href="https://www.linkedin.com/in/wilson-ngu/"
+                  target="_blank"
+                >
+                  <img
+                    className="icons"
+                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="intro">
+              Math-in-Motion animates graphs of mathematical functions and parametrical plots.
+              Change the values to see how they affect the graphs!
+              </div>
+            <div className="background-div">
               <div className="credit-div">
-                <div className="labels">
-                  <Formula /> 
-                </div>
+                  <Formula runDemoView={this.runDemoView}/> 
               </div>
             </div>
           </div>
@@ -71,5 +117,9 @@ const mSTP = state => ({
   frames: state.frames
 })
 
+const mDTP = dispatch => ({
+  receiveContext: context => dispatch(receiveContext(context))
+})
 
-export default connect(mSTP, null) (Main)
+
+export default connect(mSTP, mDTP) (Main)

@@ -27,6 +27,7 @@ class Donut extends React.Component {
     handleSubmit() {
         this.props.receiveX(this.state.x_func);
         this.props.receiveY(this.state.y_func);
+        this.props.runDemoView()
     }
 
     update(field) {
@@ -42,27 +43,23 @@ class Donut extends React.Component {
         return (
             <div>
                 <div className="slider-div">
-                    <select onChange={this.update("x_func")}>
+                    <select className="select-func" onChange={this.update("x_func")}>
                         <option value={"cos"}>cos(t)</option>
                         <option value={"sin"}>sin(t)</option>
                     </select>
 
-                    <select onChange={this.update("y_func")}>
+                    <select className="select-func" onChange={this.update("y_func")}>
                         <option value={"sin"}>sin(t)</option>
                         <option value={"cos"}>cos(t)</option>
                     </select>
-                    <button onClick={() => this.handleSubmit()}>Update Changes</button>
+                    <div className="buttons">
+                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
+                    </div>
                 </div>
                 <MathJax.Context input="tex">
                     <div className="labels">
-                        As 't' time increases, the X and Y position changes based on these
-                        formulas:
-                    <div>
-                            X position:<MathJax.Node>{texX}</MathJax.Node>
-                        </div>
-                        <div>
-                            Y position:<MathJax.Node>{texY}</MathJax.Node>
-                        </div>
+                        <MathJax.Node>{texX}</MathJax.Node>
+                        <MathJax.Node>{texY}</MathJax.Node>
                     </div>
                 </MathJax.Context>
 
