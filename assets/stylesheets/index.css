@@ -31,9 +31,8 @@
     margin: 10px;
     background-color: black;
     width: 40%;
-    /* min-height: 500px; */
-    height: 54vh;
     opacity: 0.9;
+    min-height: 54vh;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -166,10 +165,6 @@
     width: 120px;
 }
 
-.graph-select {
-    width: 120px;
-}
-
 .options {
     text-align: center;
 }
@@ -187,3 +182,44 @@
 .slider-Y {
     fill: red;
 }
+
+.horizontal-line {
+    width: 30vw;
+    height: .01px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    margin-bottom:30px;
+    margin-top: 20px;
+}
+
+.graph-select {
+    width: 140px;
+    background-color: white;
+    color: black;
+    position: absolute
+}
+
+.graph-li {
+    list-style: none;
+    position: relative;
+    right: 10px;
+}
+
+.graph-header{
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    width: 120px;
+    /* width: 100%; */
+    padding: 10px;
+}
+
+.graph-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* .test {
+    color: white
+} */

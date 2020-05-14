@@ -10,7 +10,6 @@ class Twist extends React.Component {
 
         this.state = {
             t: 5,
-            // frames: 750,
             x_pos: 55
         }
 
@@ -65,7 +64,6 @@ class Twist extends React.Component {
 
     handleSubmit() {
         this.props.receiveT(this.state.t);
-        // this.props.receiveFrame(this.state.frames);
         this.state.x_pos = 55;
         let t = 0;
 
@@ -112,6 +110,7 @@ class Twist extends React.Component {
                         <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
                     </div>
                 </div>
+                <div className="horizontal-line"></div>
                 <MathJax.Context input="tex">
                     <div className="labels">
                         <MathJax.Node>{texX}</MathJax.Node>

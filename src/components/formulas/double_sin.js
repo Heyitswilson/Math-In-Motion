@@ -145,6 +145,7 @@ class doubleSin extends React.Component {
                 </button>
               </div>
             </div>
+            <div className="horizontal-line"></div>
             <MathJax.Context input="tex">
               <div className="labels">
                 <MathJax.Node>{texX}</MathJax.Node>

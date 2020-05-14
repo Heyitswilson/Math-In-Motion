@@ -130,6 +130,7 @@ class Butterfly extends React.Component {
                         <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
                     </div>
                 </div>
+                <div className="horizontal-line"></div>
                 <MathJax.Context input="tex">
                     <div className="labels">
                         <MathJax.Node>{texX}</MathJax.Node>

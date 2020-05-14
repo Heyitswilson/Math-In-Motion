@@ -6,7 +6,7 @@ import CoolButterfly from './cool_butterfly';
 import Ring from './ring';
 import Donut from './donut';
 import Twist from './twist';
-import $ from "jquery";
+import DropdownContainer from '../dropdown/dropdown_container'
 
 
 class Formula extends React.Component {
@@ -14,62 +14,45 @@ class Formula extends React.Component {
     super(props);
 
     this.state = {
-      graph: ""
+      graph: "",
+      graph_types: [
+        {name: "Select a graph", graph: ""},
+        {name: "Sine", graph: "sin"},
+        {name: "Double Sine", graph: "doubleSin"},
+        {name: "Butterfly Curve", graph: "butterfly"},
+        {name: "Possibly Darth Vader", graph: "coolButterfly"},
+        {name: "Abstract Green", graph: "ring"},
+        {name: "Abstract White", graph: "donut"},
+        {name: "DNA Twists", graph: "twists"}
+      ]
     }
-
-    this.update = this.update.bind(this);
+    
     this.renderSwitch = this.renderSwitch.bind(this);
-    this.options = this.options.bind(this);
-  }
-
-    options() {
-      return (
-        <select className="graph-select" onChange={() => this.update("graph")}>
-          <option defaultValue>Choose a graph</option>
-          <option value="sin">Sin</option>
-          <option value="doubleSin">Double Sin</option>
-          <option value="butterfly">Butterfly Curve</option>
-          <option value="coolButterfly">Possibly Darth Vader</option>
-          <option value="ring">Abstract Green</option>
-          <option value="donut">Abstract White</option>
-          <option value="twist">DNA Twists</option>
-        </select>
-      )
-    }
-
-  update(field) {
-    this.setState({
-      [field]: $(".graph-select option:selected").val()
-    })
   }
     
-    renderSwitch (param) {
-      // const { receiveGraph, clear } = this.props;
-      // debugger
-        switch(param) {
+    renderSwitch () {
+        switch(this.props.graph) {
             case "sin":
-                return <Sin />
+              return <Sin />
             case "doubleSin":
-            return <DoubleSin />
+              return <DoubleSin />
             case "butterfly": 
-            return <Butterfly /> 
+              return <Butterfly /> 
             case "coolButterfly":
-            return <CoolButterfly />
+              return <CoolButterfly />
             case "ring":
-            return <Ring />
+              return <Ring />
             case "donut":
-            return <Donut />
+              return <Donut />
             case "twist":
-            return <Twist />
+              return <Twist />
         }
     }
 
     render () {
       return (
-          <div >
-              <div className="options-div">
-                {this.options()}
-              </div>
+          <div className="test">
+              <DropdownContainer onChange={() => this.update("graph")} title={"Select a graph"} list={this.state.graph_types}/>
               {this.renderSwitch(this.state.graph)}
           </div>
       )
