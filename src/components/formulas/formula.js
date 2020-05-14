@@ -1,5 +1,4 @@
 import React from 'react';
-// import MathJax from "react-mathjax2";
 import Sin from './sin';
 import DoubleSin from './double_sin';
 import Butterfly from './butterfly';
@@ -30,10 +29,10 @@ class Formula extends React.Component {
           <option value="sin">Sin</option>
           <option value="doubleSin">Double Sin</option>
           <option value="butterfly">Butterfly Curve</option>
-          <option value="coolButterfly">Cool Butterfly</option>
-          <option value="ring">Ring</option>
-          <option value="donut">Donut</option>
-          <option value="twist">DNA Twist</option>
+          <option value="coolButterfly">Possibly Darth Vader</option>
+          <option value="ring">Abstract Green</option>
+          <option value="donut">Abstract White</option>
+          <option value="twist">DNA Twists</option>
         </select>
       )
     }

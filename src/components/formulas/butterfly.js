@@ -3,7 +3,6 @@ import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
 import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions';
 import $ from 'jquery'
-import Sin from '../../util/sin'
 
 class Butterfly extends React.Component {
     constructor(props) {
@@ -16,13 +15,41 @@ class Butterfly extends React.Component {
 
         this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.Sin = new Sin(this.props.context);
         this.rgb = this.rgb.bind(this);
+        this.animation = this.animation.bind(this);
+    }
+
+    animation(t) {
+        this.props.context.lineWidth = 2;
+        let that = this;
+
+        let x = function (t) {
+            return (
+            Math.sin(t) *
+                (Math.pow(Math.E, Math[that.state.x_func](t)) -
+                2 * Math.cos(4 * t) -
+                Math.pow(Math.sin(t / 12), 5)) *
+                (-800 / 10) +
+            800 / 2
+            );
+        };
+
+        let y = function (t) {
+            return (
+            Math.cos(t) *
+                (Math.pow(Math.E, Math[that.state.y_func](t)) -
+                2 * Math.cos(4 * t) -
+                Math.pow(Math.sin(t / 12), 5)) *
+                (-600 / 10) +
+            600 / 2
+            );
+        };
+        this.props.context.fillRect(x(t + 1), y(t + 1), 15, 5);
     }
 
 
     componentDidMount() {
-        this.props.receiveGraph("butterfly")
+        this.props.receiveGraph("butterfly");
     }
 
     componentWillUnmount() {
@@ -49,30 +76,26 @@ class Butterfly extends React.Component {
     handleSubmit() {
         this.props.receiveX(this.state.x_func);
         this.props.receiveY(this.state.y_func);
-        // this.props.runDemoView()
         let t = 0
 
-        function clear() {
-            $('.update-changes').click(clearInterval(butterflyInterval))
-        }
-        
+        this.props.context.clearRect(0, 0, 800, 600)
         let butterflyInterval = setInterval(() => {
-
-            
+        
             this.props.context.fillStyle = this.rgb(t)
                 
-                t += 1
+            t += 1
             if (t < 250) {
-              this.Sin.butterfly(
-                this.props.context,
-                800,
-                600,
-                t / (12 * Math.PI),
-                this.state.x_func,
-                this.state.y_func
-              );
+              this.animation(t / (12 * Math.PI),);
+                $('.update-changes').prop('disabled', true)
+                $(".input-slider").prop("disabled", true);
+                $(".select-func").prop("disabled", true);
+
             } else {
-                clearInterval(butterflyInterval)
+                clearInterval(butterflyInterval);
+                $(".update-changes").prop("disabled", false);
+                $(".input-slider").prop("disabled", false);
+                $(".select-func").prop("disabled", false);
+
             }
         }, 20);
         

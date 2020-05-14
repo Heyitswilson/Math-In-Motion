@@ -45,7 +45,7 @@ class Main extends React.Component {
   // }
 
   render () {
-    debugger
+    // debugger
     return (
       <div>
         <div className="screen-div">

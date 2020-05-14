@@ -1,7 +1,8 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions'
+import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions';
+import $ from "jquery";
 
 class coolButterfly extends React.Component {
     constructor(props) {
@@ -14,6 +15,8 @@ class coolButterfly extends React.Component {
 
         this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.rgb = this.rgb.bind(this);
+        this.animation = this.animation.bind(this);
     }
 
     componentDidMount() {
@@ -23,11 +26,82 @@ class coolButterfly extends React.Component {
     componentWillUnmount() {
         this.props.clear()
     }
+    
+    animation(t) {
+        this.props.context.lineWidth = 2;
+
+        let that = this;
+
+        let x = function (t) {
+            return (
+            Math.sin(t) *
+                (Math.pow(Math.E, Math[that.state.x_func](t)) +
+                2 * Math[that.state.y_func](4 * t) -
+                Math.pow(Math.sin(t / 12), 5)) *
+                (-800 / 10) +
+            800 / 2
+            );
+        };
+
+        let y = function (t) {
+            return (
+            Math.cos(t) *
+                (Math.pow(Math.E, Math.cos(t)) +
+                2 * Math.cos(4 * t) -
+                Math.pow(Math.sin(t / 12), 5)) *
+                (-600 / 10) +
+            600 / 2
+            );
+        };
+
+        this.props.context.beginPath();
+        this.props.context.moveTo(x(t), y(t));
+        this.props.context.lineTo(x(t + 1), y(t + 1));
+        this.props.context.stroke();
+    }
+
+    rgb(t) {
+        function r(t) {
+            return 100 + Math.cos(t / 300) * 700;
+        }
+        function g(t) {
+            return Math.sin(t / 400) * 500;
+        }
+        function b(t) {
+            return 200 + Math.sin(t / 60) * 55;
+        }
+
+        return `rgb(
+        ${r(t)},
+        ${g(t)},
+        ${b(t)})`;
+    }
 
     handleSubmit() {
         this.props.receiveX(this.state.x_func);
         this.props.receiveY(this.state.y_func);
-        this.props.runDemoView()
+        let t = 0;
+        
+        this.props.context.clearRect(0, 0, 800, 600);
+
+        let coolButterflyInterval = setInterval(() => {
+            this.props.context.strokeStyle = this.rgb(t);
+
+            t += 1;
+            if (t < 199) {
+                this.animation(t / (12 * Math.PI));
+                $(".update-changes").prop("disabled", true);
+                $(".input-slider").prop("disabled", true);
+                $(".select-func").prop("disabled", true);
+
+            } else {
+                clearInterval(coolButterflyInterval);
+                $(".update-changes").prop("disabled", false);
+                $(".input-slider").prop("disabled", false);
+                $(".select-func").prop("disabled", false);
+
+            }
+        }, 20);
     }
 
     update(field) {
@@ -73,7 +147,8 @@ class coolButterfly extends React.Component {
 const mSTP = state => ({
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
 })
 
 const mDTP = dispatch => ({
