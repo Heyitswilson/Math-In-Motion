@@ -43530,6 +43530,27 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./src/actions/context_actions.js":
+/*!****************************************!*\
+  !*** ./src/actions/context_actions.js ***!
+  \****************************************/
+/*! exports provided: RECEIVE_CONTEXT, receiveContext */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CONTEXT", function() { return RECEIVE_CONTEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveContext", function() { return receiveContext; });
+var RECEIVE_CONTEXT = "RECEIVE_CONTEXT";
+var receiveContext = function receiveContext(context) {
+  return {
+    type: RECEIVE_CONTEXT,
+    context: context
+  };
+};
+
+/***/ }),
+
 /***/ "./src/actions/graph_actions.js":
 /*!**************************************!*\
   !*** ./src/actions/graph_actions.js ***!
@@ -43606,10 +43627,9 @@ var clear = function clear() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./src/components/bar.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./src/components/main.js");
-/* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./header/header */ "./src/components/header/header.js");
-/* harmony import */ var _components_formulas_formula__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/formulas/formula */ "./src/components/formulas/formula.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main */ "./src/components/main.js");
+/* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/header */ "./src/components/header/header.js");
+/* harmony import */ var _components_formulas_formula__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/formulas/formula */ "./src/components/formulas/formula.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43637,7 +43657,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -43655,7 +43674,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       // const canvas = document.getElementById("canvas");
       // const ctx = canvas.getContext("2d");
       // const Demoview = new DemoView(ctx);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -43663,29 +43682,6 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./src/components/bar.js":
-/*!*******************************!*\
-  !*** ./src/components/bar.js ***!
-  \*******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var Bar = function Bar() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "bar"
-  }, "BAR");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Bar);
 
 /***/ }),
 
@@ -43698,10 +43694,9 @@ var Bar = function Bar() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _util_sin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/sin */ "./src/util/sin.js");
+/* harmony import */ var _util_graph__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/graph */ "./src/util/graph.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import Demo from './demo'
 
 
 var DemoView = function DemoView(ctx) {
@@ -43709,105 +43704,77 @@ var DemoView = function DemoView(ctx) {
 
   this.Demo = new Demo();
   this.ctx = ctx;
-  this.Sin = new _util_sin__WEBPACK_IMPORTED_MODULE_0__["default"]();
-};
+  this.Graph = new _util_graph__WEBPACK_IMPORTED_MODULE_0__["default"]();
+}; // DemoView.prototype.butterfly = function (w, h, userX, userY) {
+//     let t = 0
+//     function r(t) {
+//         return 100 + Math.cos(t / 300) * 700;
+//     };
+//     function g(t) {
+//         return Math.sin(t / 400) * 500;
+//     };
+//     function b(t) {
+//         return 200 + Math.sin(t / 60) * 55;
+//     };
+//     setInterval(() => {
+//         this.ctx.fillStyle = `rgb(
+//             ${r(t)},
+//             ${g(t)},
+//             ${b(t)})`;
+//             t += 1
+//             if (t < 250) {
+//                 this.Graph.butterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
+//             }
+//         }, 20);
+//         // clearInterval(interval);
+//     // butterflyInterval(r(t), g(t), b(t), w, h, userX, userY)
+// }
+// DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
+//     let t = 0
+//     function r(t) {
+//         return 100 + Math.cos(t / 300) * 700;
+//     };
+//     function g(t) {
+//         return Math.sin(t / 400) * 500;
+//     };
+//     function b(t) {
+//         return 200 + Math.sin(t / 60) * 55;
+//     };
+//     setInterval(() => {
+//         this.ctx.strokeStyle = `rgb(
+//         ${r(t)},
+//         ${g(t)},
+//         ${b(t)})`;
+//         t += 1
+//         if (t < 199) {
+//             this.Graph.coolButterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
+//         }
+//     }, 20);
+// }
+// DemoView.prototype.sin = function (w, h, userX, userY) {
+//     let t = 0
+//     function r(t) {
+//         return 100 + Math.cos(t / 300) * 700;
+//     };
+//     function g(t) {
+//         return Math.sin(t / 400) * 500;
+//     };
+//     function b(t) {
+//         return 200 + Math.sin(t / 60) * 55;
+//     };
+//     setInterval(() => {
+//         this.ctx.strokeStyle = `rgb(
+//         ${r(t)},
+//         ${g(t)},
+//         ${b(t)}`;
+//         t += 1
+//         this.Graph.sin(this.ctx, w, h, t, userX, userY)
+//     }, 20);
+// }
 
-DemoView.prototype.butterfly = function (w, h, userX, userY) {
-  var _this = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 100 + Math.cos(t / 300) * 700;
-  }
-
-  ;
-
-  function g(t) {
-    return Math.sin(t / 400) * 500;
-  }
-
-  ;
-
-  function b(t) {
-    return 200 + Math.sin(t / 60) * 55;
-  }
-
-  ;
-  setInterval(function () {
-    _this.ctx.fillStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 1;
-
-    if (t < 250) {
-      _this.Sin.butterfly(_this.ctx, w, h, t / (12 * Math.PI), userX, userY);
-    }
-  }, 20);
-};
-
-DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
-  var _this2 = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 100 + Math.cos(t / 300) * 700;
-  }
-
-  ;
-
-  function g(t) {
-    return Math.sin(t / 400) * 500;
-  }
-
-  ;
-
-  function b(t) {
-    return 200 + Math.sin(t / 60) * 55;
-  }
-
-  ;
-  setInterval(function () {
-    _this2.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 1;
-
-    if (t < 199) {
-      _this2.Sin.coolButterfly(_this2.ctx, w, h, t / (12 * Math.PI), userX, userY);
-    }
-  }, 20);
-};
-
-DemoView.prototype.sin = function (w, h, userX, userY) {
-  var _this3 = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 100 + Math.cos(t / 300) * 700;
-  }
-
-  ;
-
-  function g(t) {
-    return Math.sin(t / 400) * 500;
-  }
-
-  ;
-
-  function b(t) {
-    return 200 + Math.sin(t / 60) * 55;
-  }
-
-  ;
-  setInterval(function () {
-    _this3.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 1;
-
-    _this3.Sin.sin(_this3.ctx, w, h, t, userX, userY);
-  }, 20);
-};
 
 DemoView.prototype.doubleSin = function (w, h, userX, userY) {
-  var _this4 = this;
+  var _this = this;
 
   var t = 0;
 
@@ -43829,86 +43796,67 @@ DemoView.prototype.doubleSin = function (w, h, userX, userY) {
 
   ;
   setInterval(function () {
-    _this4.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
+    _this.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
     t += 1;
 
     if (t < 130) {
-      _this4.Sin.doubleSin(_this4.ctx, w, h, t, userX, userY);
+      _this.Graph.doubleSin(_this.ctx, w, h, t, userX, userY);
     }
   }, 20);
-};
+}; // DemoView.prototype.ring = function (w, h, userX, userY) {
+//     let t = 0
+//     function r(t) {
+//         return 150 + Math.sin(t / 700) * 200;
+//     };
+//     function g(t) {
+//         return Math.cos(t / 400) * 500;
+//     };
+//     function b(t) {
+//         return 200 + Math.tan(t / 900) * 55;
+//     };
+//     setInterval(() => {
+//         this.ctx.strokeStyle = `rgb(
+//         ${r(t)},
+//         ${g(t)},
+//         ${b(t)}`;
+//         t += 0.5
+//         if (t < 150) {
+//             this.Graph.ring(this.ctx, w, h, t / (80 * Math.PI), userX, userY)
+//         }
+//     }, 20);
+// }
+// DemoView.prototype.donut = function (w, h, userX, userY) {
+//     let t = 0
+//     setInterval(() => {
+//         t += 1
+//         if (t < 460) {
+//             this.Graph.donut(this.ctx, w, h, t / ( 50 * Math.PI), userX, userY)
+//         }
+//     }, 20);
+// }
+// DemoView.prototype.twist = function (w, h, none1, none2, userT, userFrames) {
+//   let t = 0;
+//   function r(t) {
+//     return 450 + Math.cos(t / 100) * 500;
+//   }
+//   function g(t) {
+//     return 300 + Math.cos(t / 400) * 500;
+//   }
+//   function b(t) {
+//     return 500 + Math.sin(t / 200) * 255;
+//   }
+//   setInterval(() => {
+//     this.ctx.strokeStyle = `rgb(
+//         ${r(t)},
+//         ${g(t)},
+//         ${b(t)}`;
+//     t += 2;
+//     if (t < userFrames) {
+//       this.Graph.twist(this.ctx, w, h, t / (userT * Math.PI));
+//     }
+//   }, 20);
+// };
 
-DemoView.prototype.ring = function (w, h, userX, userY) {
-  var _this5 = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 150 + Math.sin(t / 700) * 200;
-  }
-
-  ;
-
-  function g(t) {
-    return Math.cos(t / 400) * 500;
-  }
-
-  ;
-
-  function b(t) {
-    return 200 + Math.tan(t / 900) * 55;
-  }
-
-  ;
-  setInterval(function () {
-    _this5.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 0.5;
-
-    if (t < 150) {
-      _this5.Sin.ring(_this5.ctx, w, h, t / (80 * Math.PI), userX, userY);
-    }
-  }, 20);
-};
-
-DemoView.prototype.donut = function (w, h, userX, userY) {
-  var _this6 = this;
-
-  var t = 0;
-  setInterval(function () {
-    t += 1;
-
-    if (t < 460) {
-      _this6.Sin.donut(_this6.ctx, w, h, t / (50 * Math.PI), userX, userY);
-    }
-  }, 20);
-};
-
-DemoView.prototype.twist = function (w, h, none1, none2, userT, userFrames) {
-  var _this7 = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 450 + Math.cos(t / 100) * 500;
-  }
-
-  function g(t) {
-    return 300 + Math.cos(t / 400) * 500;
-  }
-
-  function b(t) {
-    return 500 + Math.sin(t / 200) * 255;
-  }
-
-  setInterval(function () {
-    _this7.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 2;
-
-    if (t < userFrames) {
-      _this7.Sin.twist(_this7.ctx, w, h, t / (userT * Math.PI));
-    }
-  }, 20);
-};
 
 /* harmony default export */ __webpack_exports__["default"] = (DemoView);
 
@@ -43929,6 +43877,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -43958,6 +43908,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Butterfly = /*#__PURE__*/function (_React$Component) {
   _inherits(Butterfly, _React$Component);
 
@@ -43975,10 +43926,28 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.rgb = _this.rgb.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Butterfly, [{
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+      var that = this;
+
+      var x = function x(t) {
+        return Math.sin(t) * (Math.pow(Math.E, Math[that.state.x_func](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-800 / 10) + 800 / 2;
+      };
+
+      var y = function y(t) {
+        return Math.cos(t) * (Math.pow(Math.E, Math[that.state.y_func](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-600 / 10) + 600 / 2;
+      };
+
+      this.props.context.fillRect(x(t + 1), y(t + 1), 15, 5);
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.receiveGraph("butterfly");
@@ -43989,30 +43958,74 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "rgb",
+    value: function rgb(t) {
+      function r(t) {
+        return 100 + Math.cos(t / 300) * 700;
+      }
+
+      ;
+
+      function g(t) {
+        return Math.sin(t / 400) * 500;
+      }
+
+      ;
+
+      function b(t) {
+        return 200 + Math.sin(t / 60) * 55;
+      }
+
+      ;
+      return "rgb(\n                ".concat(r(t), ",\n                ").concat(g(t), ",\n                ").concat(b(t), ")");
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       this.props.receiveX(this.state.x_func);
       this.props.receiveY(this.state.y_func);
+      var t = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var butterflyInterval = setInterval(function () {
+        _this2.props.context.fillStyle = _this2.rgb(t);
+        t += 1;
+
+        if (t < 250) {
+          _this2.animation(t / (12 * Math.PI));
+
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()('.update-changes').prop('disabled', true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(butterflyInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
       var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\".concat(this.state.y_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
@@ -44021,6 +44034,7 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "tan"
       }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
@@ -44028,15 +44042,18 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
         value: "sin"
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "tan"
-      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
     }
   }]);
 
@@ -44047,7 +44064,8 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
@@ -44087,6 +44105,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44116,6 +44136,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var coolButterfly = /*#__PURE__*/function (_React$Component) {
   _inherits(coolButterfly, _React$Component);
 
@@ -44133,6 +44154,8 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.rgb = _this.rgb.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -44147,30 +44170,88 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+      var that = this;
+
+      var x = function x(t) {
+        return Math.sin(t) * (Math.pow(Math.E, Math[that.state.x_func](t)) + 2 * Math[that.state.y_func](4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-800 / 10) + 800 / 2;
+      };
+
+      var y = function y(t) {
+        return Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-600 / 10) + 600 / 2;
+      };
+
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 1), y(t + 1));
+      this.props.context.stroke();
+    }
+  }, {
+    key: "rgb",
+    value: function rgb(t) {
+      function r(t) {
+        return 100 + Math.cos(t / 300) * 700;
+      }
+
+      function g(t) {
+        return Math.sin(t / 400) * 500;
+      }
+
+      function b(t) {
+        return 200 + Math.sin(t / 60) * 55;
+      }
+
+      return "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t), ")");
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       this.props.receiveX(this.state.x_func);
       this.props.receiveY(this.state.y_func);
+      var t = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var coolButterflyInterval = setInterval(function () {
+        _this2.props.context.strokeStyle = _this2.rgb(t);
+        t += 1;
+
+        if (t < 199) {
+          _this2.animation(t / (12 * Math.PI));
+
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(coolButterflyInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} + 2(\\color{red}{\\").concat(this.state.y_func, "(4t)}) - sin(\\frac{t}{12})^5)");
       var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
@@ -44179,6 +44260,7 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "tan"
       }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
@@ -44186,15 +44268,18 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
         value: "sin"
       }, "sin(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "tan"
-      }, "tan(4t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "tan(4t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
     }
   }]);
 
@@ -44205,7 +44290,8 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
@@ -44245,6 +44331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44274,6 +44362,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Donut = /*#__PURE__*/function (_React$Component) {
   _inherits(Donut, _React$Component);
 
@@ -44291,6 +44380,7 @@ var Donut = /*#__PURE__*/function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -44305,50 +44395,95 @@ var Donut = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+      this.props.context.strokeStyle = "rgb(255, 255, 255)";
+      var that = this;
+
+      var x = function x(t) {
+        return (Math.cos(20 * t) + Math[that.state.x_func](13 * t) / 2 + Math.sin(14 * t) / 3) * (-800 / 4) + 800 / 2;
+      };
+
+      var y = function y(t) {
+        return (Math.sin(20 * t) + Math[that.state.y_func](13 * t) / 2 + Math.cos(14 * t) / 3) * (-600 / 4) + 600 / 2;
+      };
+
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 1), y(t + 1));
+      this.props.context.stroke();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       this.props.receiveX(this.state.x_func);
       this.props.receiveY(this.state.y_func);
+      this.props.context.clearRect(0, 0, 800, 600);
+      var t = 0;
+      var donutInterval = setInterval(function () {
+        t += 1;
+
+        if (t < 460) {
+          _this2.animation(t / (50 * Math.PI));
+
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(donutInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "({13t})}}{2} + \\frac{\\sin(14t)}{3}");
       var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "({13t})}}{2} + \\frac{\\cos(14t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
       }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "sin"
       }, "sin(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "sin"
       }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "cos"
-      }, "cos(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "cos(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
     }
   }]);
 
@@ -44359,7 +44494,8 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
@@ -44399,6 +44535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44428,6 +44566,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var doubleSin = /*#__PURE__*/function (_React$Component) {
   _inherits(doubleSin, _React$Component);
 
@@ -44441,10 +44580,13 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       x_val: 120,
-      y_val: 120
+      y_val: 120,
+      frames: 130
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
+    _this.rgb = _this.rgb.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -44459,54 +44601,136 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "rgb",
+    value: function rgb(t) {
+      function r(t) {
+        return 100 + Math.tan(t / 300) * 200;
+      }
+
+      ;
+
+      function g(t) {
+        return Math.cos(t / 400) * 500;
+      }
+
+      ;
+
+      function b(t) {
+        return 200 + Math.tan(t / 900) * 55;
+      }
+
+      ;
+      return "rgb(\n            ".concat(r(t), ",\n            ").concat(g(t), ",\n            ").concat(b(t), ")");
+    }
+  }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+      var that = this;
+
+      var x = function x(t) {
+        return Math.sin(t * (10 * Math.PI / that.state.x_val)) * (-800 / 4) + 800 / 2;
+      };
+
+      var y = function y(t) {
+        return Math.sin(t * (8 * Math.PI) / that.state.y_val) * (-600 / 4) + 600 / 2;
+      };
+
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 1), y(t + 1));
+      this.props.context.stroke();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       this.props.receiveX(this.state.x_val);
       this.props.receiveY(this.state.y_val);
+      var t = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var doubleSinInterval = setInterval(function () {
+        _this2.props.context.strokeStyle = _this2.rgb(t);
+        t += 1;
+
+        if (t < _this2.state.frames) {
+          _this2.animation(t);
+
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(doubleSinInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
       var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-X"
       }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("x_val"),
         type: "range",
+        className: "input-slider",
         min: "50",
         max: "500",
         value: this.state.x_val
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
+        className: "labels-Y"
       }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("y_val"),
         type: "range",
+        className: "input-slider",
         min: "50",
         max: "500",
         value: this.state.y_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "Animation Frames", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update("frames"),
+        type: "range",
+        className: "input-slider",
+        min: "130",
+        max: "200",
+        value: this.state.frames
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "frame-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "Animation frames: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "frame-num"
+      }, " ", this.state.frames, " ")))));
     }
   }]);
 
@@ -44517,7 +44741,9 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    frames: state.frames,
+    context: state.context
   };
 };
 
@@ -44531,6 +44757,9 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+    },
+    receiveFrame: function receiveFrame(frames) {
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveFrame"])(frames));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -44586,7 +44815,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
- // import MathJax from "react-mathjax2";
 
 
 
@@ -44637,13 +44865,13 @@ var Formula = /*#__PURE__*/function (_React$Component) {
         value: "butterfly"
       }, "Butterfly Curve"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "coolButterfly"
-      }, "Darth Vader Look-a-like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }, "Possibly Darth Vader"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "ring"
-      }, "Ring"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }, "Abstract Green"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "donut"
-      }, "Donut"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }, "Abstract White"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "twist"
-      }, "Twist"));
+      }, "DNA Twists"));
     }
   }, {
     key: "update",
@@ -44654,33 +44882,50 @@ var Formula = /*#__PURE__*/function (_React$Component) {
     key: "renderSwitch",
     value: function renderSwitch(param) {
       // const { receiveGraph, clear } = this.props;
+      // debugger
       switch (param) {
         case "sin":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "doubleSin":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "butterfly":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "coolButterfly":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "ring":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "donut":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            runDemoView: this.props.runDemoView
+          });
 
         case "twist":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], {
+            runDemoView: this.props.runDemoView
+          });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.options(), this.renderSwitch(this.state.graph));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "options-div"
+      }, this.options()), this.renderSwitch(this.state.graph));
     }
   }]);
 
@@ -44740,7 +44985,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44764,6 +45011,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -44787,6 +45035,8 @@ var Ring = /*#__PURE__*/function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
+    _this.rgb = _this.rgb.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -44801,54 +45051,127 @@ var Ring = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "rgb",
+    value: function rgb(t) {
+      function r(t) {
+        return 150 + Math.sin(t / 700) * 200;
+      }
+
+      ;
+
+      function g(t) {
+        return Math.cos(t / 400) * 500;
+      }
+
+      ;
+
+      function b(t) {
+        return 200 + Math.tan(t / 900) * 55;
+      }
+
+      ;
+      return "rgb(\n            ".concat(r(t), ",\n            ").concat(g(t), ",\n            ").concat(b(t), ")");
+    }
+  }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+      var that = this;
+
+      var x = function x(t) {
+        return (Math.cos(20 * t) + Math[that.state.x_func](13 * t) / 2 + Math.sin(6 * t) / 3) * (-800 / 4) + 800 / 2;
+      };
+
+      var y = function y(t) {
+        return (Math.sin(20 * t) + Math[that.state.y_func](13 * t) / 2 + Math.cos(6 * t) / 3) * (-600 / 4) + 600 / 2;
+      };
+
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 0.5), y(t + 0.5));
+      this.props.context.stroke();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       this.props.receiveX(this.state.x_func);
       this.props.receiveY(this.state.y_func);
+      var t = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var ringInterval = setInterval(function () {
+        _this2.props.context.strokeStyle = _this2.rgb(t);
+        t += 0.5;
+
+        if (t < 150) {
+          _this2.animation(t / (80 * Math.PI));
+
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(ringInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "(13t)}}{2} + \\frac{\\sin(6t)}{3}");
       var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "(13t)}}{2} + \\frac{\\cos(6t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("x_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "cos"
       }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "sin"
       }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "tan"
       }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select-func",
         onChange: this.update("y_func")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "cos"
       }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "sin"
       }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        className: "options",
         value: "tan"
-      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
     }
   }]);
 
@@ -44859,23 +45182,24 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
     receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveX"])(x));
     },
     receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveY"])(y));
     },
     receiveGraph: function receiveGraph(graph) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveGraph"])(graph));
     },
     clear: function clear() {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["clear"])());
     }
   };
 };
@@ -44899,6 +45223,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44928,6 +45254,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Sin = /*#__PURE__*/function (_React$Component) {
   _inherits(Sin, _React$Component);
 
@@ -44941,10 +45268,12 @@ var Sin = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       x_val: 120,
-      y_val: 120
+      y_val: 120,
+      x_pos: null
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -44959,17 +45288,56 @@ var Sin = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.strokeStyle = "#00ffff";
+      this.props.context.lineWidth = 1;
+      var that = this;
+
+      var x = function x(t) {
+        return 800 * t / that.state.x_val;
+      };
+
+      var y = function y(t) {
+        return Math.sin(t * (4 * Math.PI) / that.state.y_val) * (-600 / 4) + 600 / 2;
+      };
+
+      this.state.x_pos = x(t);
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 1), y(t + 1));
+      this.props.context.stroke();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
       this.props.receiveX(this.state.x_val);
       this.props.receiveY(this.state.y_val);
+      this.state.x_pos = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var t = 0;
+      var that = this;
+      var sinInterval = setInterval(function () {
+        t += 1;
+
+        if (that.state.x_pos < 800) {
+          that.animation(t);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(sinInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
 
-      console.log(this.state.x_val);
       return function (e) {
         return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
@@ -44983,31 +45351,36 @@ var Sin = /*#__PURE__*/function (_React$Component) {
       var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-X"
       }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "input-slider",
         onChange: this.update("x_val"),
         type: "range",
         min: 50,
         max: 500,
         value: this.state.x_val
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
+        className: "labels-Y"
       }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "input-slider",
         onChange: this.update("y_val"),
         type: "range",
         min: 50,
         max: 500,
         value: this.state.y_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
           return _this3.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
     }
   }]);
 
@@ -45018,7 +45391,8 @@ var mSTP = function mSTP(state) {
   return {
     x: state.x,
     y: state.y,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
@@ -45057,7 +45431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-mathjax2 */ "./node_modules/react-mathjax2/lib/index.js");
 /* harmony import */ var react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_mathjax2__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -45087,6 +45463,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Twist = /*#__PURE__*/function (_React$Component) {
   _inherits(Twist, _React$Component);
 
@@ -45099,11 +45476,14 @@ var Twist = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      t: 10,
-      frames: 750
+      t: 5,
+      // frames: 750,
+      x_pos: 55
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.animation = _this.animation.bind(_assertThisInitialized(_this));
+    _this.rgb = _this.rgb.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -45118,31 +45498,87 @@ var Twist = /*#__PURE__*/function (_React$Component) {
       this.props.clear();
     }
   }, {
+    key: "rgb",
+    value: function rgb(t) {
+      function r(t) {
+        return 450 + Math.cos(t / 100) * 500;
+      }
+
+      function g(t) {
+        return 300 + Math.cos(t / 400) * 500;
+      }
+
+      function b(t) {
+        return 500 + Math.sin(t / 200) * 255;
+      }
+
+      return "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t), ")");
+    }
+  }, {
+    key: "animation",
+    value: function animation(t) {
+      this.props.context.lineWidth = 2;
+
+      var x = function x(t) {
+        return (t - 1.6 * Math.cos(24 * t)) * (-800 / 30) + 800 / 1.1;
+      };
+
+      var y = function y(t) {
+        return (t - 1.6 * Math.sin(25 * t)) * (-600 / 30) + 600 / 1.1;
+      };
+
+      this.state.x_pos = x(t);
+      this.props.context.beginPath();
+      this.props.context.moveTo(x(t), y(t));
+      this.props.context.lineTo(x(t + 2), y(t + 2));
+      this.props.context.stroke();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      debugger;
-      this.props.receiveT(this.state.t);
-      this.props.receiveFrame(this.state.frames);
+      var _this2 = this;
+
+      this.props.receiveT(this.state.t); // this.props.receiveFrame(this.state.frames);
+
+      this.state.x_pos = 55;
+      var t = 0;
+      this.props.context.clearRect(0, 0, 800, 600);
+      var twistInterval = setInterval(function () {
+        _this2.props.context.strokeStyle = _this2.rgb(t);
+        console.log(_this2.state.x_pos);
+        t += 2;
+
+        if (_this2.state.x_pos > 50) {
+          _this2.animation(t / (_this2.state.t * Math.PI));
+
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", true);
+        } else {
+          clearInterval(twistInterval);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", false);
+        }
+      }, 20);
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
-      console.log(this.state.t);
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var texX = "x(t) = t - 1.6(\\cos(24t))";
       var texY = "y(t) = t - 1.6(\\sin(25t))";
-      var texT = "t = (\\frac{t}{\\color{yellow}{".concat(this.state.t, "}\\Pi}) "); // const texT = `t = ${this.state.t} `;
-
+      var texT = "t = (\\frac{t}{\\color{yellow}{".concat(this.state.t, "}\\Pi}) ");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -45150,28 +45586,22 @@ var Twist = /*#__PURE__*/function (_React$Component) {
       }, "t", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("t"),
         type: "range",
+        className: "input-slider",
         min: "5",
-        max: "50",
+        max: "10",
         value: this.state.t
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, "Animation Frames", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update("frames"),
-        type: "range",
-        min: "750",
-        max: "4000",
-        value: this.state.frames
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "update-changes",
         onClick: function onClick() {
-          return _this3.handleSubmit();
+          return _this4.handleSubmit();
         }
-      }, "Update Changes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "labels"
-      }, "As 't' time increases, the X and Y position changes based on these formulas:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Y position:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Time 't': ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Animation frames: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "frame-num"
-      }, this.state.frames)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT))));
     }
   }]);
 
@@ -45181,24 +45611,21 @@ var Twist = /*#__PURE__*/function (_React$Component) {
 var mSTP = function mSTP(state) {
   return {
     t: state.t,
-    frames: state.frames,
-    graph: state.graph
+    graph: state.graph,
+    context: state.context
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
     receiveT: function receiveT(t) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveT"])(t));
-    },
-    receiveFrame: function receiveFrame(frames) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveFrame"])(frames));
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveT"])(t));
     },
     receiveGraph: function receiveGraph(graph) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveGraph"])(graph));
     },
     clear: function clear() {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
+      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["clear"])());
     }
   };
 };
@@ -45269,6 +45696,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _demo_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo_view */ "./src/components/demo_view.js");
 /* harmony import */ var _formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formulas/formula_container */ "./src/components/formulas/formula_container.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_context_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/context_actions */ "./src/actions/context_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45296,6 +45724,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Main = /*#__PURE__*/function (_React$Component) {
   _inherits(Main, _React$Component);
 
@@ -45314,7 +45743,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this));
     _this.canvas = null;
     _this.context = null;
-    _this.Demoview = null;
+    _this.Demoview = null; // this.canvas = this.canvasRef.current;
+    // this.context = this.canvas.getContext("2d");
+    // this.Demoview = new DemoView(this.context);
+
     return _this;
   }
 
@@ -45324,37 +45756,63 @@ var Main = /*#__PURE__*/function (_React$Component) {
       this.canvas = this.canvasRef.current;
       this.context = this.canvas.getContext('2d');
       this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
+      this.props.receiveContext(this.Demoview.ctx);
     }
   }, {
     key: "runDemoView",
     value: function runDemoView() {
       var ctx = this.Demoview.ctx;
-      ctx.clearRect(0, 0, 800, 600);
+      ctx.clearRect(0, 0, 800, 600); // clearInterval(this.Demoview)
+
       this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
-    }
+    } // clear() {
+    //   clearInterval(this.Demoview[this.props.graph])
+    // }
+
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "screen-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "title"
+      }, "Math-in-Motion")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "link-space"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "icon-link",
+        href: "https://angel.co/u/wilson-ngu",
+        target: "_blank"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "icons-a",
+        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "icon-link",
+        href: "https://github.com/Heyitswilson/Bounce",
+        target: "_blank"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "icons",
+        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "icon-link",
+        href: "https://www.linkedin.com/in/wilson-ngu/",
+        target: "_blank"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "icons",
+        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "intro"
+      }, "Math-in-Motion animates graphs of mathematical functions and parametrical plots. Change the values to see how they affect the graphs!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "music-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "run",
-        onClick: function onClick() {
-          return _this2.runDemoView();
-        }
-      }, "RUN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "credit-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        runDemoView: this.runDemoView
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
         height: "600",
         id: "canvas",
@@ -45376,7 +45834,15 @@ var mSTP = function mSTP(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mSTP, null)(Main));
+var mDTP = function mDTP(dispatch) {
+  return {
+    receiveContext: function receiveContext(context) {
+      return dispatch(Object(_actions_context_actions__WEBPACK_IMPORTED_MODULE_4__["receiveContext"])(context));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mSTP, mDTP)(Main));
 
 /***/ }),
 
@@ -45476,6 +45942,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
+/***/ "./src/reducers/context_reducer.js":
+/*!*****************************************!*\
+  !*** ./src/reducers/context_reducer.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_context_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/context_actions */ "./src/actions/context_actions.js");
+
+
+var contextReducer = function contextReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_context_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CONTEXT"]:
+      return action.context;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (contextReducer);
+
+/***/ }),
+
 /***/ "./src/reducers/frames_reducer.js":
 /*!****************************************!*\
   !*** ./src/reducers/frames_reducer.js ***!
@@ -45557,10 +46053,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _t_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./t_reducer */ "./src/reducers/t_reducer.js");
 /* harmony import */ var _frames_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frames_reducer */ "./src/reducers/frames_reducer.js");
 /* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
+/* harmony import */ var _context_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./context_reducer */ "./src/reducers/context_reducer.js");
 
 
 
 
+
+ // import intervalReducer from './interval_reducer';
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
@@ -45568,7 +46067,9 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   y: _y_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
+  context: _context_reducer__WEBPACK_IMPORTED_MODULE_6__["default"] // interval: intervalReducer
+
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -45698,10 +46199,10 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
-/***/ "./src/util/sin.js":
-/*!*************************!*\
-  !*** ./src/util/sin.js ***!
-  \*************************/
+/***/ "./src/util/graph.js":
+/*!***************************!*\
+  !*** ./src/util/graph.js ***!
+  \***************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45709,133 +46210,119 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Sin = function Sin(ctx) {
-  _classCallCheck(this, Sin);
+var Graph = function Graph(ctx) {
+  _classCallCheck(this, Graph);
 
   this.ctx = ctx;
-};
-
-Sin.prototype.sin = function (ctx, w, h, t, userX, userY) {
-  ctx.strokeStyle = "#00ffff";
-  ctx.lineWidth = 1;
-
-  var x = function x(t) {
-    return w * t / userX;
-  };
-
-  var y = function y(t) {
-    return Math.sin(t * (4 * Math.PI) / userY) * (-h / 4) + h / 2;
-  };
-
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 1), y(t + 1));
-  ctx.stroke();
-};
-
-Sin.prototype.doubleSin = function (ctx, w, h, t, userX, userY) {
-  ctx.lineWidth = 2;
-
-  var x = function x(t) {
-    return Math.sin(t * (10 * Math.PI / userX)) * (-w / 4) + w / 2;
-  };
-
-  var y = function y(t) {
-    return Math.sin(t * (8 * Math.PI) / userY) * (-h / 4) + h / 2;
-  };
-
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 1), y(t + 1));
-  ctx.stroke();
-};
-
-Sin.prototype.butterfly = function (ctx, w, h, t, userX, userY) {
-  ctx.lineWidth = 2;
-  debugger;
-
-  var x = function x(t) {
-    return Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
-  };
-
-  var y = function y(t) {
-    return Math.cos(t) * (Math.pow(Math.E, Math[userY](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + h / 2;
-  };
-
-  ctx.fillRect(x(t + 1), y(t + 1), 15, 5);
-};
-
-Sin.prototype.coolButterfly = function (ctx, w, h, t, userX, userY) {
-  ctx.lineWidth = 2;
-
-  var x = function x(t) {
-    return Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) + 2 * Math[userY](4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-w / 10) + w / 2;
-  };
-
-  var y = function y(t) {
-    return Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5)) * (-h / 10) + h / 2;
-  };
-
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 1), y(t + 1));
-  ctx.stroke();
-};
-
-Sin.prototype.ring = function (ctx, w, h, t, userX, userY) {
-  ctx.lineWidth = 2;
-
-  var x = function x(t) {
-    return (Math.cos(20 * t) + Math[userX](13 * t) / 2 + Math.sin(6 * t) / 3) * (-w / 4) + w / 2;
-  };
-
-  var y = function y(t) {
-    return (Math.sin(20 * t) + Math[userY](13 * t) / 2 + Math.cos(6 * t) / 3) * (-h / 4) + h / 2;
-  };
-
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 0.5), y(t + 0.5));
-  ctx.stroke();
-};
-
-Sin.prototype.donut = function (ctx, w, h, t, userX, userY) {
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "rgb(255, 255, 255)";
-
-  var x = function x(t) {
-    return (Math.cos(20 * t) + Math[userX](13 * t) / 2 + Math.sin(14 * t) / 3) * (-w / 4) + w / 2;
-  };
-
-  var y = function y(t) {
-    return (Math.sin(20 * t) + Math[userY](13 * t) / 2 + Math.cos(14 * t) / 3) * (-h / 4) + h / 2;
-  };
-
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 1), y(t + 1));
-  ctx.stroke();
-};
-
-Sin.prototype.twist = function (ctx, w, h, t) {
-  ctx.lineWidth = 2;
-
-  var x = function x(t) {
-    return (t - 1.6 * Math.cos(24 * t)) * (-w / 30) + w / 1.1;
-  };
-
-  var y = function y(t) {
-    return (t - 1.6 * Math.sin(25 * t)) * (-h / 30) + h / 1.1;
-  }; // ctx.fillRect(x(t + 1), y(t + 1), 15, 5);
+}; // Graph.prototype.sin = (ctx, w, h, t, userX, userY) => {
+//     ctx.strokeStyle = `#00ffff`;
+//     ctx.lineWidth = 1;
+//     let x = function (t) {
+//         return w * t / userX
+//     };
+//     let y = function (t) {
+//         return Math.sin(t * (4 * Math.PI) / userY) * (-h / 4) + (h / 2);
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 1), y(t + 1));
+//     ctx.stroke();
+// }
+// Graph.prototype.doubleSin = (ctx, w, h, t, userX, userY) => {
+//     ctx.lineWidth = 2;
+//     let x = function (t) {
+//         return Math.sin(t * ((10 * Math.PI) / userX)) * (-w / 4) + (w / 2);
+//     };
+//     let y = function (t) {
+//         return Math.sin(t * (8 * Math.PI) / userY) * (-h / 4) + (h / 2);
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 1), y(t + 1));
+//     ctx.stroke();
+// }
+// Graph.prototype.butterfly = (ctx, w, h, t,userX, userY) => {
+//     ctx.lineWidth = 2;
+//     let x = function (t) {
+//         return (
+//             (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
+//         )
+//     };
+//     let y = function (t) {
+//         return (
+//             (Math.cos(t) * (Math.pow(Math.E, Math[userY](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
+//         )
+//     };
+//     ctx.fillRect(x(t + 1), y(t + 1), 15, 5)
+// }
+// Graph.prototype.coolButterfly = (ctx, w, h, t, userX, userY) => {
+//     ctx.lineWidth = 2;
+//     let x = function (t) {
+//         return (
+//             (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) + 2 * Math[userY](4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
+//         )
+//     };
+//     let y = function (t) {
+//         return (
+//             (Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
+//         )
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 1), y(t + 1));
+//     ctx.stroke();
+// }
+// Graph.prototype.ring = (ctx, w, h, t, userX, userY) => {
+//     ctx.lineWidth = 2;
+//     let x = function (t) {
+//         return (
+//            (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(6 * t) / 3)) * (-w / 4) + (w / 2)
+//         )
+//     };
+//     let y = function (t) {
+//         return (
+//             (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
+//         )
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 0.5), y(t + 0.5));
+//     ctx.stroke();
+// }
+// Graph.prototype.donut = (ctx, w, h, t, userX, userY) => {
+//     ctx.lineWidth = 2;
+//     ctx.strokeStyle = "rgb(255, 255, 255)";
+//     let x = function (t) {
+//         return (
+//            (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(14 * t) / 3)) * (-w / 4) + (w / 2)
+//         )
+//     };
+//     let y = function (t) {
+//         return (
+//             (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(14 * t) / 3)) * (-h / 4) + (h / 2)
+//         )
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 1), y(t + 1));
+//     ctx.stroke();
+// }
+// Graph.prototype.twist = (ctx, w, h, t) => {
+//     ctx.lineWidth = 2;
+//     let x = function (t) {
+//         return (t - (1.6 * Math.cos(24 * t))) * (-w / 30) + (w/1.1);
+//     };
+//     let y = function (t) {
+//         return (t - (1.6 * Math.sin(25 * t))) * (-h / 30) + (h/1.1);
+//     };
+//     ctx.beginPath();
+//     ctx.moveTo(x(t), y(t));
+//     ctx.lineTo(x(t + 2), y(t + 2));
+//     ctx.stroke();
+// }
 
 
-  ctx.beginPath();
-  ctx.moveTo(x(t), y(t));
-  ctx.lineTo(x(t + 2), y(t + 2));
-  ctx.stroke();
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Sin);
+/* harmony default export */ __webpack_exports__["default"] = (Graph);
 
 /***/ })
 

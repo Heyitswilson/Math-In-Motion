@@ -1,5 +1,4 @@
 import React from "react";
-import Bar from './bar';
 import Main from './main';
 import Header from './header/header'
 import Formula from '../components/formulas/formula'
@@ -17,8 +16,7 @@ class App extends React.Component {
         return(
             <div>
             {/* {Demoview.sinY(800, 600)} */}
-                <Bar />
-                <Header />
+                {/* <Header /> */}
                 {/* <Formula /> */}
                 <Main/>
             </div>

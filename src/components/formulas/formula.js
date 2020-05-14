@@ -1,5 +1,4 @@
 import React from 'react';
-// import MathJax from "react-mathjax2";
 import Sin from './sin';
 import DoubleSin from './double_sin';
 import Butterfly from './butterfly';
@@ -30,12 +29,10 @@ class Formula extends React.Component {
           <option value="sin">Sin</option>
           <option value="doubleSin">Double Sin</option>
           <option value="butterfly">Butterfly Curve</option>
-          <option value="coolButterfly">
-            Darth Vader Look-a-like
-                    </option>
-          <option value="ring">Ring</option>
-          <option value="donut">Donut</option>
-          <option value="twist">Twist</option>
+          <option value="coolButterfly">Possibly Darth Vader</option>
+          <option value="ring">Abstract Green</option>
+          <option value="donut">Abstract White</option>
+          <option value="twist">DNA Twists</option>
         </select>
       )
     }
@@ -48,28 +45,31 @@ class Formula extends React.Component {
     
     renderSwitch (param) {
       // const { receiveGraph, clear } = this.props;
+      // debugger
         switch(param) {
             case "sin":
-                return <Sin />
+                return <Sin runDemoView={this.props.runDemoView}/>
             case "doubleSin":
-                return <DoubleSin />
+            return <DoubleSin runDemoView={this.props.runDemoView}/>
             case "butterfly": 
-                return <Butterfly /> 
+            return <Butterfly runDemoView={this.props.runDemoView}/> 
             case "coolButterfly":
-                return <CoolButterfly />
+            return <CoolButterfly runDemoView={this.props.runDemoView}/>
             case "ring":
-                return <Ring />
+            return <Ring runDemoView={this.props.runDemoView}/>
             case "donut":
-                return <Donut />
+            return <Donut runDemoView={this.props.runDemoView}/>
             case "twist":
-                return <Twist />
+            return <Twist runDemoView={this.props.runDemoView}/>
         }
     }
 
     render () {
       return (
-          <div>
-              {this.options()}
+          <div >
+              <div className="options-div">
+                {this.options()}
+              </div>
               {this.renderSwitch(this.state.graph)}
           </div>
       )

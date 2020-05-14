@@ -18,7 +18,7 @@
     border-radius: 5px;
     opacity: 0.9;
     width: 50%;
-    height: 50%;
+    height: 60vh;
     background-color: black
 }
 
@@ -28,16 +28,18 @@
 
 .background {
     padding: 25px;
-    margin: 3%;
+    margin: 10px;
     background-color: black;
-    display: inline-block;
     width: 40%;
+    /* min-height: 500px; */
+    height: 54vh;
     opacity: 0.9;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    border: 1px solid white
 }
 
 .title {
@@ -113,13 +115,13 @@
 }
 
 .background-div {
-    position: relative;
-    bottom: 15px;
+    /* width: 200px; */
 }
 
 .slider-div {
     display: flex;
     flex-direction: column;
+    align-items: center
 }
 
 .labels {
@@ -128,4 +130,59 @@
 
 .frame-num {
     color: red; 
+}
+
+.labels-X {
+    color: yellow;
+}
+
+.labels-Y {
+    color: red;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.update-changes {
+    width: 145px;
+}
+
+.run {
+    width: 145px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.frame-div {
+    display: flex;
+}
+
+.select-func {
+    width: 120px;
+}
+
+.graph-select {
+    width: 120px;
+}
+
+.options {
+    text-align: center;
+}
+
+.options-div {
+    display: flex; 
+    justify-content: center;
+}
+
+.slider-X {
+    fill: yellow;
+    stroke: none;
+}
+
+.slider-Y {
+    fill: red;
 }
