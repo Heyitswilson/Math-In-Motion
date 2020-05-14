@@ -48,19 +48,19 @@ class Formula extends React.Component {
       // debugger
         switch(param) {
             case "sin":
-                return <Sin runDemoView={this.props.runDemoView}/>
+                return <Sin />
             case "doubleSin":
-            return <DoubleSin runDemoView={this.props.runDemoView}/>
+            return <DoubleSin />
             case "butterfly": 
-            return <Butterfly runDemoView={this.props.runDemoView}/> 
+            return <Butterfly /> 
             case "coolButterfly":
-            return <CoolButterfly runDemoView={this.props.runDemoView}/>
+            return <CoolButterfly />
             case "ring":
-            return <Ring runDemoView={this.props.runDemoView}/>
+            return <Ring />
             case "donut":
-            return <Donut runDemoView={this.props.runDemoView}/>
+            return <Donut />
             case "twist":
-            return <Twist runDemoView={this.props.runDemoView}/>
+            return <Twist />
         }
     }
 

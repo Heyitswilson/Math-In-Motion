@@ -44021,7 +44021,7 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
-      var texY = "y(t) = \\cos(t)(e^{\\color{red}{\\".concat(this.state.y_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      var texY = "y(t) = \\cos(t)(e^{\\color{lime}{\\".concat(this.state.y_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -44246,7 +44246,7 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} + 2(\\color{red}{\\").concat(this.state.y_func, "(4t)}) - sin(\\frac{t}{12})^5)");
+      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} + 2(\\color{lime}{\\").concat(this.state.y_func, "(4t)}) - sin(\\frac{t}{12})^5)");
       var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
@@ -44455,7 +44455,7 @@ var Donut = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "({13t})}}{2} + \\frac{\\sin(14t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "({13t})}}{2} + \\frac{\\cos(14t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{lime}{\\".concat(this.state.y_func, "({13t})}}{2} + \\frac{\\cos(14t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -44683,7 +44683,7 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
-      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
+      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{lime}{".concat(this.state.y_val, "}})");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -44885,39 +44885,25 @@ var Formula = /*#__PURE__*/function (_React$Component) {
       // debugger
       switch (param) {
         case "sin":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
 
         case "doubleSin":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
 
         case "butterfly":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
 
         case "coolButterfly":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
 
         case "ring":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
 
         case "donut":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
 
         case "twist":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            runDemoView: this.props.runDemoView
-          });
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
       }
     }
   }, {
@@ -45133,7 +45119,7 @@ var Ring = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "(13t)}}{2} + \\frac{\\sin(6t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\color{red}{\\".concat(this.state.y_func, "(13t)}}{2} + \\frac{\\cos(6t)}{3}");
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{lime}{\\".concat(this.state.y_func, "(13t)}}{2} + \\frac{\\cos(6t)}{3}");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -45348,7 +45334,7 @@ var Sin = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
-      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{red}{".concat(this.state.y_val, "}})");
+      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{lime}{".concat(this.state.y_val, "}})");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -45739,14 +45725,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       graph: ""
     };
-    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
-    _this.runDemoView = _this.runDemoView.bind(_assertThisInitialized(_this));
+    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef(); // this.runDemoView = this.runDemoView.bind(this);
+
     _this.canvas = null;
     _this.context = null;
-    _this.Demoview = null; // this.canvas = this.canvasRef.current;
-    // this.context = this.canvas.getContext("2d");
-    // this.Demoview = new DemoView(this.context);
-
+    _this.Demoview = null;
     return _this;
   }
 
@@ -45757,15 +45740,13 @@ var Main = /*#__PURE__*/function (_React$Component) {
       this.context = this.canvas.getContext('2d');
       this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
       this.props.receiveContext(this.Demoview.ctx);
-    }
-  }, {
-    key: "runDemoView",
-    value: function runDemoView() {
-      var ctx = this.Demoview.ctx;
-      ctx.clearRect(0, 0, 800, 600); // clearInterval(this.Demoview)
-
-      this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
-    } // clear() {
+    } // runDemoView () {
+    //   let ctx = this.Demoview.ctx;
+    //   ctx.clearRect(0, 0, 800, 600);
+    //   // clearInterval(this.Demoview)
+    //   this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
+    // }
+    // clear() {
     //   clearInterval(this.Demoview[this.props.graph])
     // }
 
@@ -45810,9 +45791,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         className: "background-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "credit-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        runDemoView: this.runDemoView
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
         height: "600",
         id: "canvas",

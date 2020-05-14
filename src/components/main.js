@@ -14,16 +14,11 @@ class Main extends React.Component {
     }
 
     this.canvasRef = React.createRef();
-    this.runDemoView = this.runDemoView.bind(this);
+    // this.runDemoView = this.runDemoView.bind(this);
 
     this.canvas = null;
     this.context = null;
     this.Demoview = null;
-
-        // this.canvas = this.canvasRef.current;
-        // this.context = this.canvas.getContext("2d");
-        // this.Demoview = new DemoView(this.context);
-
   }
 
   componentDidMount() {
@@ -33,12 +28,12 @@ class Main extends React.Component {
     this.props.receiveContext(this.Demoview.ctx)
   }
 
-  runDemoView () {
-    let ctx = this.Demoview.ctx;
-    ctx.clearRect(0, 0, 800, 600);
-    // clearInterval(this.Demoview)
-    this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
-  }
+  // runDemoView () {
+  //   let ctx = this.Demoview.ctx;
+  //   ctx.clearRect(0, 0, 800, 600);
+  //   // clearInterval(this.Demoview)
+  //   this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
+  // }
 
   // clear() {
   //   clearInterval(this.Demoview[this.props.graph])
@@ -93,7 +88,7 @@ class Main extends React.Component {
               </div>
             <div className="background-div">
               <div className="credit-div">
-                  <Formula runDemoView={this.runDemoView}/> 
+                  <Formula /> 
               </div>
             </div>
           </div>

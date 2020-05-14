@@ -90,7 +90,7 @@ class Donut extends React.Component {
 
     render() {
         const texX = `x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\${this.state.x_func}({13t})}}{2} + \\frac{\\sin(14t)}{3}`;
-        const texY = `y(t) = \\sin(20t) + \\frac{\\color{red}{\\${this.state.y_func}({13t})}}{2} + \\frac{\\cos(14t)}{3}`;
+        const texY = `y(t) = \\sin(20t) + \\frac{\\color{lime}{\\${this.state.y_func}({13t})}}{2} + \\frac{\\cos(14t)}{3}`;
 
         return (
             <div>

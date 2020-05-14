@@ -111,7 +111,7 @@ class coolButterfly extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\sin(t)(e^{\\color{yellow}{\\${this.state.x_func}(t)}} + 2(\\color{red}{\\${this.state.y_func}(4t)}) - sin(\\frac{t}{12})^5)`;
+        const texX = `x(t) = \\sin(t)(e^{\\color{yellow}{\\${this.state.x_func}(t)}} + 2(\\color{lime}{\\${this.state.y_func}(4t)}) - sin(\\frac{t}{12})^5)`;
         const texY = `y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)`;
         return (
             <div >

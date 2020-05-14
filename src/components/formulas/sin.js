@@ -81,7 +81,7 @@ class Sin extends React.Component {
 
     render() {
         const texX = `x(t) = \\frac{t}{\\color{yellow}{${this.state.x_val}}}`;
-        const texY = `y(t) = t(\\frac{4\\Pi}{\\color{red}{${this.state.y_val}}})`;
+        const texY = `y(t) = t(\\frac{4\\Pi}{\\color{lime}{${this.state.y_val}}})`;
 
         return (
             <div>
