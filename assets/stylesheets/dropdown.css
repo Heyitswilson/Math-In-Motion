@@ -1,0 +1,48 @@
+.graph-select {
+    width: 110px;
+    background-color: white;
+    color: black;
+    position: absolute;
+    z-index: 3;
+    margin-top: 90px;
+    border-radius: 2px;
+}
+
+.graph-li {
+    list-style: none;
+    position: relative;
+    right: 10px;
+}
+
+.graph-li:hover {
+    cursor: pointer;
+    background-color: rgb(242, 242, 242)
+
+}
+
+.graph-header{
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    width: 140px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.graph-header:hover {
+    cursor: pointer;
+    background-color: rgb(242, 242, 242)
+}
+
+.graph-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.graph-title {
+    display: flex;
+    align-items: center;
+    font-family: 'Exo', sans-serif;
+    font-size: 15px;
+}

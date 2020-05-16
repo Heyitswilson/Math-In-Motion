@@ -21,7 +21,7 @@ class doubleSin extends React.Component {
     }
 
     componentDidMount() {
-        this.props.receiveGraph("doubleSin")
+        this.props.receiveGraph("Double Sine")
     }
 
     componentWillUnmount() {
@@ -75,14 +75,14 @@ class doubleSin extends React.Component {
           t += 1;
           if (t < this.state.frames) {
             this.animation(t);
-            $(".update-changes").prop("disabled", true);
+            $(".update-changes").addClass("disabled-button");
             $(".input-slider").prop("disabled", true);
-            $(".select-func").prop("disabled", true);
+            $(".radio").prop("disabled", true);
           } else {
                 clearInterval(doubleSinInterval);
-                $(".update-changes").prop("disabled", false);
+                $(".update-changes").removeClass("disabled-button");
                 $(".input-slider").prop("disabled", false);
-                $(".select-func").prop("disabled", false);
+                $(".radio").prop("disabled", false);
           }
         }, 20);
 
@@ -96,62 +96,74 @@ class doubleSin extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\frac{t}{\\color{yellow}{${this.state.x_val}}}`;
-        const texY = `y(t) = t(\\frac{4\\Pi}{\\color{red}{${this.state.y_val}}})`;
+        let varX = this.state.x_val;
+        let varY = this.state.y_val;
+        const texX = `x(t) = \\frac{t}{\\color{aqua}{varX}}`;
+        const texY = `y(t) = t(\\frac{4\\Pi}{\\color{aqua}{varY}})`;
         return (
           <div>
-            <div className="slider-div">
-              <div>
-                <label className="labels-X">
-                  X
-                  <input
-                    onChange={this.update("x_val")}
-                    type="range"
-                    className="input-slider"
-                    min="50"
-                    max="500"
-                    value={this.state.x_val}
-                  />
-                </label>
-                <label className="labels-Y">
-                  Y
-                  <input
-                    onChange={this.update("y_val")}
-                    type="range"
-                    className="input-slider"
-                    min="50"
-                    max="500"
-                    value={this.state.y_val}
-                  />
-                </label>
-                <label className="labels">
-                  Animation Frames
-                  <input
-                    onChange={this.update("frames")}
-                    type="range"
-                    className="input-slider"
-                    min="130"
-                    max="200"
-                    value={this.state.frames}
-                  />
-                </label>
-              </div>
-              <div className="buttons">
-                <button
+            {/* <div className="horizontal-line"></div> */}
+            <MathJax.Context input="tex">
+              <div className="slider-formula-parent-dSin">
+                <div className="slider-formula">
+                  <div className="math-formula">
+                    <MathJax.Node>{texX}</MathJax.Node>
+                  </div>
+                  <label className="labels-X">
+                    <input
+                      onChange={this.update("x_val")}
+                      type="range"
+                      className="input-slider"
+                      min="50"
+                      max="500"
+                      value={this.state.x_val}
+                    />
+                    <div className="var-div">
+                      <div className="labels-lime">varX: </div>
+                      <div className="var">{varX}</div>
+                    </div>
+                  </label>
+                </div>
+                <div className="slider-formula">
+                  <div className="math-formula">
+                    <MathJax.Node>{texY}</MathJax.Node>
+                  </div>
+                  <label className="labels-X">
+                    <input
+                      onChange={this.update("y_val")}
+                      type="range"
+                      className="input-slider"
+                      min="50"
+                      max="500"
+                      value={this.state.y_val}
+                    />
+                    <div className="var-div">
+                     <div className="labels-lime">varY: </div>
+                      <div className="var">{varY}</div>
+                    </div>
+                  </label>
+                </div>
+                <div className="slider-formula-frame">
+                  <label className="labels">
+                    <input
+                      onChange={this.update("frames")}
+                      type="range"
+                      className="input-slider"
+                      min="130"
+                      max="200"
+                      value={this.state.frames}
+                    />
+                    <div className="var-div">
+                      <div className="labels">Frames: </div>
+                      <div className="labels-frame">  {this.state.frames} </div>
+                    </div>
+                  </label>
+                </div>
+                <div
                   className="update-changes"
                   onClick={() => this.handleSubmit()}
                 >
                   Run
-                </button>
-              </div>
-            </div>
-            <MathJax.Context input="tex">
-              <div className="labels">
-                <MathJax.Node>{texX}</MathJax.Node>
-                <MathJax.Node>{texY}</MathJax.Node>
-                <div className="frame-div">
-                  <div className="labels">Animation frames: </div>
-                  <div className="frame-num"> {this.state.frames} </div>
                 </div>
               </div>
             </MathJax.Context>

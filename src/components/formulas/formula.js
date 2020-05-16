@@ -6,7 +6,7 @@ import CoolButterfly from './cool_butterfly';
 import Ring from './ring';
 import Donut from './donut';
 import Twist from './twist';
-import $ from "jquery";
+import DropdownContainer from '../dropdown/dropdown_container'
 
 
 class Formula extends React.Component {
@@ -14,63 +14,44 @@ class Formula extends React.Component {
     super(props);
 
     this.state = {
-      graph: ""
+      graph_types: [
+        "Sine",
+        "Double Sine",
+        "Butterfly Curve",
+        "Darth Vader",
+        "Abstract Green",
+        "Abstract White",
+        "DNA Twists"
+      ]
     }
 
-    this.update = this.update.bind(this);
     this.renderSwitch = this.renderSwitch.bind(this);
-    this.options = this.options.bind(this);
-  }
-
-    options() {
-      return (
-        <select className="graph-select" onChange={() => this.update("graph")}>
-          <option defaultValue>Choose a graph</option>
-          <option value="sin">Sin</option>
-          <option value="doubleSin">Double Sin</option>
-          <option value="butterfly">Butterfly Curve</option>
-          <option value="coolButterfly">Possibly Darth Vader</option>
-          <option value="ring">Abstract Green</option>
-          <option value="donut">Abstract White</option>
-          <option value="twist">DNA Twists</option>
-        </select>
-      )
-    }
-
-  update(field) {
-    this.setState({
-      [field]: $(".graph-select option:selected").val()
-    })
   }
     
-    renderSwitch (param) {
-      // const { receiveGraph, clear } = this.props;
-      // debugger
-        switch(param) {
-            case "sin":
-                return <Sin runDemoView={this.props.runDemoView}/>
-            case "doubleSin":
-            return <DoubleSin runDemoView={this.props.runDemoView}/>
-            case "butterfly": 
-            return <Butterfly runDemoView={this.props.runDemoView}/> 
-            case "coolButterfly":
-            return <CoolButterfly runDemoView={this.props.runDemoView}/>
-            case "ring":
-            return <Ring runDemoView={this.props.runDemoView}/>
-            case "donut":
-            return <Donut runDemoView={this.props.runDemoView}/>
-            case "twist":
-            return <Twist runDemoView={this.props.runDemoView}/>
+    renderSwitch () {
+        switch(this.props.graph) {
+            case "Sine":
+              return <Sin />
+            case "Double Sine":
+              return <DoubleSin />
+            case "Butterfly Curve":
+              return <Butterfly /> 
+            case "Darth Vader":
+              return <CoolButterfly />
+            case "Abstract Green":
+              return <Ring />
+            case "Abstract White":
+              return <Donut />
+            case "DNA Twists":
+              return <Twist />
         }
     }
 
     render () {
       return (
-          <div >
-              <div className="options-div">
-                {this.options()}
-              </div>
-              {this.renderSwitch(this.state.graph)}
+          <div className="test">
+              <DropdownContainer title={this.props.graph} list={this.state.graph_types}/>
+              {this.renderSwitch(this.props.graph)}
           </div>
       )
     }

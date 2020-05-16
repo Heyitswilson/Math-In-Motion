@@ -21,7 +21,7 @@ class Sin extends React.Component {
     }
 
     componentDidMount() {
-        this.props.receiveGraph("sin")
+        this.props.receiveGraph("Sine")
     }
 
     componentWillUnmount() {
@@ -60,15 +60,15 @@ class Sin extends React.Component {
           t += 1;
           if (that.state.x_pos < 800) {
               that.animation(t);
-              $(".update-changes").prop("disabled", true);
+            $(".update-changes").addClass("disabled-button");
             $(".input-slider").prop("disabled", true);
-            $(".select-func").prop("disabled", true);
+            $(".radio").prop("disabled", true);
 
             } else {
                 clearInterval(sinInterval);
-                $(".update-changes").prop("disabled", false);
+            $(".update-changes").removeClass("disabled-button");
                 $(".input-slider").prop("disabled", false);
-                $(".select-func").prop("disabled", false);
+                $(".radio").prop("disabled", false);
           }
         }, 20);
     }
@@ -80,37 +80,67 @@ class Sin extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\frac{t}{\\color{yellow}{${this.state.x_val}}}`;
-        const texY = `y(t) = t(\\frac{4\\Pi}{\\color{red}{${this.state.y_val}}})`;
+        let varX = this.state.x_val;
+        let varY = this.state.y_val;
+        const texX = `\\color{white}{x(t) = \\frac{t}{\\color{aqua}{varX}}}`;
+        const texY = `\\color{white}{y(t) = t(\\frac{4\\Pi}{\\color{aqua}{varY}})}`;
 
         return (
-            <div>
-                <div className="slider-div">
-                    <div>
-                        <label className="labels-X">
-                            X
-                            <input className="input-slider" onChange={this.update("x_val")} type="range" min={50} max={500} value={this.state.x_val} />
-                        </label>
-                        <label className="labels-Y">
-                            Y
-                            <input className="input-slider" onChange={this.update("y_val")} type="range" min={50} max={500} value={this.state.y_val} />
-                        </label>
-
-                    </div>
-                    <div className="buttons">
-                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
-                    </div>
-                </div>
-                <MathJax.Context input="tex">
-                    <div className="labels">
-                        <MathJax.Node>{texX}</MathJax.Node>
-
-                        <MathJax.Node>{texY}</MathJax.Node>
-
-                    </div>
-                </MathJax.Context>
-
+          <div>
+            <div className="slider-div">
+              <div className="buttons"></div>
             </div>
+            <MathJax.Context input="tex" >
+              <div className="slider-formula-parent">
+                <div className="slider-formula">
+                  <div className="math-formula">
+                    <MathJax.Node>{texX}</MathJax.Node>
+                  </div>
+                  <label className="labels-X">
+                    <input
+                      className="input-slider"
+                      onChange={this.update("x_val")}
+                      type="range"
+                      min={50}
+                      max={210}
+                      value={this.state.x_val}
+                    />
+                    <div className="var-div"> 
+                      <div className="labels-lime">varX: </div>
+                      <div className="var">{varX}</div>
+                    </div>
+                  </label>
+                </div>
+                <div className="slider-formula">
+                  <div className="math-formula">
+                    <MathJax.Node>{texY}</MathJax.Node>
+                  </div>
+                  <label className="labels-X">
+                    <input
+                      className="input-slider"
+                      onChange={this.update("y_val")}
+                      type="range"
+                      min={50}
+                      max={210}
+                      value={this.state.y_val}
+                    />
+                    <div className="var-div">
+                      <div className="labels-lime">
+                        varY: 
+                      </div>
+                      <div className="var">{varY}</div>
+                    </div>
+                  </label>
+                </div>
+                <div
+                  className="update-changes"
+                  onClick={() => this.handleSubmit()}
+                >
+                  Run
+                </div>
+              </div>
+            </MathJax.Context>
+          </div>
         );
     }
 }

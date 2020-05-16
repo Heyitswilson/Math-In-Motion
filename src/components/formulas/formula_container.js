@@ -3,7 +3,7 @@ import Formula from './formula';
 import { receiveGraph, clear } from '../../actions/graph_actions'
 
 const mSTP = state => ({
-
+    graph: state.graph
 })
 
 const mDTP = dispatch => ({

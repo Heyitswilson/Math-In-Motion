@@ -14,16 +14,11 @@ class Main extends React.Component {
     }
 
     this.canvasRef = React.createRef();
-    this.runDemoView = this.runDemoView.bind(this);
+    // this.runDemoView = this.runDemoView.bind(this);
 
     this.canvas = null;
     this.context = null;
     this.Demoview = null;
-
-        // this.canvas = this.canvasRef.current;
-        // this.context = this.canvas.getContext("2d");
-        // this.Demoview = new DemoView(this.context);
-
   }
 
   componentDidMount() {
@@ -33,19 +28,7 @@ class Main extends React.Component {
     this.props.receiveContext(this.Demoview.ctx)
   }
 
-  runDemoView () {
-    let ctx = this.Demoview.ctx;
-    ctx.clearRect(0, 0, 800, 600);
-    // clearInterval(this.Demoview)
-    this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
-  }
-
-  // clear() {
-  //   clearInterval(this.Demoview[this.props.graph])
-  // }
-
   render () {
-    // debugger
     return (
       <div>
         <div className="screen-div">
@@ -87,13 +70,15 @@ class Main extends React.Component {
                 </a>
               </div>
             </div>
+            <div className="horizontal-line"></div>
             <div className="intro">
-              Math-in-Motion animates graphs of mathematical functions and parametrical plots.
-              Change the values to see how they affect the graphs!
-              </div>
+              Math-in-Motion animates graphs of mathematical functions and
+              parametrical plots. Try running the animation with default values, then change 
+              them to see the effect!
+            </div>
             <div className="background-div">
               <div className="credit-div">
-                  <Formula runDemoView={this.runDemoView}/> 
+                <Formula />
               </div>
             </div>
           </div>

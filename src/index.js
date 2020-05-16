@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Root from "./components/root";
 import configureStore from "./store/store";
-import Demo from './demo'
-import DemoView from './components/demo_view'
+import Demo from './demo';
+import DemoView from './components/demo_view';
+
 window.Demo = Demo
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -10,7 +10,6 @@ class Twist extends React.Component {
 
         this.state = {
             t: 5,
-            // frames: 750,
             x_pos: 55
         }
 
@@ -21,7 +20,7 @@ class Twist extends React.Component {
     }
 
     componentDidMount() {
-        this.props.receiveGraph("twist")
+        this.props.receiveGraph("DNA Twists")
     }
 
     componentWillUnmount() {
@@ -65,7 +64,6 @@ class Twist extends React.Component {
 
     handleSubmit() {
         this.props.receiveT(this.state.t);
-        // this.props.receiveFrame(this.state.frames);
         this.state.x_pos = 55;
         let t = 0;
 
@@ -77,15 +75,15 @@ class Twist extends React.Component {
             t += 2;
             if (this.state.x_pos > 50) {
                 this.animation(t / (this.state.t * Math.PI));
-                $(".update-changes").prop("disabled", true);
+                $(".update-changes").addClass("disabled-button");
                 $(".input-slider").prop("disabled", true);
-                $(".select-func").prop("disabled", true);
+                $(".radio").prop("disabled", true);
             
             } else {
                 clearInterval(twistInterval);
-                $(".update-changes").prop("disabled", false);
+                $(".update-changes").removeClass("disabled-button");
                 $(".input-slider").prop("disabled", false);
-                $(".select-func").prop("disabled", false);
+                $(".radio").prop("disabled", false);
             }
         }, 20);
     }
@@ -99,24 +97,38 @@ class Twist extends React.Component {
     render() {
         const texX = `x(t) = t - 1.6(\\cos(24t))`;
         const texY = `y(t) = t - 1.6(\\sin(25t))`;
-        const texT = `t = (\\frac{t}{\\color{yellow}{${this.state.t}}\\Pi}) `;
+        const texT = `t = (\\frac{t}{\\color{aqua}{varT}\\Pi}) `;
 
         return (
             <div>
-                <div className="slider-div">
-                    <label className="labels">
-                        t
-                        <input onChange={this.update("t")} type="range" className="input-slider" min="5" max="10" value={this.state.t} />
-                    </label>
-                    <div className="buttons">
-                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
-                    </div>
-                </div>
                 <MathJax.Context input="tex">
-                    <div className="labels">
-                        <MathJax.Node>{texX}</MathJax.Node>
-                        <MathJax.Node>{texY}</MathJax.Node>
-                        <MathJax.Node>{texT}</MathJax.Node>
+                    <div className="slider-formula-parent-dSin">
+                        <div className="math-formula">
+                            <div className="math-formula-twists">
+                                <MathJax.Node>{texX}</MathJax.Node>
+                            </div>
+                            <div>
+                                <MathJax.Node>{texY}</MathJax.Node>
+                            </div>
+                        </div>
+                        <div id="twists" className="slider-formula">
+                            <div className="math-formula">
+                                <MathJax.Node>{texT}</MathJax.Node>
+                            </div>
+                            <label className="labels-X">
+                                <input onChange={this.update("t")} type="range" className="input-slider" min="5" max="10" value={this.state.t} />
+                                <div className="var-div">
+                                    <div className="labels-lime">varT: </div>
+                                    <div className="var">{this.state.t}</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div
+                            className="update-changes"
+                            onClick={() => this.handleSubmit()}
+                        >
+                            Run
+                         </div>
                     </div>
                 </MathJax.Context>
 
