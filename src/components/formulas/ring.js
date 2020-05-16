@@ -21,7 +21,7 @@ class Ring extends React.Component {
     }
 
     componentDidMount() {
-        this.props.receiveGraph("ring")
+        this.props.receiveGraph("Abstract Green")
     }
 
     componentWillUnmount() {
@@ -89,14 +89,14 @@ class Ring extends React.Component {
             t += 0.5;
             if (t < 150) {
                 this.animation(t / (80 * Math.PI));
-                $(".update-changes").prop("disabled", true);
+                $(".update-changes").addClass("disabled-button");
                 $(".input-slider").prop("disabled", true);
-                $(".select-func").prop("disabled", true);
+                $(".radio").prop("disabled", true);
             } else {
                 clearInterval(ringInterval);
-                $(".update-changes").prop("disabled", false);
+                $(".update-changes").removeClass("disabled-button");
                 $(".input-slider").prop("disabled", false);
-                $(".select-func").prop("disabled", false);
+                $(".radio").prop("disabled", false);
             }
         }, 20);
     }
@@ -108,32 +108,55 @@ class Ring extends React.Component {
     }
 
     render() {
-        const texX = `x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\${this.state.x_func}(13t)}}{2} + \\frac{\\sin(6t)}{3}`;
-        const texY = `y(t) = \\sin(20t) + \\frac{\\color{lime}{\\${this.state.y_func}(13t)}}{2} + \\frac{\\cos(6t)}{3}`;
+        const texX = `x(t) = \\cos(20t) + \\frac{\\color{aqua}{varX}(13t)}{2} + \\frac{\\sin(6t)}{3}`;
+        const texY = `y(t) = \\sin(20t) + \\frac{\\color{aqua}{varY}(13t)}{2} + \\frac{\\cos(6t)}{3}`;
         return (
             <div>
-                <div className="slider-div">
-                    <select className="select-func" onChange={this.update("x_func")}>
-                        <option className="options" value={"cos"}>cos(13t)</option>
-                        <option className="options" value={"sin"}>sin(13t)</option>
-                        <option className="options" value={"tan"}>tan(13t)</option>
-                    </select>
-
-                    <select className="select-func" onChange={this.update("y_func")}>
-                        <option className="options" value={"cos"}>cos(13t)</option>
-                        <option className="options" value={"sin"}>sin(13t)</option>
-                        <option className="options" value={"tan"}>tan(13t)</option>
-                    </select>
-                    <div className="buttons">
-                        <button className="update-changes" onClick={() => this.handleSubmit()}>Run</button>
-                    </div>
-                </div>
-                <div className="horizontal-line"></div>
                 <MathJax.Context input="tex">
-                    <div className="labels">
-                        <MathJax.Node>{texX}</MathJax.Node>
-
-                        <MathJax.Node>{texY}</MathJax.Node>
+                    <div className="slider-formula-parent-dSin">
+                        <div className="select-formula">
+                            <div className="math-formula" id="width-formula">
+                                <MathJax.Node>{texX}</MathJax.Node>
+                            </div>
+                            <label className="labels-Y">
+                                <div className="var-radio-div">
+                                    <div className="labels-lime">varX: </div>
+                                    <div>
+                                        <input checked={this.state.x_func === "cos"} className="radio" onChange={this.update("x_func")} name="varX" type="radio" value="cos" />
+                                        <label className="labels">cos</label>
+                                        <input checked={this.state.x_func === "sin"} className="radio" onChange={this.update("x_func")} name="varX" type="radio" value="sin" />
+                                        <label className="labels">sin</label>
+                                        <input checked={this.state.x_func === "tan"} className="radio" onChange={this.update("x_func")} name="varX" type="radio" value="tan" />
+                                        <label className="labels">tan</label>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div className="select-formula">
+                            <div className="math-formula" id="width-formula">
+                                <MathJax.Node>{texY}</MathJax.Node>
+                            </div>
+                            <label className="labels-Y">
+                                <div className="var-radio-div">
+                                    <div className="labels-lime">varY: </div>
+                                    <div>
+                                        <input checked={this.state.y_func === "cos"} className="radio" onChange={this.update("y_func")} name="varY" type="radio" value="cos" />
+                                        <label className="labels">cos</label>
+                                        <input checked={this.state.y_func === "sin"} className="radio" onChange={this.update("y_func")} name="varY" type="radio" value="sin" />
+                                        <label className="labels">sin</label>
+                                        <input checked={this.state.y_func === "tan"} className="radio" onChange={this.update("y_func")} name="varY" type="radio" value="tan" />
+                                        <label className="labels">tan</label>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div
+                            id="update-id"
+                            className="update-changes"
+                            onClick={() => this.handleSubmit()}
+                        >
+                            Run
+                        </div>
                     </div>
                 </MathJax.Context>
 

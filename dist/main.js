@@ -54614,7 +54614,10 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
   _createClass(Dropdown, [{
     key: "updateGraph",
     value: function updateGraph(item) {
-      this.props.receiveGraph(item.graph);
+      this.props.receiveGraph(item);
+      this.setState({
+        title: [item]
+      });
       this.toggleList();
     }
   }, {
@@ -54644,13 +54647,13 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "graph-select"
         }, list.map(function (item) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             onClick: function onClick() {
               return _this2.updateGraph(item);
             },
             className: "graph-li",
             key: list.indexOf(item)
-          }, item.name);
+          }, item);
         }));
       }
     }
@@ -54810,7 +54813,7 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("butterfly");
+      this.props.receiveGraph("Butterfly Curve");
     }
   }, {
     key: "componentWillUnmount",
@@ -54855,14 +54858,14 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
         if (t < 250) {
           _this2.animation(t / (12 * Math.PI));
 
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()('.update-changes').prop('disabled', true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(butterflyInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -54880,42 +54883,97 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
-      var texY = "y(t) = \\cos(t)(e^{\\color{lime}{\\".concat(this.state.y_func, "(t)}} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)");
+      var texX = "x(t) = \\sin(t)(e^{\\color{aqua}{varX}(t)} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
+      var texY = "y(t) = \\cos(t)(e^{\\color{aqua}{varY}(t)} - 2(\\cos(4t)) - sin(\\frac{t}{12})^5)";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("x_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos"
-      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin"
-      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan"
-      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("y_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "cos"
-      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin"
-      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "tan"
-      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "update-changes",
-        onClick: function onClick() {
-          return _this4.handleSubmit();
-        }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
         input: "tex"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varX: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "cos",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
+        value: "cos"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "sin",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
+        value: "sin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "tan",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
+        value: "tan"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "cos",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
+        value: "cos"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "sin",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
+        value: "sin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "tan",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
+        value: "tan"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "update-changes",
+        id: "update-id",
+        onClick: function onClick() {
+          return _this4.handleSubmit();
+        }
+      }, "Run"))));
     }
   }]);
 
@@ -55024,7 +55082,7 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
   _createClass(coolButterfly, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("coolButterfly");
+      this.props.receiveGraph("Darth Vader");
     }
   }, {
     key: "componentWillUnmount",
@@ -55054,15 +55112,15 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     key: "rgb",
     value: function rgb(t) {
       function r(t) {
-        return 100 + Math.cos(t / 300) * 700;
+        return 300 + Math.sin(t / 300) * 20;
       }
 
       function g(t) {
-        return Math.sin(t / 400) * 500;
+        return 200 + Math.sin(t / 400) * 500;
       }
 
       function b(t) {
-        return 200 + Math.sin(t / 60) * 55;
+        return 100 + Math.sin(t / 60) * 55;
       }
 
       return "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t), ")");
@@ -55083,14 +55141,14 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
         if (t < 199) {
           _this2.animation(t / (12 * Math.PI));
 
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(coolButterflyInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -55108,42 +55166,95 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\sin(t)(e^{\\color{yellow}{\\".concat(this.state.x_func, "(t)}} + 2(\\color{lime}{\\").concat(this.state.y_func, "(4t)}) - sin(\\frac{t}{12})^5)");
+      var texX = "x(t) = \\sin(t)(e^{\\color{aqua}{varOne}(t)} + 2(\\color{aqua}{varTwo}(4t)) - sin(\\frac{t}{12})^5)";
       var texY = "y(t) = \\cos(t)(e^{\\cos(t)} + 2(\\cos(4t)) - sinos(4t)) - sin(\\frac{t}{12})^5)";
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("x_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div-vader"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varOne: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "cos",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "cos"
-      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "sin",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "sin"
-      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "tan",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "tan"
-      }, "tan(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("y_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div-vader"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varTwo: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "cos",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "cos"
-      }, "cos(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "sin",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "sin"
-      }, "sin(4t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "tan",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "tan"
-      }, "tan(4t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "update-id",
         className: "update-changes",
         onClick: function onClick() {
           return _this4.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+      }, "Run"))));
     }
   }]);
 
@@ -55251,7 +55362,7 @@ var Donut = /*#__PURE__*/function (_React$Component) {
   _createClass(Donut, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("donut");
+      this.props.receiveGraph("Abstract White");
     }
   }, {
     key: "componentWillUnmount",
@@ -55293,14 +55404,14 @@ var Donut = /*#__PURE__*/function (_React$Component) {
         if (t < 460) {
           _this2.animation(t / (50 * Math.PI));
 
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(donutInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -55318,38 +55429,78 @@ var Donut = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "({13t})}}{2} + \\frac{\\sin(14t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\color{lime}{\\".concat(this.state.y_func, "({13t})}}{2} + \\frac{\\cos(14t)}{3}");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("x_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      var texX = "x(t) = \\cos(20t) + \\frac{\\color{aqua}{varX}({13t})}{2} + \\frac{\\sin(14t)}{3}";
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{aqua}{varY}({13t})}{2} + \\frac{\\cos(14t)}{3}";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varX: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "cos",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "cos"
-      }, "cos(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "sin",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "sin"
-      }, "sin(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("y_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "sin"
-      }, "sin(t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "cos",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "cos"
-      }, "cos(t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "sin",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
+        value: "sin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "update-changes",
+        id: "update-id",
         onClick: function onClick() {
           return _this4.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+      }, "Run"))));
     }
   }]);
 
@@ -55459,7 +55610,7 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
   _createClass(doubleSin, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("doubleSin");
+      this.props.receiveGraph("Double Sine");
     }
   }, {
     key: "componentWillUnmount",
@@ -55523,14 +55674,14 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
         if (t < _this2.state.frames) {
           _this2.animation(t);
 
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(doubleSinInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -55548,57 +55699,75 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
-      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{lime}{".concat(this.state.y_val, "}})");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      var varX = this.state.x_val;
+      var varY = this.state.y_val;
+      var texX = "x(t) = \\frac{t}{\\color{aqua}{varX}}";
+      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{aqua}{varY}})";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "labels-X"
-      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("x_val"),
         type: "range",
         className: "input-slider",
         min: "50",
         max: "500",
         value: this.state.x_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels-Y"
-      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varX: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var"
+      }, varX)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-X"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("y_val"),
         type: "range",
         className: "input-slider",
         min: "50",
         max: "500",
         value: this.state.y_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var"
+      }, varY)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-frame"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "labels"
-      }, "Animation Frames", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("frames"),
         type: "range",
         className: "input-slider",
         min: "130",
         max: "200",
         value: this.state.frames
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels"
+      }, "Frames: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-frame"
+      }, "  ", this.state.frames, " ")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "update-changes",
         onClick: function onClick() {
           return _this4.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "frame-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, "Animation frames: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "frame-num"
-      }, " ", this.state.frames, " ")))));
+      }, "Run"))));
     }
   }]);
 
@@ -55702,32 +55871,7 @@ var Formula = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      graph: "",
-      graph_types: [{
-        name: "Select a graph",
-        graph: ""
-      }, {
-        name: "Sine",
-        graph: "sin"
-      }, {
-        name: "Double Sine",
-        graph: "doubleSin"
-      }, {
-        name: "Butterfly Curve",
-        graph: "butterfly"
-      }, {
-        name: "Possibly Darth Vader",
-        graph: "coolButterfly"
-      }, {
-        name: "Abstract Green",
-        graph: "ring"
-      }, {
-        name: "Abstract White",
-        graph: "donut"
-      }, {
-        name: "DNA Twists",
-        graph: "twists"
-      }]
+      graph_types: ["Sine", "Double Sine", "Butterfly Curve", "Darth Vader", "Abstract Green", "Abstract White", "DNA Twists"]
     };
     _this.renderSwitch = _this.renderSwitch.bind(_assertThisInitialized(_this));
     return _this;
@@ -55737,42 +55881,37 @@ var Formula = /*#__PURE__*/function (_React$Component) {
     key: "renderSwitch",
     value: function renderSwitch() {
       switch (this.props.graph) {
-        case "sin":
+        case "Sine":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
 
-        case "doubleSin":
+        case "Double Sine":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
 
-        case "butterfly":
+        case "Butterfly Curve":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
 
-        case "coolButterfly":
+        case "Darth Vader":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
 
-        case "ring":
+        case "Abstract Green":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
 
-        case "donut":
+        case "Abstract White":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
 
-        case "twist":
+        case "DNA Twists":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "test"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropdown_dropdown_container__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        onChange: function onChange() {
-          return _this2.update("graph");
-        },
-        title: "Select a graph",
+        title: this.props.graph,
         list: this.state.graph_types
-      }), this.renderSwitch(this.state.graph));
+      }), this.renderSwitch(this.props.graph));
     }
   }]);
 
@@ -55892,7 +56031,7 @@ var Ring = /*#__PURE__*/function (_React$Component) {
   _createClass(Ring, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("ring");
+      this.props.receiveGraph("Abstract Green");
     }
   }, {
     key: "componentWillUnmount",
@@ -55956,14 +56095,14 @@ var Ring = /*#__PURE__*/function (_React$Component) {
         if (t < 150) {
           _this2.animation(t / (80 * Math.PI));
 
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(ringInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -55981,48 +56120,95 @@ var Ring = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var texX = "x(t) = \\cos(20t) + \\frac{\\color{yellow}{\\".concat(this.state.x_func, "(13t)}}{2} + \\frac{\\sin(6t)}{3}");
-      var texY = "y(t) = \\sin(20t) + \\frac{\\color{lime}{\\".concat(this.state.y_func, "(13t)}}{2} + \\frac{\\cos(6t)}{3}");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("x_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      var texX = "x(t) = \\cos(20t) + \\frac{\\color{aqua}{varX}(13t)}{2} + \\frac{\\sin(6t)}{3}";
+      var texY = "y(t) = \\sin(20t) + \\frac{\\color{aqua}{varY}(13t)}{2} + \\frac{\\cos(6t)}{3}";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varX: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "cos",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "cos"
-      }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "sin",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "sin"
-      }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.x_func === "tan",
+        className: "radio",
+        onChange: this.update("x_func"),
+        name: "varX",
+        type: "radio",
         value: "tan"
-      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "select-func",
-        onChange: this.update("y_func")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "select-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula",
+        id: "width-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-Y"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-radio-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varY: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "cos",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "cos"
-      }, "cos(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "cos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "sin",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "sin"
-      }, "sin(13t)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        className: "options",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "sin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.state.y_func === "tan",
+        className: "radio",
+        onChange: this.update("y_func"),
+        name: "varY",
+        type: "radio",
         value: "tan"
-      }, "tan(13t)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels"
+      }, "tan"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "update-id",
         className: "update-changes",
         onClick: function onClick() {
           return _this4.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+      }, "Run"))));
     }
   }]);
 
@@ -56131,7 +56317,7 @@ var Sin = /*#__PURE__*/function (_React$Component) {
   _createClass(Sin, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("sin");
+      this.props.receiveGraph("Sine");
     }
   }, {
     key: "componentWillUnmount",
@@ -56173,14 +56359,14 @@ var Sin = /*#__PURE__*/function (_React$Component) {
 
         if (that.state.x_pos < 800) {
           that.animation(t);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(sinInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_4___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_4___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -56198,42 +56384,62 @@ var Sin = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var texX = "x(t) = \\frac{t}{\\color{yellow}{".concat(this.state.x_val, "}}");
-      var texY = "y(t) = t(\\frac{4\\Pi}{\\color{lime}{".concat(this.state.y_val, "}})");
+      var varX = this.state.x_val;
+      var varY = this.state.y_val;
+      var texX = "\\color{white}{x(t) = \\frac{t}{\\color{aqua}{varX}}}";
+      var texY = "\\color{white}{y(t) = t(\\frac{4\\Pi}{\\color{aqua}{varY}})}";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buttons"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "labels-X"
-      }, "X", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "input-slider",
         onChange: this.update("x_val"),
         type: "range",
         min: 50,
-        max: 500,
+        max: 210,
         value: this.state.x_val
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels-Y"
-      }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varX: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var"
+      }, varX)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-X"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "input-slider",
         onChange: this.update("y_val"),
         type: "range",
         min: 50,
-        max: 500,
+        max: 210,
         value: this.state.y_val
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varY:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var"
+      }, varY)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "update-changes",
         onClick: function onClick() {
           return _this3.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))));
+      }, "Run"))));
     }
   }]);
 
@@ -56342,7 +56548,7 @@ var Twist = /*#__PURE__*/function (_React$Component) {
   _createClass(Twist, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveGraph("twist");
+      this.props.receiveGraph("DNA Twists");
     }
   }, {
     key: "componentWillUnmount",
@@ -56402,14 +56608,14 @@ var Twist = /*#__PURE__*/function (_React$Component) {
         if (_this2.state.x_pos > 50) {
           _this2.animation(t / (_this2.state.t * Math.PI));
 
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").addClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", true);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", true);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".radio").prop("disabled", true);
         } else {
           clearInterval(twistInterval);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".update-changes").removeClass("disabled-button");
           jquery__WEBPACK_IMPORTED_MODULE_3___default()(".input-slider").prop("disabled", false);
-          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".select-func").prop("disabled", false);
+          jquery__WEBPACK_IMPORTED_MODULE_3___default()(".radio").prop("disabled", false);
         }
       }, 20);
     }
@@ -56429,32 +56635,41 @@ var Twist = /*#__PURE__*/function (_React$Component) {
 
       var texX = "x(t) = t - 1.6(\\cos(24t))";
       var texY = "y(t) = t - 1.6(\\sin(25t))";
-      var texT = "t = (\\frac{t}{\\color{yellow}{".concat(this.state.t, "}\\Pi}) ");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "slider-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "labels"
-      }, "t", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      var texT = "t = (\\frac{t}{\\color{aqua}{varT}\\Pi}) ";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
+        input: "tex"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "slider-formula-parent-dSin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula-twists"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "twists",
+        className: "slider-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "math-formula"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "labels-X"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         onChange: this.update("t"),
         type: "range",
         className: "input-slider",
         min: "5",
         max: "10",
         value: this.state.t
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "labels-lime"
+      }, "varT: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "var"
+      }, this.state.t)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "update-changes",
         onClick: function onClick() {
           return _this4.handleSubmit();
         }
-      }, "Run"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "horizontal-line"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Context, {
-        input: "tex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "labels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texX), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texY), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_mathjax2__WEBPACK_IMPORTED_MODULE_1___default.a.Node, null, texT))));
+      }, "Run"))));
     }
   }]);
 
@@ -56607,20 +56822,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
       this.context = this.canvas.getContext('2d');
       this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
       this.props.receiveContext(this.Demoview.ctx);
-    } // runDemoView () {
-    //   let ctx = this.Demoview.ctx;
-    //   ctx.clearRect(0, 0, 800, 600);
-    //   // clearInterval(this.Demoview)
-    //   this.Demoview[this.props.graph](800, 600, this.props.x, this.props.y, this.props.t, this.props.frames);
-    // }
-    // clear() {
-    //   clearInterval(this.Demoview[this.props.graph])
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "screen-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -56653,8 +56858,10 @@ var Main = /*#__PURE__*/function (_React$Component) {
         className: "icons",
         src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "horizontal-line"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "intro"
-      }, "Math-in-Motion animates graphs of mathematical functions and parametrical plots. Change the values to see how they affect the graphs!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Math-in-Motion animates graphs of mathematical functions and parametrical plots. Try running the animation with default values, then change them to see the effect!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "credit-div"
@@ -56864,7 +57071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var graphReducer = function graphReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Sine";
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -56873,7 +57080,7 @@ var graphReducer = function graphReducer() {
       return action.graph;
 
     case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return null;
+      return "Sine";
 
     default:
       return state;

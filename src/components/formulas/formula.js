@@ -14,37 +14,35 @@ class Formula extends React.Component {
     super(props);
 
     this.state = {
-      graph: "",
       graph_types: [
-        {name: "Select a graph", graph: ""},
-        {name: "Sine", graph: "sin"},
-        {name: "Double Sine", graph: "doubleSin"},
-        {name: "Butterfly Curve", graph: "butterfly"},
-        {name: "Possibly Darth Vader", graph: "coolButterfly"},
-        {name: "Abstract Green", graph: "ring"},
-        {name: "Abstract White", graph: "donut"},
-        {name: "DNA Twists", graph: "twists"}
+        "Sine",
+        "Double Sine",
+        "Butterfly Curve",
+        "Darth Vader",
+        "Abstract Green",
+        "Abstract White",
+        "DNA Twists"
       ]
     }
-    
+
     this.renderSwitch = this.renderSwitch.bind(this);
   }
     
     renderSwitch () {
         switch(this.props.graph) {
-            case "sin":
+            case "Sine":
               return <Sin />
-            case "doubleSin":
+            case "Double Sine":
               return <DoubleSin />
-            case "butterfly": 
+            case "Butterfly Curve":
               return <Butterfly /> 
-            case "coolButterfly":
+            case "Darth Vader":
               return <CoolButterfly />
-            case "ring":
+            case "Abstract Green":
               return <Ring />
-            case "donut":
+            case "Abstract White":
               return <Donut />
-            case "twist":
+            case "DNA Twists":
               return <Twist />
         }
     }
@@ -52,8 +50,8 @@ class Formula extends React.Component {
     render () {
       return (
           <div className="test">
-              <DropdownContainer onChange={() => this.update("graph")} title={"Select a graph"} list={this.state.graph_types}/>
-              {this.renderSwitch(this.state.graph)}
+              <DropdownContainer title={this.props.graph} list={this.state.graph_types}/>
+              {this.renderSwitch(this.props.graph)}
           </div>
       )
     }

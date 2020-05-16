@@ -20,7 +20,10 @@ class Dropdown extends React.Component {
   }
 
   updateGraph(item) {
-    this.props.receiveGraph(item.graph);
+    this.props.receiveGraph(item);
+    this.setState({
+      title: [item]
+    })
     this.toggleList()
   }
 
@@ -43,9 +46,9 @@ class Dropdown extends React.Component {
               <ul className="graph-select">
                   {list.map(item => {
                       return (
-                      <li onClick={() => this.updateGraph(item)} className="graph-li" key={list.indexOf(item)}>
-                          {item.name}
-                      </li>
+                      <div onClick={() => this.updateGraph(item)} className="graph-li" key={list.indexOf(item)}>
+                          {item}
+                      </div>
                       )
                   })}
               </ul>
