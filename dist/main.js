@@ -54313,8 +54313,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main */ "./src/components/main.js");
-/* harmony import */ var _header_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header/header */ "./src/components/header/header.js");
-/* harmony import */ var _components_formulas_formula__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/formulas/formula */ "./src/components/formulas/formula.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54340,8 +54338,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -54356,9 +54352,6 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      // const canvas = document.getElementById("canvas");
-      // const ctx = canvas.getContext("2d");
-      // const Demoview = new DemoView(ctx);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
@@ -54367,183 +54360,6 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./src/components/demo_view.js":
-/*!*************************************!*\
-  !*** ./src/components/demo_view.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _util_graph__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/graph */ "./src/util/graph.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-
-
-var DemoView = function DemoView(ctx) {
-  _classCallCheck(this, DemoView);
-
-  this.Demo = new Demo();
-  this.ctx = ctx;
-  this.Graph = new _util_graph__WEBPACK_IMPORTED_MODULE_0__["default"]();
-}; // DemoView.prototype.butterfly = function (w, h, userX, userY) {
-//     let t = 0
-//     function r(t) {
-//         return 100 + Math.cos(t / 300) * 700;
-//     };
-//     function g(t) {
-//         return Math.sin(t / 400) * 500;
-//     };
-//     function b(t) {
-//         return 200 + Math.sin(t / 60) * 55;
-//     };
-//     setInterval(() => {
-//         this.ctx.fillStyle = `rgb(
-//             ${r(t)},
-//             ${g(t)},
-//             ${b(t)})`;
-//             t += 1
-//             if (t < 250) {
-//                 this.Graph.butterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
-//             }
-//         }, 20);
-//         // clearInterval(interval);
-//     // butterflyInterval(r(t), g(t), b(t), w, h, userX, userY)
-// }
-// DemoView.prototype.coolButterfly = function (w, h, userX, userY) {
-//     let t = 0
-//     function r(t) {
-//         return 100 + Math.cos(t / 300) * 700;
-//     };
-//     function g(t) {
-//         return Math.sin(t / 400) * 500;
-//     };
-//     function b(t) {
-//         return 200 + Math.sin(t / 60) * 55;
-//     };
-//     setInterval(() => {
-//         this.ctx.strokeStyle = `rgb(
-//         ${r(t)},
-//         ${g(t)},
-//         ${b(t)})`;
-//         t += 1
-//         if (t < 199) {
-//             this.Graph.coolButterfly(this.ctx, w, h, t / (12 * Math.PI), userX, userY)
-//         }
-//     }, 20);
-// }
-// DemoView.prototype.sin = function (w, h, userX, userY) {
-//     let t = 0
-//     function r(t) {
-//         return 100 + Math.cos(t / 300) * 700;
-//     };
-//     function g(t) {
-//         return Math.sin(t / 400) * 500;
-//     };
-//     function b(t) {
-//         return 200 + Math.sin(t / 60) * 55;
-//     };
-//     setInterval(() => {
-//         this.ctx.strokeStyle = `rgb(
-//         ${r(t)},
-//         ${g(t)},
-//         ${b(t)}`;
-//         t += 1
-//         this.Graph.sin(this.ctx, w, h, t, userX, userY)
-//     }, 20);
-// }
-
-
-DemoView.prototype.doubleSin = function (w, h, userX, userY) {
-  var _this = this;
-
-  var t = 0;
-
-  function r(t) {
-    return 100 + Math.tan(t / 300) * 200;
-  }
-
-  ;
-
-  function g(t) {
-    return Math.cos(t / 400) * 500;
-  }
-
-  ;
-
-  function b(t) {
-    return 200 + Math.tan(t / 900) * 55;
-  }
-
-  ;
-  setInterval(function () {
-    _this.ctx.strokeStyle = "rgb(\n        ".concat(r(t), ",\n        ").concat(g(t), ",\n        ").concat(b(t));
-    t += 1;
-
-    if (t < 130) {
-      _this.Graph.doubleSin(_this.ctx, w, h, t, userX, userY);
-    }
-  }, 20);
-}; // DemoView.prototype.ring = function (w, h, userX, userY) {
-//     let t = 0
-//     function r(t) {
-//         return 150 + Math.sin(t / 700) * 200;
-//     };
-//     function g(t) {
-//         return Math.cos(t / 400) * 500;
-//     };
-//     function b(t) {
-//         return 200 + Math.tan(t / 900) * 55;
-//     };
-//     setInterval(() => {
-//         this.ctx.strokeStyle = `rgb(
-//         ${r(t)},
-//         ${g(t)},
-//         ${b(t)}`;
-//         t += 0.5
-//         if (t < 150) {
-//             this.Graph.ring(this.ctx, w, h, t / (80 * Math.PI), userX, userY)
-//         }
-//     }, 20);
-// }
-// DemoView.prototype.donut = function (w, h, userX, userY) {
-//     let t = 0
-//     setInterval(() => {
-//         t += 1
-//         if (t < 460) {
-//             this.Graph.donut(this.ctx, w, h, t / ( 50 * Math.PI), userX, userY)
-//         }
-//     }, 20);
-// }
-// DemoView.prototype.twist = function (w, h, none1, none2, userT, userFrames) {
-//   let t = 0;
-//   function r(t) {
-//     return 450 + Math.cos(t / 100) * 500;
-//   }
-//   function g(t) {
-//     return 300 + Math.cos(t / 400) * 500;
-//   }
-//   function b(t) {
-//     return 500 + Math.sin(t / 200) * 255;
-//   }
-//   setInterval(() => {
-//     this.ctx.strokeStyle = `rgb(
-//         ${r(t)},
-//         ${g(t)},
-//         ${b(t)}`;
-//     t += 2;
-//     if (t < userFrames) {
-//       this.Graph.twist(this.ctx, w, h, t / (userT * Math.PI));
-//     }
-//   }, 20);
-// };
-
-
-/* harmony default export */ __webpack_exports__["default"] = (DemoView);
 
 /***/ }),
 
@@ -55808,157 +55624,6 @@ var mDTP = function mDTP(dispatch) {
 
 /***/ }),
 
-/***/ "./src/components/formulas/formula.js":
-/*!********************************************!*\
-  !*** ./src/components/formulas/formula.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sin */ "./src/components/formulas/sin.js");
-/* harmony import */ var _double_sin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./double_sin */ "./src/components/formulas/double_sin.js");
-/* harmony import */ var _butterfly__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./butterfly */ "./src/components/formulas/butterfly.js");
-/* harmony import */ var _cool_butterfly__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cool_butterfly */ "./src/components/formulas/cool_butterfly.js");
-/* harmony import */ var _ring__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ring */ "./src/components/formulas/ring.js");
-/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./donut */ "./src/components/formulas/donut.js");
-/* harmony import */ var _twist__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./twist */ "./src/components/formulas/twist.js");
-/* harmony import */ var _dropdown_dropdown_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../dropdown/dropdown_container */ "./src/components/dropdown/dropdown_container.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-
-
-
-
-
-var Formula = /*#__PURE__*/function (_React$Component) {
-  _inherits(Formula, _React$Component);
-
-  var _super = _createSuper(Formula);
-
-  function Formula(props) {
-    var _this;
-
-    _classCallCheck(this, Formula);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      graph_types: ["Sine", "Double Sine", "Butterfly Curve", "Darth Vader", "Abstract Green", "Abstract White", "DNA Twists"]
-    };
-    _this.renderSwitch = _this.renderSwitch.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Formula, [{
-    key: "renderSwitch",
-    value: function renderSwitch() {
-      switch (this.props.graph) {
-        case "Sine":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
-
-        case "Double Sine":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-
-        case "Butterfly Curve":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
-
-        case "Darth Vader":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
-
-        case "Abstract Green":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-
-        case "Abstract White":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
-
-        case "DNA Twists":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "test"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropdown_dropdown_container__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        title: this.props.graph,
-        list: this.state.graph_types
-      }), this.renderSwitch(this.props.graph));
-    }
-  }]);
-
-  return Formula;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Formula);
-
-/***/ }),
-
-/***/ "./src/components/formulas/formula_container.js":
-/*!******************************************************!*\
-  !*** ./src/components/formulas/formula_container.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _formula__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formula */ "./src/components/formulas/formula.js");
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/graph_actions */ "./src/actions/graph_actions.js");
-
-
-
-
-var mSTP = function mSTP(state) {
-  return {
-    graph: state.graph
-  };
-};
-
-var mDTP = function mDTP(dispatch) {
-  return {
-    clear: function clear() {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["clear"])());
-    },
-    receiveGraph: function receiveGraph(graph) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_2__["receiveGraph"])(graph));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_formula__WEBPACK_IMPORTED_MODULE_1__["default"]));
-
-/***/ }),
-
 /***/ "./src/components/formulas/ring.js":
 /*!*****************************************!*\
   !*** ./src/components/formulas/ring.js ***!
@@ -56602,7 +56267,6 @@ var Twist = /*#__PURE__*/function (_React$Component) {
       this.props.context.clearRect(0, 0, 800, 600);
       var twistInterval = setInterval(function () {
         _this2.props.context.strokeStyle = _this2.rgb(t);
-        console.log(_this2.state.x_pos);
         t += 2;
 
         if (_this2.state.x_pos > 50) {
@@ -56702,10 +56366,10 @@ var mDTP = function mDTP(dispatch) {
 
 /***/ }),
 
-/***/ "./src/components/header/header.js":
-/*!*****************************************!*\
-  !*** ./src/components/header/header.js ***!
-  \*****************************************/
+/***/ "./src/components/interface/interface.js":
+/*!***********************************************!*\
+  !*** ./src/components/interface/interface.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -56713,58 +56377,14 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function Header() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "title"
-  }, "Bounce")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "link-space"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "icon-link",
-    href: "https://angel.co/u/wilson-ngu",
-    target: "_blank"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "icons-a",
-    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "icon-link",
-    href: "https://github.com/Heyitswilson/Bounce",
-    target: "_blank"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "icons",
-    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "icon-link",
-    href: "https://www.linkedin.com/in/wilson-ngu/",
-    target: "_blank"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "icons",
-    src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
-  }))));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-
-/***/ "./src/components/main.js":
-/*!********************************!*\
-  !*** ./src/components/main.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _demo_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo_view */ "./src/components/demo_view.js");
-/* harmony import */ var _formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formulas/formula_container */ "./src/components/formulas/formula_container.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_context_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/context_actions */ "./src/actions/context_actions.js");
+/* harmony import */ var _formulas_sin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../formulas/sin */ "./src/components/formulas/sin.js");
+/* harmony import */ var _formulas_double_sin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../formulas/double_sin */ "./src/components/formulas/double_sin.js");
+/* harmony import */ var _formulas_butterfly__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../formulas/butterfly */ "./src/components/formulas/butterfly.js");
+/* harmony import */ var _formulas_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../formulas/cool_butterfly */ "./src/components/formulas/cool_butterfly.js");
+/* harmony import */ var _formulas_ring__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../formulas/ring */ "./src/components/formulas/ring.js");
+/* harmony import */ var _formulas_donut__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../formulas/donut */ "./src/components/formulas/donut.js");
+/* harmony import */ var _formulas_twist__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../formulas/twist */ "./src/components/formulas/twist.js");
+/* harmony import */ var _dropdown_dropdown_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../dropdown/dropdown_container */ "./src/components/dropdown/dropdown_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56793,6 +56413,138 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+var Formula = /*#__PURE__*/function (_React$Component) {
+  _inherits(Formula, _React$Component);
+
+  var _super = _createSuper(Formula);
+
+  function Formula(props) {
+    var _this;
+
+    _classCallCheck(this, Formula);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      graph_types: ["Sine", "Double Sine", "Butterfly Curve", "Darth Vader", "Abstract Green", "Abstract White", "DNA Twists"]
+    };
+    _this.renderSwitch = _this.renderSwitch.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Formula, [{
+    key: "renderSwitch",
+    value: function renderSwitch() {
+      switch (this.props.graph) {
+        case "Sine":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_sin__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+
+        case "Double Sine":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_double_sin__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+
+        case "Butterfly Curve":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_butterfly__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+
+        case "Darth Vader":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_cool_butterfly__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+
+        case "Abstract Green":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_ring__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+
+        case "Abstract White":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_donut__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+
+        case "DNA Twists":
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_twist__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "test"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropdown_dropdown_container__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        title: this.props.graph,
+        list: this.state.graph_types
+      }), this.renderSwitch(this.props.graph));
+    }
+  }]);
+
+  return Formula;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Formula);
+
+/***/ }),
+
+/***/ "./src/components/interface/interface_container.js":
+/*!*********************************************************!*\
+  !*** ./src/components/interface/interface_container.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interface */ "./src/components/interface/interface.js");
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    graph: state.graph
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, null)(_interface__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./src/components/main.js":
+/*!********************************!*\
+  !*** ./src/components/main.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _interface_interface_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interface/interface_container */ "./src/components/interface/interface_container.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_context_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/context_actions */ "./src/actions/context_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
 var Main = /*#__PURE__*/function (_React$Component) {
   _inherits(Main, _React$Component);
 
@@ -56807,8 +56559,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       graph: ""
     };
-    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef(); // this.runDemoView = this.runDemoView.bind(this);
-
+    _this.canvasRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.canvas = null;
     _this.context = null;
     _this.Demoview = null;
@@ -56820,8 +56571,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       this.canvas = this.canvasRef.current;
       this.context = this.canvas.getContext('2d');
-      this.Demoview = new _demo_view__WEBPACK_IMPORTED_MODULE_1__["default"](this.context);
-      this.props.receiveContext(this.Demoview.ctx);
+      this.props.receiveContext(this.context);
     }
   }, {
     key: "render",
@@ -56845,7 +56595,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "icon-link",
-        href: "https://github.com/Heyitswilson/Bounce",
+        href: "https://github.com/Heyitswilson/Math-In-Motion.git",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "icons",
@@ -56861,11 +56611,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
         className: "horizontal-line"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "intro"
-      }, "Math-in-Motion animates graphs of mathematical functions and parametrical plots. Try running the animation with default values, then change them to see the effect!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Math-in-Motion animates graphs of mathematical functions and parametrical plots. Try running the animation with default values, then change them to see the effects!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "credit-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formulas_formula_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_interface_interface_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
         width: "800",
         height: "600",
         id: "canvas",
@@ -56877,25 +56627,15 @@ var Main = /*#__PURE__*/function (_React$Component) {
   return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-var mSTP = function mSTP(state) {
-  return {
-    graph: state.graph,
-    x: state.x,
-    y: state.y,
-    t: state.t,
-    frames: state.frames
-  };
-};
-
 var mDTP = function mDTP(dispatch) {
   return {
     receiveContext: function receiveContext(context) {
-      return dispatch(Object(_actions_context_actions__WEBPACK_IMPORTED_MODULE_4__["receiveContext"])(context));
+      return dispatch(Object(_actions_context_actions__WEBPACK_IMPORTED_MODULE_3__["receiveContext"])(context));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mSTP, mDTP)(Main));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mDTP)(Main));
 
 /***/ }),
 
@@ -56928,35 +56668,6 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./src/demo.js":
-/*!*********************!*\
-  !*** ./src/demo.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Demo = function Demo() {
-  _classCallCheck(this, Demo);
-
-  this.DIM_X = 800;
-  this.DIM_Y = 600;
-};
-
-Demo.prototype.randomPosition = function () {
-  var x = Math.floor(Math.random() * 800);
-  var y = Math.floor(Math.random() * 800);
-  var randPos = [x, y];
-  return randPos;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Demo);
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -56972,22 +56683,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root */ "./src/components/root.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./src/store/store.js");
-/* harmony import */ var _demo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./demo */ "./src/demo.js");
-/* harmony import */ var _components_demo_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/demo_view */ "./src/components/demo_view.js");
 
 
 
 
-
-
-window.Demo = _demo__WEBPACK_IMPORTED_MODULE_4__["default"];
 document.addEventListener("DOMContentLoaded", function () {
-  var canvas = document.getElementById("canvas"); // const ctx = canvas.getContext("2d");
-
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  window.getState = store.getState; // const Demoview = new DemoView(ctx)
-  // Demoview.sinY(800, 600)
-
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), main);
@@ -57112,7 +56813,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import intervalReducer from './interval_reducer';
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
@@ -57121,8 +56821,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
-  context: _context_reducer__WEBPACK_IMPORTED_MODULE_6__["default"] // interval: intervalReducer
-
+  context: _context_reducer__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -57249,133 +56948,6 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
-
-/***/ }),
-
-/***/ "./src/util/graph.js":
-/*!***************************!*\
-  !*** ./src/util/graph.js ***!
-  \***************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Graph = function Graph(ctx) {
-  _classCallCheck(this, Graph);
-
-  this.ctx = ctx;
-}; // Graph.prototype.sin = (ctx, w, h, t, userX, userY) => {
-//     ctx.strokeStyle = `#00ffff`;
-//     ctx.lineWidth = 1;
-//     let x = function (t) {
-//         return w * t / userX
-//     };
-//     let y = function (t) {
-//         return Math.sin(t * (4 * Math.PI) / userY) * (-h / 4) + (h / 2);
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 1), y(t + 1));
-//     ctx.stroke();
-// }
-// Graph.prototype.doubleSin = (ctx, w, h, t, userX, userY) => {
-//     ctx.lineWidth = 2;
-//     let x = function (t) {
-//         return Math.sin(t * ((10 * Math.PI) / userX)) * (-w / 4) + (w / 2);
-//     };
-//     let y = function (t) {
-//         return Math.sin(t * (8 * Math.PI) / userY) * (-h / 4) + (h / 2);
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 1), y(t + 1));
-//     ctx.stroke();
-// }
-// Graph.prototype.butterfly = (ctx, w, h, t,userX, userY) => {
-//     ctx.lineWidth = 2;
-//     let x = function (t) {
-//         return (
-//             (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
-//         )
-//     };
-//     let y = function (t) {
-//         return (
-//             (Math.cos(t) * (Math.pow(Math.E, Math[userY](t)) - 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
-//         )
-//     };
-//     ctx.fillRect(x(t + 1), y(t + 1), 15, 5)
-// }
-// Graph.prototype.coolButterfly = (ctx, w, h, t, userX, userY) => {
-//     ctx.lineWidth = 2;
-//     let x = function (t) {
-//         return (
-//             (Math.sin(t) * (Math.pow(Math.E, Math[userX](t)) + 2 * Math[userY](4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-w / 10) + (w / 2)
-//         )
-//     };
-//     let y = function (t) {
-//         return (
-//             (Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) + 2 * Math.cos(4 * t) - Math.pow(Math.sin(t / 12), 5))) * (-h / 10) + (h / 2)
-//         )
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 1), y(t + 1));
-//     ctx.stroke();
-// }
-// Graph.prototype.ring = (ctx, w, h, t, userX, userY) => {
-//     ctx.lineWidth = 2;
-//     let x = function (t) {
-//         return (
-//            (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(6 * t) / 3)) * (-w / 4) + (w / 2)
-//         )
-//     };
-//     let y = function (t) {
-//         return (
-//             (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(6 * t) / 3)) * (-h / 4) + (h / 2)
-//         )
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 0.5), y(t + 0.5));
-//     ctx.stroke();
-// }
-// Graph.prototype.donut = (ctx, w, h, t, userX, userY) => {
-//     ctx.lineWidth = 2;
-//     ctx.strokeStyle = "rgb(255, 255, 255)";
-//     let x = function (t) {
-//         return (
-//            (Math.cos(20 * t) + (Math[userX](13 * t) / 2) + (Math.sin(14 * t) / 3)) * (-w / 4) + (w / 2)
-//         )
-//     };
-//     let y = function (t) {
-//         return (
-//             (Math.sin(20 * t) + (Math[userY](13 * t)/ 2) + (Math.cos(14 * t) / 3)) * (-h / 4) + (h / 2)
-//         )
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 1), y(t + 1));
-//     ctx.stroke();
-// }
-// Graph.prototype.twist = (ctx, w, h, t) => {
-//     ctx.lineWidth = 2;
-//     let x = function (t) {
-//         return (t - (1.6 * Math.cos(24 * t))) * (-w / 30) + (w/1.1);
-//     };
-//     let y = function (t) {
-//         return (t - (1.6 * Math.sin(25 * t))) * (-h / 30) + (h/1.1);
-//     };
-//     ctx.beginPath();
-//     ctx.moveTo(x(t), y(t));
-//     ctx.lineTo(x(t + 2), y(t + 2));
-//     ctx.stroke();
-// }
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Graph);
 
 /***/ })
 

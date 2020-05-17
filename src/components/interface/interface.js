@@ -1,11 +1,11 @@
 import React from 'react';
-import Sin from './sin';
-import DoubleSin from './double_sin';
-import Butterfly from './butterfly';
-import CoolButterfly from './cool_butterfly';
-import Ring from './ring';
-import Donut from './donut';
-import Twist from './twist';
+import Sin from '../formulas/sin';
+import DoubleSin from '../formulas/double_sin';
+import Butterfly from '../formulas/butterfly';
+import CoolButterfly from '../formulas/cool_butterfly';
+import Ring from '../formulas/ring';
+import Donut from '../formulas/donut';
+import Twist from '../formulas/twist';
 import DropdownContainer from '../dropdown/dropdown_container'
 
 
