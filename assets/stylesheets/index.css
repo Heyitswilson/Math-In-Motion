@@ -122,6 +122,7 @@ input, select {
 .background {
     padding: 25px;
     margin: 10px;
+    margin-left: 20px;
     background-color: black;
     width: 40%;
     opacity: 0.9;

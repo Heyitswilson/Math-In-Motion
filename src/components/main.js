@@ -1,9 +1,7 @@
 import React from 'react';
-import DemoView from './demo_view';
-import Formula from './formulas/formula_container';
+import Formula from './interface/interface_container';
 import { connect } from "react-redux";
 import { receiveContext } from '../actions/context_actions'
-
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,7 +12,6 @@ class Main extends React.Component {
     }
 
     this.canvasRef = React.createRef();
-    // this.runDemoView = this.runDemoView.bind(this);
 
     this.canvas = null;
     this.context = null;
@@ -24,8 +21,7 @@ class Main extends React.Component {
   componentDidMount() {
     this.canvas = this.canvasRef.current;
     this.context = this.canvas.getContext('2d');
-    this.Demoview = new DemoView(this.context)
-    this.props.receiveContext(this.Demoview.ctx)
+    this.props.receiveContext(this.context)
   }
 
   render () {
@@ -50,7 +46,7 @@ class Main extends React.Component {
                 </a>
                 <a
                   className="icon-link"
-                  href="https://github.com/Heyitswilson/Bounce"
+                  href="https://github.com/Heyitswilson/Math-In-Motion.git"
                   target="_blank"
                 >
                   <img
@@ -74,7 +70,7 @@ class Main extends React.Component {
             <div className="intro">
               Math-in-Motion animates graphs of mathematical functions and
               parametrical plots. Try running the animation with default values, then change 
-              them to see the effect!
+              them to see the effects!
             </div>
             <div className="background-div">
               <div className="credit-div">
@@ -94,17 +90,9 @@ class Main extends React.Component {
   }
 }
 
-const mSTP = state => ({
-  graph: state.graph,
-  x: state.x,
-  y: state.y,
-  t: state.t,
-  frames: state.frames
-})
-
 const mDTP = dispatch => ({
   receiveContext: context => dispatch(receiveContext(context))
 })
 
 
-export default connect(mSTP, mDTP) (Main)
+export default connect(null, mDTP) (Main)

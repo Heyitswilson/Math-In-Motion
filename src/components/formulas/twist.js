@@ -71,7 +71,6 @@ class Twist extends React.Component {
 
         let twistInterval = setInterval(() => {
             this.props.context.strokeStyle = this.rgb(t)
-            console.log(this.state.x_pos)
             t += 2;
             if (this.state.x_pos > 50) {
                 this.animation(t / (this.state.t * Math.PI));
