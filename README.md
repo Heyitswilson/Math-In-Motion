@@ -9,8 +9,6 @@ Bounce is a visual demo built with JavaScript which features particle collisions
 * Animated parametric plots and mathematical functions
 * RGB color changes
 
-![bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/bounce5.gif)
-
 ## Code
 
 #### Animated parametric plots and mathematical functions
