@@ -8,7 +8,6 @@ Math-in-Motion animates graphs of mathematical functions and parametrical plots 
 ## Features
 * Animated parametric plots and mathematical functions
 * RGB color changes
-* Formula display using React MathJax and LaTeX
 
 ## Code
 
