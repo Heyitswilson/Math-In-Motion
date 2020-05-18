@@ -8,7 +8,7 @@ Math-in-Motion animates graphs of mathematical functions and parametrical plots 
 ## Features
 * Animated parametric plots and mathematical functions
 * RGB color changes
-* User interaction with graph animations
+* Formula display using React MathJax and LaTeX
 
 ## Code
 
@@ -66,24 +66,5 @@ rgb(t) {
     }
 ```
 
-#### User interaction with graph animations
-The Redux store, reducers, and actions passed user-changed values to the 
-
-![butterfly](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/butterfly.gif)
-
-```javascript
-const rootReducer = combineReducers({
-    x: xReducer,
-    y: yReducer,
-    t: tReducer,
-    frames: framesReducer,
-    graph: graphReducer,
-    context: contextReducer
-});
-```
-
-
-
- 
 ## To-do
 * Add more graphs
