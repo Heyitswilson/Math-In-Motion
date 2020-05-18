@@ -1,7 +1,7 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions';
+import { receiveGraph, clear } from '../../actions/graph_actions';
 import $ from "jquery";
 
 class Sin extends React.Component {
@@ -48,8 +48,6 @@ class Sin extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveX(this.state.x_val);
-        this.props.receiveY(this.state.y_val);
         this.state.x_pos = 0
         this.props.context.clearRect(0, 0, 800, 600);
 
@@ -146,15 +144,11 @@ class Sin extends React.Component {
 }
 
 const mSTP = (state) => ({
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context,
 });
 
 const mDTP = dispatch => ({
-    receiveX: x => dispatch(receiveX(x)),
-    receiveY: y => dispatch(receiveY(y)),
     receiveGraph: graph => dispatch(receiveGraph(graph)),
     clear: () => dispatch(clear())
 })

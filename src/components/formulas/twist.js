@@ -2,7 +2,7 @@ import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
 import $ from "jquery";
-import { receiveT, receiveGraph, clear } from '../../actions/graph_actions'
+import { receiveGraph, clear } from '../../actions/graph_actions'
 
 class Twist extends React.Component {
     constructor(props) {
@@ -63,7 +63,6 @@ class Twist extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveT(this.state.t);
         this.state.x_pos = 55;
         let t = 0;
 
@@ -137,13 +136,11 @@ class Twist extends React.Component {
 }
 
 const mSTP = state => ({
-    t: state.t,
     graph: state.graph,
     context: state.context
 })
 
 const mDTP = dispatch => ({
-    receiveT: t => dispatch(receiveT(t)),
     receiveGraph: graph => dispatch(receiveGraph(graph)),
     clear: () => dispatch(clear())
 })

@@ -1,7 +1,7 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveX, receiveY, receiveGraph, clear, receiveFrame } from '../../actions/graph_actions'
+import { receiveGraph, clear } from '../../actions/graph_actions'
 import $ from "jquery";
 
 class doubleSin extends React.Component {
@@ -63,8 +63,6 @@ class doubleSin extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveX(this.state.x_val);
-        this.props.receiveY(this.state.y_val);
         let t = 0;
 
         this.props.context.clearRect(0, 0, 800, 600);
@@ -102,7 +100,6 @@ class doubleSin extends React.Component {
         const texY = `y(t) = t(\\frac{4\\Pi}{\\color{aqua}{varY}})`;
         return (
           <div>
-            {/* <div className="horizontal-line"></div> */}
             <MathJax.Context input="tex">
               <div className="slider-formula-parent-dSin">
                 <div className="slider-formula">
@@ -173,18 +170,13 @@ class doubleSin extends React.Component {
 }
 
 const mSTP = state => ({
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     frames: state.frames,
     context: state.context
 })
 
 const mDTP = dispatch => ({
-    receiveX: x=> dispatch(receiveX(x)),
-    receiveY: y=> dispatch(receiveY(y)),
     receiveGraph: graph => dispatch(receiveGraph(graph)),
-    receiveFrame: frames => dispatch(receiveFrame(frames)),
     clear: () => dispatch(clear())
 })
 

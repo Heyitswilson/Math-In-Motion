@@ -54240,57 +54240,21 @@ var receiveContext = function receiveContext(context) {
 /*!**************************************!*\
   !*** ./src/actions/graph_actions.js ***!
   \**************************************/
-/*! exports provided: RECEIVE_X, RECEIVE_Y, RECEIVE_T, RECEIVE_FRAME, CLEAR, RECEIVE_GRAPH, receiveGraph, receiveX, receiveY, receiveT, receiveFrame, clear */
+/*! exports provided: CLEAR, RECEIVE_GRAPH, receiveGraph, clear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_X", function() { return RECEIVE_X; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_Y", function() { return RECEIVE_Y; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_T", function() { return RECEIVE_T; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FRAME", function() { return RECEIVE_FRAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR", function() { return CLEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_GRAPH", function() { return RECEIVE_GRAPH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveGraph", function() { return receiveGraph; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveX", function() { return receiveX; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveY", function() { return receiveY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveT", function() { return receiveT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveFrame", function() { return receiveFrame; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clear", function() { return clear; });
-var RECEIVE_X = "RECEIVE_X";
-var RECEIVE_Y = "RECEIVE_Y";
-var RECEIVE_T = "RECEIVE_T";
-var RECEIVE_FRAME = "RECEIVE_FRAME";
 var CLEAR = "CLEAR";
 var RECEIVE_GRAPH = "RECEIVE_GRAPH";
 var receiveGraph = function receiveGraph(graph) {
   return {
     type: RECEIVE_GRAPH,
     graph: graph
-  };
-};
-var receiveX = function receiveX(x) {
-  return {
-    type: RECEIVE_X,
-    x: x
-  };
-};
-var receiveY = function receiveY(y) {
-  return {
-    type: RECEIVE_Y,
-    y: y
-  };
-};
-var receiveT = function receiveT(t) {
-  return {
-    type: RECEIVE_T,
-    t: t
-  };
-};
-var receiveFrame = function receiveFrame(frames) {
-  return {
-    type: RECEIVE_FRAME,
-    frames: frames
   };
 };
 var clear = function clear() {
@@ -54663,8 +54627,6 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveX(this.state.x_func);
-      this.props.receiveY(this.state.y_func);
       var t = 0;
       this.props.context.clearRect(0, 0, 800, 600);
       var butterflyInterval = setInterval(function () {
@@ -54798,8 +54760,6 @@ var Butterfly = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
   };
@@ -54807,12 +54767,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
@@ -54946,8 +54900,6 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveX(this.state.x_func);
-      this.props.receiveY(this.state.y_func);
       var t = 0;
       this.props.context.clearRect(0, 0, 800, 600);
       var coolButterflyInterval = setInterval(function () {
@@ -55079,8 +55031,6 @@ var coolButterfly = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
   };
@@ -55088,12 +55038,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
@@ -55210,8 +55154,6 @@ var Donut = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveX(this.state.x_func);
-      this.props.receiveY(this.state.y_func);
       this.props.context.clearRect(0, 0, 800, 600);
       var t = 0;
       var donutInterval = setInterval(function () {
@@ -55325,8 +55267,6 @@ var Donut = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
   };
@@ -55334,12 +55274,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
@@ -55479,8 +55413,6 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveX(this.state.x_val);
-      this.props.receiveY(this.state.y_val);
       var t = 0;
       this.props.context.clearRect(0, 0, 800, 600);
       var doubleSinInterval = setInterval(function () {
@@ -55592,8 +55524,6 @@ var doubleSin = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     frames: state.frames,
     context: state.context
@@ -55602,17 +55532,8 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
-    },
-    receiveFrame: function receiveFrame(frames) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveFrame"])(frames));
     },
     clear: function clear() {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["clear"])());
@@ -55749,8 +55670,6 @@ var Ring = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveX(this.state.x_func);
-      this.props.receiveY(this.state.y_func);
       var t = 0;
       this.props.context.clearRect(0, 0, 800, 600);
       var ringInterval = setInterval(function () {
@@ -55882,8 +55801,6 @@ var Ring = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
   };
@@ -55891,12 +55808,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveGraph"])(graph));
     },
@@ -56013,8 +55924,6 @@ var Sin = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      this.props.receiveX(this.state.x_val);
-      this.props.receiveY(this.state.y_val);
       this.state.x_pos = 0;
       this.props.context.clearRect(0, 0, 800, 600);
       var t = 0;
@@ -56113,8 +56022,6 @@ var Sin = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
   };
@@ -56122,12 +56029,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveX: function receiveX(x) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveX"])(x));
-    },
-    receiveY: function receiveY(y) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveY"])(y));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_3__["receiveGraph"])(graph));
     },
@@ -56261,7 +56162,6 @@ var Twist = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
-      this.props.receiveT(this.state.t);
       this.state.x_pos = 55;
       var t = 0;
       this.props.context.clearRect(0, 0, 800, 600);
@@ -56342,7 +56242,6 @@ var Twist = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    t: state.t,
     graph: state.graph,
     context: state.context
   };
@@ -56350,9 +56249,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    receiveT: function receiveT(t) {
-      return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveT"])(t));
-    },
     receiveGraph: function receiveGraph(graph) {
       return dispatch(Object(_actions_graph_actions__WEBPACK_IMPORTED_MODULE_4__["receiveGraph"])(graph));
     },
@@ -56657,8 +56553,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Root = function Root(_ref) {
-  var ctx = _ref.ctx,
-      store = _ref.store;
+  var store = _ref.store;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: store
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -56726,39 +56621,6 @@ var contextReducer = function contextReducer() {
 
 /***/ }),
 
-/***/ "./src/reducers/frames_reducer.js":
-/*!****************************************!*\
-  !*** ./src/reducers/frames_reducer.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
-
-
-var framesReducer = function framesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FRAME"]:
-      return action.frames;
-
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return null;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (framesReducer);
-
-/***/ }),
-
 /***/ "./src/reducers/graph_reducer.js":
 /*!***************************************!*\
   !*** ./src/reducers/graph_reducer.js ***!
@@ -56802,127 +56664,16 @@ var graphReducer = function graphReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _x_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./x_reducer */ "./src/reducers/x_reducer.js");
-/* harmony import */ var _y_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./y_reducer */ "./src/reducers/y_reducer.js");
-/* harmony import */ var _t_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./t_reducer */ "./src/reducers/t_reducer.js");
-/* harmony import */ var _frames_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frames_reducer */ "./src/reducers/frames_reducer.js");
-/* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
-/* harmony import */ var _context_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./context_reducer */ "./src/reducers/context_reducer.js");
-
-
-
-
+/* harmony import */ var _graph_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graph_reducer */ "./src/reducers/graph_reducer.js");
+/* harmony import */ var _context_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./context_reducer */ "./src/reducers/context_reducer.js");
 
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  x: _x_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  y: _y_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  t: _t_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  frames: _frames_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
-  context: _context_reducer__WEBPACK_IMPORTED_MODULE_6__["default"]
+  graph: _graph_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  context: _context_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
-
-/***/ }),
-
-/***/ "./src/reducers/t_reducer.js":
-/*!***********************************!*\
-  !*** ./src/reducers/t_reducer.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
-
-
-var tReducer = function tReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_T"]:
-      return action.t;
-
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return null;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (tReducer);
-
-/***/ }),
-
-/***/ "./src/reducers/x_reducer.js":
-/*!***********************************!*\
-  !*** ./src/reducers/x_reducer.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
-
-
-var xReducer = function xReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_X"]:
-      return action.x;
-
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return null;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (xReducer);
-
-/***/ }),
-
-/***/ "./src/reducers/y_reducer.js":
-/*!***********************************!*\
-  !*** ./src/reducers/y_reducer.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/graph_actions */ "./src/actions/graph_actions.js");
-
-
-var yReducer = function yReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_Y"]:
-      return action.y;
-
-    case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return null;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (yReducer);
 
 /***/ }),
 

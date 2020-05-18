@@ -1,7 +1,7 @@
 import React from 'react';
 import MathJax from "react-mathjax2";
 import { connect } from "react-redux";
-import { receiveX, receiveY, receiveGraph, clear } from '../../actions/graph_actions';
+import { receiveGraph, clear } from '../../actions/graph_actions';
 import $ from "jquery";
 
 class coolButterfly extends React.Component {
@@ -78,8 +78,6 @@ class coolButterfly extends React.Component {
     }
 
     handleSubmit() {
-        this.props.receiveX(this.state.x_func);
-        this.props.receiveY(this.state.y_func);
         let t = 0;
         
         this.props.context.clearRect(0, 0, 800, 600);
@@ -171,15 +169,11 @@ class coolButterfly extends React.Component {
 }
 
 const mSTP = state => ({
-    x: state.x,
-    y: state.y,
     graph: state.graph,
     context: state.context
 })
 
 const mDTP = dispatch => ({
-    receiveX: x => dispatch(receiveX(x)),
-    receiveY: y => dispatch(receiveY(y)),
     receiveGraph: graph => dispatch(receiveGraph(graph)),
     clear: () => dispatch(clear())
 })
