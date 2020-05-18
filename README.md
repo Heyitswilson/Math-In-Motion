@@ -1,84 +1,71 @@
-# Bounce
-[Live Site](https://heyitswilson.github.io/Bounce/)
+# Math-in-Motion
+[Live Site](https://www.wilsonngu.net/Math-In-Motion/)
 
 Bounce is a visual demo built with JavaScript which features particle collisions and oscillations.
 
-![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/Bounce.png)
+![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/math-in-motion-sc.png)
 
 ## Features
-* Particle collisions
-* Particle oscillations
-* Color changes
+* Animated parametric plots and mathematical functions
+* RGB color changes
 
 ![bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/bounce5.gif)
 
 ## Code
 
-#### Particle Collisions
-Particle collisions were animated by taking into account one particle's position, radius and velocity and checking whether its edge will cross over the edge of another particle in the next frame. If it would cross, the velocities of both particles are reversed, resulting in different travel directions upon collision. 
+#### Animated parametric plots and mathematical functions
+
+The animations were done by using the asynchronous function, setInterval, to change the variable "t" and pass it to the animation function. This function calculates all X and Y coordinates on the graph using certain math equations, and then either draws a rectangle at that position or draws a line from that position to another.
+
+![darth_vader](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/darth_vader.gif)
 
 ```javascript
-MovingObject.prototype.collideMoveObj = function(particle2) {
-    let x1 = this.pos[0];
-    let x2 = particle2.pos[0];
-    let r1 = this.radius;
-    let r2 = particle2.radius;
+    animation(t) {
+        this.props.context.strokeStyle = `#00ffff`;
+        this.props.context.lineWidth = 1;
+        let that = this;
+        let x = function (t) {
+            return (800 * t) / that.state.x_val;
+        };
 
-    //Reverses the velocity of both particles if their next positions places them inside each other. 
-    if (x1 + r1 + this.vel[0] > x2 - r2) {
-        this.vel[0] *= -1
-        this.vel[1] *= -1
-        particle2.vel[0] *= -1
-        particle2.vel[1] *= -1
+        let y = function (t) {
+            return Math.sin((t * (4 * Math.PI)) / that.state.y_val) * (-600 / 4) + 600 / 2;
+            // Remember to scale the graph to the size of your canvas and to position it properly. 
+            // In this case, the height of the canvas was 600 pixels, and the proper 
+            // calculations were done at the end of the equation.
+        };
+        this.state.x_pos = x(t)
+
+        this.props.context.beginPath();
+        this.props.context.moveTo(x(t), y(t));
+        this.props.context.lineTo(x(t + 1), y(t + 1));
+        this.props.context.stroke();
     }
-}
 ```
 
-#### Particle oscillations
-The factor which causes particle oscillation is an everchanging angle value.
-```javascript
-class WindParticle extends MovingObject{
-    constructor(args) {
-        super(args)
-        this.name = windAttrs.name;
-        this.radius = windAttrs.radius;
-        this.pos = args.pos;
-        this.angle = 0;
-        this.vel = Util.setVec(5, args.mouseX, args.mouseY, windAttrs.angle) || args.vel
-        windAttrs.angle += 2
-    }
+#### RGB Color Changes
+Color changes are also based on the changing variable "t." 
 
-}
-```
-As the angle variable increases with each frame, it increases the deg constant and eventually changes its sine value from a positive number to a negative number, or vice versa, thus causing a change in velocity and the oscillation effect. 
+![butterfly](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/butterfly.gif)
+
 ```javascript
-setVec(length, mouseX, mouseY, angle) {
-        //Angle is divided by the sum of the mouse X and Y coordinates, resulting in faster 
-        //oscillations with smaller coordinate sums and slower oscillations 
-        //with larger coordinate sums.
-        const deg = 2 * Math.PI * (angle/(mouseY + mouseX));
-        return Util.scale([Math.sin(deg), Math.sin(deg)], length);
-    }
- ```
- 
- #### Color Changes
- The particle color changes on collision with another particle. All particles have an array of colors and display one based on an index. Collisions simply change the index so that the next color is displayed.
- ```javascript
- MovingObject.prototype.isCollidedWith = function(otherObject) {
-    if (Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius)) {
-        let currentIdx = this.strokeColors.indexOf(this.strokeColor);
-        let otherCurrentIdx = otherObject.strokeColors.indexOf(otherObject.strokeColor);
-        let nextIdx = (currentIdx + 1) % 5;
-        let otherNextIdx = (otherCurrentIdx + 1) % 5;
+rgb(t) {
+        function r(t) {
+            return 150 + Math.sin(t / 700) * 200;
+        };
+        function g(t) {
+            return Math.cos(t / 400) * 500;
+        };
+        function b(t) {
+            return 200 + Math.tan(t / 900) * 55;
+        };
         
-        this.strokeColor = this.strokeColors[nextIdx];
-        otherObject.strokeColor = otherObject.strokeColors[otherNextIdx];
-
-        this.collideMoveObj(otherObject)
+        return `rgb(
+            ${r(t)},
+            ${g(t)},
+            ${b(t)})`;
     }
-}
 ```
  
 ## To-do
-* Different oscillation directions
-* Different travel paths
+* Add more graphs
