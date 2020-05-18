@@ -1,7 +1,7 @@
 # Math-in-Motion
 [Live Site](https://www.wilsonngu.net/Math-In-Motion/)
 
-Bounce is a visual demo built with JavaScript which features particle collisions and oscillations.
+Math-in-Motion animates graphs of mathematical functions and parametrical plots using React and JavaScript.
 
 ![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/math-in-motion-sc.png)
 
