@@ -56325,7 +56325,7 @@ var Formula = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      graph_types: ["Sine", "Double Sine", "Butterfly Curve", "Darth Vader", "Abstract Green", "Abstract White", "DNA Twists"]
+      graph_types: ["DNA Twists", "Darth Vader", "Abstract Green", "Abstract White", "Butterfly Curve", "Sine", "Double Sine"]
     };
     _this.renderSwitch = _this.renderSwitch.bind(_assertThisInitialized(_this));
     return _this;
@@ -56634,7 +56634,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var graphReducer = function graphReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Sine";
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "DNA Twists";
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -56643,7 +56643,7 @@ var graphReducer = function graphReducer() {
       return action.graph;
 
     case _actions_graph_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR"]:
-      return "Sine";
+      return "DNA Twists";
 
     default:
       return state;

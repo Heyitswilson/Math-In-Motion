@@ -15,13 +15,13 @@ class Formula extends React.Component {
 
     this.state = {
       graph_types: [
-        "Sine",
-        "Double Sine",
-        "Butterfly Curve",
+        "DNA Twists",
         "Darth Vader",
         "Abstract Green",
         "Abstract White",
-        "DNA Twists"
+        "Butterfly Curve",
+        "Sine",
+        "Double Sine"
       ]
     }
 
