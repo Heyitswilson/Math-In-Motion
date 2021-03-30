@@ -3,7 +3,7 @@
 
 Math-in-Motion animates graphs of mathematical functions and parametrical plots using React and JavaScript.
 
-![Bounce](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/math-in-motion-sc.png)
+![Bounce](https://segmed-dev.s3-us-west-1.amazonaws.com/math-in-motion/math-in-motion-sc.pngg)
 
 ## Features
 * Animated parametric plots and mathematical functions
@@ -15,7 +15,7 @@ Math-in-Motion animates graphs of mathematical functions and parametrical plots 
 
 The animations were done by using the asynchronous function, setInterval, to change the variable "t" and pass it to the animation function. This function calculates all X and Y coordinates on the graph using certain math equations, and then either draws a rectangle at that position or draws a line from that position to another.
 
-![darth_vader](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/darth_vader.gif)
+![darth_vader](https://segmed-dev.s3-us-west-1.amazonaws.com/math-in-motion/darth_vader.gif)
 
 ```javascript
     animation(t) {
@@ -44,7 +44,7 @@ The animations were done by using the asynchronous function, setInterval, to cha
 #### RGB Color Changes
 Color changes are also based on the changing variable "t." 
 
-![butterfly](https://toasty-dev.s3-us-west-1.amazonaws.com/icons/butterfly.gif)
+![butterfly](https://segmed-dev.s3-us-west-1.amazonaws.com/math-in-motion/butterfly.gif)
 
 ```javascript
 rgb(t) {

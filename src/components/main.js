@@ -41,7 +41,7 @@ class Main extends React.Component {
                 >
                   <img
                     className="icons-a"
-                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
+                    src="https://segmed-dev.s3-us-west-1.amazonaws.com/social/angelListIcon.png"
                   />
                 </a>
                 <a
@@ -51,7 +51,7 @@ class Main extends React.Component {
                 >
                   <img
                     className="icons"
-                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
+                    src="https://segmed-dev.s3-us-west-1.amazonaws.com/studypal/white-github.png"
                   />
                 </a>
                 <a
@@ -61,7 +61,7 @@ class Main extends React.Component {
                 >
                   <img
                     className="icons"
-                    src="https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
+                    src="https://segmed-dev.s3-us-west-1.amazonaws.com/social/LinkedInIcon.png"
                   />
                 </a>
               </div>

@@ -56488,21 +56488,21 @@ var Main = /*#__PURE__*/function (_React$Component) {
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "icons-a",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/angelListIcon.png"
+        src: "https://segmed-dev.s3-us-west-1.amazonaws.com/social/angelListIcon.png"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "icon-link",
         href: "https://github.com/Heyitswilson/Math-In-Motion.git",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "icons",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/white-github.png"
+        src: "https://segmed-dev.s3-us-west-1.amazonaws.com/studypal/white-github.png"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "icon-link",
         href: "https://www.linkedin.com/in/wilson-ngu/",
         target: "_blank"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "icons",
-        src: "https://studypal-dev.s3-us-west-1.amazonaws.com/LinkedInIcon.png"
+        src: "https://segmed-dev.s3-us-west-1.amazonaws.com/social/LinkedInIcon.png"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "horizontal-line"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
